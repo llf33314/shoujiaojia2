@@ -9,15 +9,12 @@ import  util  from './assets/js/util'
 /*
 * 加载全局组件
 * */
-import 'jquery-weui/dist/lib/weui.min.css' 
 /*
 * 加载全局样式
 * */
-require('./assets/css/public.css')
 /*
 * 加载全局阿里iconfont
 * */
-require('./assets/iconfont/iconfont.css')
 /*
 * 挂载全局axsio方法
 * */
