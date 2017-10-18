@@ -9,8 +9,7 @@ import  util  from './assets/js/util'
 /*
 * 加载全局组件
 * */
-import ElementUI from 'gt-pc-ui'
-import 'gt-pc-ui/lib/theme-default/index.css'
+import 'jquery-weui/dist/lib/weui.min.css' 
 /*
 * 加载全局样式
 * */
@@ -36,7 +35,6 @@ Vue.prototype.$baseURL = 'http://192.168.3.98:7073'
 /*
 * 注册全局组件
 * */
-Vue.use(ElementUI)
 
 /* eslint-disable no-new */
 new Vue({

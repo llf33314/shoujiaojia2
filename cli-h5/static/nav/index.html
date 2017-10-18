@@ -87,8 +87,7 @@
           <div class="swiper-slide">
             <div>
               <ul id="applyList">
-                <li class="index" data-url="parkMapAdmin">小公园</li>
-                <li data-type="h5" data-url="parkMapApp">小公园H5</li>
+                <li data-url="parkMap">小公园H5</li>
               </ul>
             </div>
           </div>
@@ -136,7 +135,7 @@
     </div>
 
     <div class="content">
-      <iframe id="gtIframe" name="gtIframe" class="content-ifr" src="http://localhost:8012/#/parkMapAdmin/index" frameborder="0"
+      <iframe id="gtIframe" name="gtIframe" class="content-ifr" src="http://localhost:8012/#/parkMap/index" frameborder="0"
         style="padding-top: 49px"></iframe>
       <div class="content-notice">
         <i class="iconfont icon-tongzhi2"></i>通知
@@ -153,11 +152,7 @@
     $(function () {
       $('body').find('#applyList li').on('click', function (e) {
         $(this).addClass('index').siblings('li').removeClass('index')
-        $('#gtIframe').attr('src', 'http://localhost:8012/#/' + e.currentTarget.dataset.url + '/index')
-
-        if (e.currentTarget.dataset.type) {
-          window.open('http://localhost:8012/#/' + e.currentTarget.dataset.url + '/index')
-        }
+        window.open('http://localhost:8012/#/' + e.currentTarget.dataset.url + '/index')
       })
     })
     //子类通知父类，开启遮罩哦

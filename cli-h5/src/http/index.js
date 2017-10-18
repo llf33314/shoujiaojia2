@@ -1,9 +1,6 @@
 import axios from 'axios'
 import Promise from 'promise'
 import router from './../router/index'
-import { Message } from "gt-pc-ui";
-import { Loading } from 'gt-pc-ui';
-var loadingInstance = null
 const Axios = axios.create({
   //baseURL: "http://192.168.3.98:7072",
   timeout: 3000,
@@ -36,11 +33,7 @@ Axios.interceptors.request.use(
     return config
   },
   err => {
-    Message({
-      showClose: true,
-      message: err,
-      type: "error.data.error.message"
-    });
+    
     return Promise.reject(err)
   })
 
@@ -48,32 +41,13 @@ Axios.interceptors.request.use(
 Axios.interceptors.response.use(
   response => {
     if(response.data.code == 301 || response.data.code == 300){
-      Message({
-        showClose: true,
-        message: response.data.msg,
-        type: "error",
-        onClose:()=>{
-          router.push({
-            path: '/error/index',
-          })
-        }
-      });
+      
     }
     return  response
   },
   error => {
     if (error.response == undefined || error.response == 'undefined') {
-      // Message({
-      //   showClose: true,
-      //   message: '请求错误',
-      //   type: "error",
-      //   onClose:()=>{
-      //     router.push({
-      //       path: '/error/index',
-      //     })
-      //   }
-      // });
-      // loadingInstance.close()
+      
     }else{
       return Promise.reject(error.response.data)
     }

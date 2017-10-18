@@ -1,16 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 加载小公园app
-import {parkMapAppRouter} from '@/components/parkMap/app/router.js'
-import {parkMapAdminRouter} from '@/components/parkMap/admin/router.js'
+import {parkMapAppRouter} from '@/components/parkMap/router.js'
 
 Vue.use(VueRouter)
 var routes = []
 
 // 合并多个路由的数组
 routes = routes.concat(parkMapAppRouter)
-routes = routes.concat(parkMapAdminRouter)
-
 const router = new VueRouter({
   // mode: 'history',
   routes
