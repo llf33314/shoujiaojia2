@@ -22,14 +22,11 @@ import java.util.*;
 public class MpGenerator {
 
     // 项目的绝对路径
-    public static final  String   outPutBaseDir      = "E:/workspaceIDEA/gt_customize_general/customize/";
+    public static final  String   outPutBaseDir      = "E:/workspaceIDEA/GT/gt_customize_general/customize/";
     // 生成*.java 的文件路径
     public static final  String   outPutJavaModel    = outPutBaseDir + "src/main/java";
     // 需要生成的表----------------------------------------------------------改这里
-    public static final  String[] generatorTableName = new String[] {"t_wx_community_draw_cash", "t_wx_community_main", "t_wx_community_main_ad", "t_wx_community_main_info",
-			"t_wx_community_main_info_plate", "t_wx_community_main_info_praise", "t_wx_community_main_info_watermark", "t_wx_community_main_notice", "t_wx_community_mycenter",
-			"t_wx_community_mycenter_award", "t_wx_community_order", "t_wx_community_post", "t_wx_community_post_award", "t_wx_community_post_comment",
-			"t_wx_community_post_images", "t_wx_community_post_nice", "t_wx_community_post_video", "t_wx_community_template_report"};
+    public static final  String[] generatorTableName = new String[] {"t_customize_minipark_hotel", "t_customize_minipark_eat"};
     // 作者
     private static final String   author             = "psr";
     // 去除表前缀 例如：bus_user 填入bus 生成的 user

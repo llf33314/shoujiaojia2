@@ -10,7 +10,8 @@ public enum ResponseEnums {
     // 200+针对请求失败
     ERROR(200, "请求失败"),
     // 300+针对统一错误
-    DIFF_USER(301, "无权操作的信息")
+    DIFF_USER(301, "无权操作的信息"),
+    INFO_NULL(302, "操作信息不存在"),
     // 400+针对自己的错误
     ;
 

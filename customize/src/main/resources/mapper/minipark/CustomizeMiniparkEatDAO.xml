@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gt.customize.core.dao.minipark.CustomizeMiniparkEatDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.gt.customize.core.entity.minipark.CustomizeMiniparkEat">
+		<id column="id" property="id" />
+		<result column="bus_id" property="busId" />
+		<result column="shop_name" property="shopName" />
+		<result column="shop_logo_url" property="shopLogoUrl" />
+		<result column="shop_introduce" property="shopIntroduce" />
+		<result column="shop_add" property="shopAdd" />
+		<result column="shop_lon" property="shopLon" />
+		<result column="shop_lat" property="shopLat" />
+		<result column="shop_phone" property="shopPhone" />
+		<result column="shop_banner_url" property="shopBannerUrl" />
+		<result column="shop_remark" property="shopRemark" />
+		<result column="shop_status" property="shopStatus" />
+		<result column="create_time" property="createTime" />
+		<result column="deleteflag" property="deleteflag" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, bus_id, shop_name, shop_logo_url, shop_introduce, shop_add, shop_lon, shop_lat, shop_phone, shop_banner_url, shop_remark, shop_status, create_time, deleteflag
+    </sql>
+
+</mapper>
