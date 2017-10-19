@@ -13,6 +13,7 @@
     "axios": "^0.15.3",
     "clipboard": "^1.7.1",
     "element-ui": "^1.4.6",
+    "jquery": "^3.2.1",
     "jquery-weui": "^1.0.1",
     "marked": "^0.3.6",
     "promise": "^8.0.1",

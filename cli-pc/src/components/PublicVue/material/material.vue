@@ -28,7 +28,7 @@
       <!-- 素材库 -->
       <div class="material-dialog" v-if="materialVisible==prop">
         <div class="content">
-          <div class="title">素材库{{prop}}</div>
+          <div class="title">素材库 <i class="el-icon-close icon" @click="close"></i></div>
           <div class="">
             <iframe :src="materialUrl" class="material"></iframe>
           </div>
@@ -57,10 +57,6 @@
         url: {
           type: String,
           default: ''
-        },
-        style:{
-          type:Object,
-          default:{}
         },
         width:{
           type:String,
@@ -130,6 +126,10 @@
             prop: this.prop,
             url: this.showImg[this.prop] || ''
           })
+        },
+        // 关闭素材库
+        close(){
+          this.materialVisible = null
         }
       }
     }
@@ -297,6 +297,19 @@
         }
       }
     }
-  
+    .material{
+      width: 100%;
+      min-height: 500px;
+    }
+
+    .icon{
+      float: right;
+      margin-top: 15px;
+      margin-right:10px;
+      cursor: pointer;
+    }
+    .icon:hover{
+      color: #20a0ff;
+    }
   </style>
   

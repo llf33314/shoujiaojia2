@@ -11,13 +11,13 @@
             <el-table-column prop="address" label="地址"></el-table-column>
             <el-table-column prop="phone" label="电话"></el-table-column>
             <el-table-column label="创建时间">
-                <template scope="scope">
+                <template slot-scope="scope">
                     <el-icon name="time"></el-icon>
                     <span style="margin-left: 10px">{{ $util.DateFormat(scope.row.createTime, "yyyy-MM-dd hh:mm") }}</span>
                 </template>
             </el-table-column>
             <el-table-column label="操作">
-                <template scope="scope">
+                <template slot-scope="scope">
                     <el-button size="small" @click="editEat(scope.row)">编辑</el-button>
                     <el-button size="small" type="danger" @click="delEat(scope.row.id)">删除</el-button>
                 </template>
