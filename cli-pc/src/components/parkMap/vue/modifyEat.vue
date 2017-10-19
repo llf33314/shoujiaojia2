@@ -110,7 +110,7 @@ export default {
                         message: '编辑餐饮店铺成功！',
                         type: 'success'
                     });
-                    this.$router.push({ path: '/parkMapAdmin/index' });
+                    this.$router.push({ path: '/parkMapAdmin/eatList' });
                 } else {
                     this.$message.error(data.msg + "[错误码：" + _code + "]");
                 }

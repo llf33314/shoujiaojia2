@@ -18,9 +18,8 @@
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <el-button size="small" @click="editEat(scope.row.id)">编辑</el-button>
-                    <el-button size="small" type="danger" @click="delEat(scope.row.id)">删除</el-button>
-                </template>
+                    <el-button size="small" @click="editHotel(scope.row)">编辑</el-button>
+                    <el-button size="small" type="danger" @click="delHotel(scope.row.id)">删除</el-button>
             </el-table-column>
         </el-table>
 
@@ -50,10 +49,11 @@ export default {
                 }
             });
         },
-        editEat(id) {
-            this.$router.push({ path: '/parkMapAdmin/modifyHotel/' + id });
+        editHotel(hotelInfo) {
+            console.log(hotelInfo);
+            this.$router.push({ path: '/parkMapAdmin/modifyHotel', query: hotelInfo });
         },
-        delEat(id) {
+        delHotel(id) {
             this.$confirm('此操作将永久删除该店铺以及相关数据，是否继续？', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',

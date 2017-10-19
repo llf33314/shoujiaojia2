@@ -164,6 +164,13 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
             listHotelRes.setAddress(customizeMiniparkHotel.getShopAdd());
             listHotelRes.setPhone(customizeMiniparkHotel.getShopPhone());
             listHotelRes.setCreateTime(customizeMiniparkHotel.getCreateTime());
+            // ----- 编辑的信息
+            listHotelRes.setBannerUrl(customizeMiniparkHotel.getShopBannerUrl());
+            listHotelRes.setIntroduce(customizeMiniparkHotel.getShopIntroduce());
+            listHotelRes.setLogoUrl(customizeMiniparkHotel.getShopLogoUrl());
+            listHotelRes.setRemark(customizeMiniparkHotel.getShopRemark());
+            listHotelRes.setLat(customizeMiniparkHotel.getShopLat());
+            listHotelRes.setLon(customizeMiniparkHotel.getShopLon());
             listHotelResList.add(listHotelRes);
         }
         PageDTO pageDTO = new PageDTO(page.getPages(), page.getTotal());
