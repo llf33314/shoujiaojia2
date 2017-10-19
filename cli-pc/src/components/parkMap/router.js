@@ -40,7 +40,7 @@ export const parkMapAdminRouter = [
     component: addHotel,
   },
   {
-    path: '/parkMapAdmin/modifyHotel/:id',
+    path: '/parkMapAdmin/modifyHotel',
     name: 'modifyHotel',
     component: modifyHotel,
   },

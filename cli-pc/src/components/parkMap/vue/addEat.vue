@@ -3,7 +3,7 @@
         <div>
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{ path: '/parkMapAdmin/eatList' }">餐饮管理</el-breadcrumb-item>
-                <el-breadcrumb-item>编辑店铺</el-breadcrumb-item>
+                <el-breadcrumb-item>新增店铺</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div>
