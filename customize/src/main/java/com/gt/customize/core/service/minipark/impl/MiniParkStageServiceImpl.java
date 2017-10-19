@@ -58,6 +58,13 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
             listEatRes.setAddress(customizeMiniparkEat.getShopAdd());
             listEatRes.setPhone(customizeMiniparkEat.getShopPhone());
             listEatRes.setCreateTime(customizeMiniparkEat.getCreateTime());
+            // ----- 编辑的信息
+            listEatRes.setBannerUrl(customizeMiniparkEat.getShopBannerUrl());
+            listEatRes.setIntroduce(customizeMiniparkEat.getShopIntroduce());
+            listEatRes.setLogoUrl(customizeMiniparkEat.getShopLogoUrl());
+            listEatRes.setRemark(customizeMiniparkEat.getShopRemark());
+            listEatRes.setLat(customizeMiniparkEat.getShopLat());
+            listEatRes.setLon(customizeMiniparkEat.getShopLon());
             listEatResList.add(listEatRes);
         }
         PageDTO pageDTO = new PageDTO(page.getPages(), page.getTotal());
@@ -113,8 +120,28 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
         customizeMiniparkEat.setShopPhone(modifyEatReq.getPhone());
         customizeMiniparkEat.setShopBannerUrl(modifyEatReq.getBannerUrl());
         customizeMiniparkEat.setShopRemark(modifyEatReq.getRemark());
+        customizeMiniparkEatService.updateAllColumnById(customizeMiniparkEat);
+    }
+
+    /**
+     * 删除餐饮店铺
+     *
+     * @param busUser
+     * @param delEatReq
+     */
+    @Override
+    public void delEat(BusUser busUser, DelEatReq delEatReq) throws MiniParkException {
+        CustomizeMiniparkEat  customizeMiniparkEat = customizeMiniparkEatService.selectById(delEatReq.getId());
+        if (CommonUtil.isEmpty(customizeMiniparkEat)){
+            throw new MiniParkException(ResponseEnums.INFO_NULL);
+        }
+        if (busUser.getId() != customizeMiniparkEat.getBusId()){
+            throw new MiniParkException(ResponseEnums.DIFF_USER);
+        }
+        customizeMiniparkEat.setDeleteflag(1);
         customizeMiniparkEatService.updateById(customizeMiniparkEat);
     }
+
     /**
      * 获取酒店店铺列表
      *
@@ -192,6 +219,25 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
         customizeMiniparkHotel.setShopPhone(modifyHotelReq.getPhone());
         customizeMiniparkHotel.setShopBannerUrl(modifyHotelReq.getBannerUrl());
         customizeMiniparkHotel.setShopRemark(modifyHotelReq.getRemark());
+        customizeMiniparkHotelService.updateById(customizeMiniparkHotel);
+    }
+
+    /**
+     * 删除酒店店铺
+     *
+     * @param busUser
+     * @param delHotelReq
+     */
+    @Override
+    public void delHotel(BusUser busUser, DelHotelReq delHotelReq) throws MiniParkException {
+        CustomizeMiniparkHotel  customizeMiniparkHotel = customizeMiniparkHotelService.selectById(delHotelReq.getId());
+        if (CommonUtil.isEmpty(customizeMiniparkHotel)){
+            throw new MiniParkException(ResponseEnums.INFO_NULL);
+        }
+        if (busUser.getId() != customizeMiniparkHotel.getBusId()){
+            throw new MiniParkException(ResponseEnums.DIFF_USER);
+        }
+        customizeMiniparkHotel.setDeleteflag(1);
         customizeMiniparkHotelService.updateById(customizeMiniparkHotel);
     }
 }

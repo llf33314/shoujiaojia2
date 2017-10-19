@@ -45,6 +45,7 @@ public class MiniParkStageController extends BaseController {
     public ResponseDTO listEats(@RequestBody @ApiParam("分页获取餐饮店铺列表对象") ListEatReq listEatReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
+            logger.debug(listEatReq.toString());
             BusUser busUser = CommonUtil.getLoginUser(request);
             ResponseDTO<List<ListEatRes>> responseDTO = miniParkStageService.listEatsByPage(busUser, listEatReq);
             return responseDTO;
@@ -65,6 +66,7 @@ public class MiniParkStageController extends BaseController {
     public ResponseDTO addEat(@RequestBody @ApiParam("新增餐饮店铺对象") AddEatReq addEatReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
+            logger.debug(addEatReq.toString());
             BusUser busUser = CommonUtil.getLoginUser(request);
             miniParkStageService.addEat(busUser, addEatReq);
             return ResponseDTO.createBySuccessMessage("新增餐饮店铺成功");
@@ -85,9 +87,30 @@ public class MiniParkStageController extends BaseController {
     public ResponseDTO modifyEat(@RequestBody @ApiParam("编辑餐饮店铺对象") ModifyEatReq modifyEatReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
+            logger.debug(modifyEatReq.toString());
             BusUser busUser = CommonUtil.getLoginUser(request);
             miniParkStageService.modifyEat(busUser, modifyEatReq);
             return ResponseDTO.createBySuccessMessage("编辑餐饮店铺成功");
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+    })
+    @ApiOperation(value = "删除餐饮店铺", notes = "删除餐饮店铺")
+    @RequestMapping(value = "/delEat", method = RequestMethod.POST)
+    public ResponseDTO delEat(@RequestBody @ApiParam("删除餐饮店铺对象") DelEatReq delEatReq, BindingResult bindingResult, HttpServletRequest request){
+        InvalidParameter(bindingResult);
+        try {
+            BusUser busUser = CommonUtil.getLoginUser(request);
+            miniParkStageService.delEat(busUser, delEatReq);
+            return ResponseDTO.createBySuccessMessage("删除餐饮店铺成功");
         } catch (MiniParkException e){
             logger.error(e.getMessage(), e.fillInStackTrace());
             return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
@@ -150,6 +173,27 @@ public class MiniParkStageController extends BaseController {
             BusUser busUser = CommonUtil.getLoginUser(request);
             miniParkStageService.modifyHotel(busUser, modifyHotelReq);
             return ResponseDTO.createBySuccessMessage("编辑酒店店铺成功");
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+    })
+    @ApiOperation(value = "删除酒店店铺", notes = "删除酒店店铺")
+    @RequestMapping(value = "/delHotel", method = RequestMethod.POST)
+    public ResponseDTO delHotel(@RequestBody @ApiParam("删除餐饮店铺对象") DelHotelReq delHotelReq, BindingResult bindingResult, HttpServletRequest request){
+        InvalidParameter(bindingResult);
+        try {
+            BusUser busUser = CommonUtil.getLoginUser(request);
+            miniParkStageService.delHotel(busUser, delHotelReq);
+            return ResponseDTO.createBySuccessMessage("删除酒店店铺成功");
         } catch (MiniParkException e){
             logger.error(e.getMessage(), e.fillInStackTrace());
             return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());

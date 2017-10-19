@@ -37,6 +37,13 @@ public interface MiniParkStageService {
     void modifyEat(BusUser busUser, ModifyEatReq modifyEatReq) throws MiniParkException;
 
     /**
+     * 删除餐饮店铺
+     * @param busUser
+     * @param delEatReq
+     */
+    void delEat(BusUser busUser, DelEatReq delEatReq) throws MiniParkException;
+
+    /**
      * 获取酒店店铺列表
      * @return
      * @throws MiniParkException
@@ -56,4 +63,11 @@ public interface MiniParkStageService {
      * @param modifyHotelReq
      */
     void modifyHotel(BusUser busUser, ModifyHotelReq modifyHotelReq) throws MiniParkException;
+
+    /**
+     * 删除酒店店铺
+     * @param busUser
+     * @param delHotelReq
+     */
+    void delHotel(BusUser busUser, DelHotelReq delHotelReq) throws MiniParkException;
 }

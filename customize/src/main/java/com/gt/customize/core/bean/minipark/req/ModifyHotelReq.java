@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by psr on 2017/10/18 0018.
  */
-@ApiModel(value = "新增酒店店铺")
+@ApiModel(value = "编辑酒店店铺")
 public class ModifyHotelReq {
 
     @NotNull(message = "id不能为空")
