@@ -4,7 +4,7 @@
 ```aidl
   // vue
   <div class="row">
-    <gt-region-choose :selectedOptions="selectedOptions" v-model="selectedOptions" @change="regionChange"></gt-region-choose>
+    <gt-region-choose :selectedOptions="selectedOptions"   @change="regionChange"></gt-region-choose>
   </div>
   
   // js
@@ -20,7 +20,7 @@
       },
       methods:{
         regionChange(e){
-            this.selectedOptions = e
+            this.selectedOptions = e.value
         },
       }
     }
