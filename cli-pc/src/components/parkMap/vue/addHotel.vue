@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div>
+    <div style="margin:0 20px; ">
+        <div class="a-in-stop-head">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{ path: '/parkMapAdmin/hotelList' }">酒店管理</el-breadcrumb-item>
                 <el-breadcrumb-item>新增店铺</el-breadcrumb-item>
@@ -8,35 +8,39 @@
         </div>
         <div>
             <el-form :model="addHotelReq" :rules="addHotelRules" ref="addHotelReq" label-width="130px" class="demo-ruleForm">
-                <div>编辑店铺信息</div>
-                <el-form-item label="店铺名称" prop="name">
-                    <el-input v-model="addHotelReq.name"></el-input>
-                </el-form-item>
-                <el-form-item label="LOGO上传" prop="logoUrl">
-                    <gt-material prop="logoUrl" :url="addHotelReq.logoUrl" v-on:getChangeUrl="getChangeUrl" width="220" height="220"></gt-material>
-                    <span>建议上传1:1尺寸图片</span>
-                </el-form-item>
-                <el-form-item label="文案介绍" prop="introduce">
-                    <el-input v-model="addHotelReq.introduce"></el-input>
-                </el-form-item>
-                <el-form-item label="店铺地址" prop="address">
-                    <el-input v-model="addHotelReq.address"></el-input>
-                </el-form-item>
-                <el-form-item label="店铺电话" prop="phone">
-                    <el-input v-model="addHotelReq.phone"></el-input>
-                </el-form-item>
-                <div>编辑店铺详情页</div>
-                <el-form-item label="Banner图" prop="bannerUrl">
-                    <gt-material prop="bannerUrl" :url="addHotelReq.bannerUrl" v-on:getChangeUrl="getChangeUrl" width="220" height="220"></gt-material>
-                    <span>建议上传360*200尺寸图片</span>
-                </el-form-item>
-                <el-form-item label="店铺介绍" prop="remark">
-                    <el-input type="textarea" v-model="addHotelReq.remark"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="submitForm('addHotelReq')">保存</el-button>
-                    <el-button @click="resetForm('addHotelReq')">返回</el-button>
-                </el-form-item>
+                <div class="a-in-stop-title">编辑店铺信息</div>
+                <div class="a-in-stop-box">
+                    <el-form-item label="酒店名称：" prop="name">
+                        <el-input v-model="addHotelReq.name" style="width: 251px!important;"></el-input>
+                    </el-form-item>
+                    <el-form-item label="LOGO上传：" prop="logoUrl">
+                        <gt-material prop="logoUrl" :url="addHotelReq.logoUrl" v-on:getChangeUrl="getChangeUrl" width="80" height="80"></gt-material>
+                        <p class="a-in-stop-prompt">建议上传1:1尺寸图片</p>
+                    </el-form-item>
+                    <el-form-item label="文案介绍：" prop="introduce">
+                        <el-input v-model="addHotelReq.introduce" style="width: 251px!important;"></el-input>
+                    </el-form-item>
+                    <el-form-item label="酒店地址：" prop="address">
+                        <el-input v-model="addHotelReq.address" style="width: 251px!important;"></el-input>
+                    </el-form-item>
+                    <el-form-item label="酒店电话：" prop="phone">
+                        <el-input v-model="addHotelReq.phone" style="width: 251px!important;"></el-input>
+                    </el-form-item>
+                </div>
+                <div class="a-in-stop-title">编辑店铺详情页</div>
+                <div class="a-in-stop-box">
+                    <el-form-item label="Banner图：" prop="bannerUrl">
+                        <gt-material prop="bannerUrl" :url="addHotelReq.bannerUrl" v-on:getChangeUrl="getChangeUrl"  width="80" height="80"></gt-material>
+                        <p class="a-in-stop-prompt">建议上传360*200尺寸图片</p>
+                    </el-form-item>
+                    <el-form-item label="酒店介绍：" prop="remark">
+                        <el-input type="textarea" v-model="addHotelReq.remark" style="width: 400px!important;" rows="4"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="submitForm('addHotelReq')">保存</el-button>
+                        <el-button type="primary" @click="resetForm('addHotelReq')">返回</el-button>
+                    </el-form-item>
+                </div>
             </el-form>
         </div>
     </div>
@@ -118,3 +122,32 @@ export default {
     }
 }
 </script>
+<style>
+.a-in-stop-head{
+    display: inline-block;
+    line-height: 53px;
+    font-size: 16px;
+    padding: 25px 0;
+}
+.a-in-stop-title{
+    width: 749px;
+    height: 40px;
+    background-color: rgba(242, 242, 242, 1);
+    font-size: 14px;
+    line-height: 40px;
+    padding-left: 40px;
+    margin: 0 0 25px;
+}
+.a-in-stop-box{
+    width:600px;
+    padding-left:80px;
+}
+.a-in-stop-prompt{
+    display: inline-block;
+    position: absolute;
+    top: 25px;
+    left: 100px;
+    color: #999;
+    font-size: 12px;
+}
+</style>

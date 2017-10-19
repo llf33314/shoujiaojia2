@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <div>
+    <div style="padding: 0 40px 0 20px;">
+        <div class="a-in-add">
             <el-button type="primary" @click="addEatClick">新增</el-button>
         </div>
-        <div>
-            已创建店铺列表
+        <div class="a-in-add-list">
+            已创建酒店列表
         </div>
         <el-table :data="hotelListData" border highlight-current-row style="width: 100%">
             <el-table-column prop="name" label="店铺名称"></el-table-column>

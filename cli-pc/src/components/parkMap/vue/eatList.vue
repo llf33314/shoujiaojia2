@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <div>
+    <div style="padding: 0 40px 0 20px;">
+        <div class="a-in-add">
             <el-button type="primary" @click="addEatClick">新增</el-button>
         </div>
-        <div>
-            已创建店铺列表
+        <div class="a-in-add-list"> 
+              已创建店铺列表 
         </div>
         <el-table :data="eatListData" border highlight-current-row style="width: 100%">
             <el-table-column prop="name" label="店铺名称"></el-table-column>
@@ -85,5 +85,29 @@ export default {
 };
 </script>
 <style>
-
+.a-in-add{
+   width: 100%;
+    height: 91px;
+    background: inherit;
+    background-color: rgba(248, 248, 248, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(236, 236, 236, 1);
+    -moz-box-shadow: none;
+    line-height: 91px;
+    padding-left: 26px;
+    margin-bottom:15px;
+}
+.el-button--primary {
+    color: #333;
+    border-color: rgba(121, 121, 121, 1);
+    width: 77px;
+    background-color: #fff;
+}
+.a-in-add-list{
+    font-size: 14px;
+    color: #333;
+    margin: 20px 30px;
+}
 </style>
