@@ -37,7 +37,7 @@ export default {
             pois: [],//地图数据
             map: "",//地图
             dialogVisible: false,//弹框
-            detailedAddress: '',//选中的地址
+            // detailedAddress: '',//选中的地址
             addressinput: ''
         }
     },
