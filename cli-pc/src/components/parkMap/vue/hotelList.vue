@@ -20,6 +20,7 @@
                 <template slot-scope="scope">
                     <el-button size="small" @click="editHotel(scope.row)">编辑</el-button>
                     <el-button size="small" type="danger" @click="delHotel(scope.row.id)">删除</el-button>
+                </template>
             </el-table-column>
         </el-table>
 
