@@ -1,12 +1,12 @@
 <template>
-    <div style="margin:0 20px; ">
+    <div style="overflow: hidden;">
         <div class="a-in-stop-head">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{ path: '/parkMapAdmin/eatList' }">餐饮管理</el-breadcrumb-item>
                 <el-breadcrumb-item>新增店铺</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-        <div>
+        <div style="margin:0 30px; ">
             <el-form :model="addEatReq" :rules="addEatRules" ref="addEatReq" label-width="130px" class="demo-ruleForm">
                 <div  class="a-in-stop-title">编辑店铺信息</div>
                 <div class="a-in-stop-box">
@@ -44,7 +44,7 @@
                     <el-form-item label="店铺介绍：" prop="remark">
                         <el-input type="textarea" v-model="addEatReq.remark" style="width: 400px!important;" rows="4"></el-input>
                     </el-form-item>
-                    <el-form-item>
+                    <el-form-item style="margin-top: 80px;">
                         <el-button type="primary" @click="submitForm('addEatReq')">保存</el-button>
                         <el-button type="primary" @click="resetForm('addEatReq')">返回</el-button>
                     </el-form-item>
@@ -144,18 +144,20 @@ export default {
 <style>
 .a-in-stop-head{
     display: inline-block;
-    line-height: 53px;
+    padding: 30px 0 0 29px;
     font-size: 16px;
-    padding: 25px 0;
+    width: 100%;
+    height: 51px;
+    background-color: rgba(248, 248, 248, 1);
 }
-.a-in-stop-title{
+.a-in-stop-title {
     width: 749px;
-    height: 40px;
-    background-color: rgba(242, 242, 242, 1);
+    height: 60px;
     font-size: 14px;
-    line-height: 40px;
-    padding-left: 40px;
-    margin: 0 0 25px;
+    line-height: 60px;
+    margin: 2px 0 35px;
+    color: #666;
+    border-bottom: 1px solid #ddd;
 }
 .a-in-stop-box{
     width:600px;
@@ -168,5 +170,8 @@ export default {
     left: 100px;
     color: #999;
     font-size: 12px;
+}
+.el-form-item {
+    margin-bottom: 26px;
 }
 </style>

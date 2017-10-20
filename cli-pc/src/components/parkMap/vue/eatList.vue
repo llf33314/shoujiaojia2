@@ -99,15 +99,19 @@ export default {
     padding-left: 26px;
     margin-bottom:15px;
 }
-.el-button--primary {
-    color: #333;
-    border-color: rgba(121, 121, 121, 1);
-    width: 77px;
-    background-color: #fff;
-}
 .a-in-add-list{
     font-size: 14px;
     color: #333;
-    margin: 20px 30px;
+    margin: 25px 30px;
+}
+.el-table td, .el-table th {
+    height: 45px;
+    min-width: 0;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+.el-breadcrumb__item__inner, .el-breadcrumb__item__inner a {
+    transition: color .15s linear;
+    color: #2d8dfd;
 }
 </style>
