@@ -21,14 +21,8 @@
                         <el-input v-model="addEatReq.introduce" style="width: 251px!important;"></el-input>
                     </el-form-item>
                     <el-form-item label="店铺地址：" prop="address">
-                        <el-input v-model="addEatReq.address" style="width: 251px!important;"></el-input>
+                        <gt-map :mapInformation.sync="mapBean"></gt-map>
                     </el-form-item>
-                    <!--
-                        selectedOptions 地址的省份selectedOptions= ["130000", "130200", "130203"]
-                        detailedAddress:详细地址信息
-                        region 地址的省份 region='广东省惠州市惠阳区',
-                    -->
-                    <gt-map :mapInformation.sync="mapInformation"></gt-map>
                     <el-form-item label="店铺电话：" prop="phone">
                         <el-input v-model="addEatReq.phone" style="width: 251px!important;"></el-input>
                     </el-form-item>
@@ -69,94 +63,37 @@ export default {
         lon: "" // 纬度
       },
       mapBean: {
-        //   selectedOptions: ["440000","441300","441302"],
-        selectedOptions: ["130000", "130200", "130203"],
-        address: "赛格假日广场",
-        region: "广东省惠州市惠城区惠州大道20号"
-      },
-      mapInformation: {
-        label: "店铺地址",
-        Charactron: ["440000", "441300", "441303"],
-        address: "广东省惠州市惠阳区",
+        label: "",
+        Charactron: [],
+        address: "",
         detailedAddress: "广东省惠州市惠城区惠州大道20号"
-      },
-      mapInformation2: {
-        label: "选择地址",
-        Charactron: ["440000", "441300", "441303"],
-        address: "广东省惠州市惠阳区",
-        detailedAddress: ""
       },
       addEatRules: {
         name: [
-          {
-            required: true,
-            message: "请输入店铺名称",
-            trigger: "blur"
-          },
-          {
-            min: 1,
-            max: 7,
-            message: "长度不超过7个字符",
-            trigger: "blur"
-          }
+          { required: true, message: "请输入店铺名称", trigger: "blur" },
+          { min: 1, max: 7, message: "长度不超过7个字符", trigger: "blur" }
         ],
-        logoUrl: [
-          {
-            required: true,
-            message: "请选择上传的logo图",
-            trigger: "blur"
-          }
-        ],
+        logoUrl: [{ required: true, message: "请选择上传的logo图", trigger: "blur" }],
         introduce: [
-          {
-            required: true,
-            message: "请输入介绍文案",
-            trigger: "blur"
-          },
-          {
-            min: 1,
-            max: 7,
-            message: "长度不超过7个字符",
-            trigger: "blur"
-          }
+          { required: true, message: "请输入介绍文案", trigger: "blur" },
+          { min: 1, max: 7, message: "长度不超过7个字符", trigger: "blur" }
         ],
-        address: [
-          {
-            required: true,
-            message: "请选择店铺地址",
-            trigger: "blur"
-          }
-        ],
-        phone: [
-          {
-            required: true,
-            message: "请输入店铺电话",
-            trigger: "blur"
-          }
-        ],
-        lat: [
-          {
-            required: true,
-            message: "请选择地图信息",
-            trigger: "blur"
-          }
-        ],
+        address: [{ required: true, message: "请选择店铺地址", trigger: "blur" }],
+        phone: [{ required: true, message: "请输入店铺电话", trigger: "blur" }],
+        lat: [{ required: true, message: "请选择地图信息", trigger: "blur" }],
         bannerUrl: [
-          {
-            required: true,
-            message: "请选择上传banner图",
-            trigger: "blur"
-          }
+          { required: true, message: "请选择上传banner图", trigger: "blur" }
         ]
       }
     };
   },
   methods: {
     submitForm(formName) {
-      console.log(this.mapInformation);
+      console.log(this.mapBean);
       try {
-        this.addEatReq.lat = this.mapBean.address.latLng.lat;
-        this.addEatReq.lon = this.mapBean.address.latLng.lng;
+        this.addEatReq.address = this.mapBean.MapData.address;
+        this.addEatReq.lat = this.mapBean.MapData.latLng.lat;
+        this.addEatReq.lon = this.mapBean.MapData.latLng.lng;
       } catch (error) {}
 
       console.log(this.addEatReq);

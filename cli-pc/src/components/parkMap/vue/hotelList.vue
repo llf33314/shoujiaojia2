@@ -27,61 +27,63 @@
     </div>
 </template>
 <script>
-import { requestListHotels, requestDelHotel } from "../api/api"
+import { requestListHotels, requestDelHotel } from "../api/api";
 export default {
-    data() {
-        return {
-            hotelListData: [],
-            hotelListReq: {
-                "current": 0,
-                "size": 10
-            }
+  data() {
+    return {
+      hotelListData: [],
+      hotelListReq: {
+        current: 0,
+        size: 10
+      }
+    };
+  },
+  methods: {
+    listHotels() {
+      requestListHotels(this.hotelListReq).then(data => {
+        // console.log(data);
+        var _code = data.code;
+        if (_code == 100) {
+          this.hotelListData = data.data;
+        } else {
+          this.$message.error(data.msg + "[错误码：" + _code + "]");
         }
+      });
     },
-    methods: {
-        listHotels() {
-            requestListHotels(this.hotelListReq).then(data => {
-                // console.log(data);
-                var _code = data.code;
-                if (_code == 100) {
-                    this.hotelListData = data.data;
-                } else {
-                    this.$message.error(data.msg + "[错误码：" + _code + "]");
-                }
-            });
-        },
-        editHotel(hotelInfo) {
-            console.log(hotelInfo);
-            this.$router.push({ path: '/parkMapAdmin/modifyHotel', query: hotelInfo });
-        },
-        delHotel(id) {
-            this.$confirm('此操作将永久删除该店铺以及相关数据，是否继续？', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-            }).then(() => {
-                requestDelHotel({ id: id }).then(data => {
-                    var _code = data.code;
-                    if (_code == 100) {
-                        this.$message({
-                            type: 'success',
-                            message: '您已删除该店铺信息！'
-                        });
-                        this.listHotels();
-                    } else {
-                        this.$message.error(data.msg + "[错误码：" + _code + "]");
-                    }
-                });
-
-            });
-        },
-        addEatClick() {
-            this.$router.push({ path: '/parkMapAdmin/addHotel' });
-        }
+    editHotel(hotelInfo) {
+      console.log(hotelInfo);
+      this.$router.push({
+        path: "/parkMapAdmin/modifyHotel",
+        query: hotelInfo
+      });
     },
-    mounted() {
-        this.listHotels();
+    delHotel(id) {
+      this.$confirm("此操作将永久删除该店铺以及相关数据，是否继续？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        requestDelHotel({ id: id }).then(data => {
+          var _code = data.code;
+          if (_code == 100) {
+            this.$message({
+              type: "success",
+              message: "您已删除该店铺信息！"
+            });
+            this.listHotels();
+          } else {
+            this.$message.error(data.msg + "[错误码：" + _code + "]");
+          }
+        });
+      });
+    },
+    addEatClick() {
+      this.$router.push({ path: "/parkMapAdmin/addHotel" });
     }
+  },
+  created() {
+    this.listHotels();
+  }
 };
 </script>
 <style>

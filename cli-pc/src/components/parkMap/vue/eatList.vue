@@ -77,7 +77,7 @@ export default {
       this.$router.push({ path: "/parkMapAdmin/addEat" });
     }
   },
-  mounted() {
+  created(){
     this.listEats();
   }
 };

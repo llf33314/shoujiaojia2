@@ -11,24 +11,24 @@
 export default {
   data() {
     return {
-      manage: 'eatList'
+      manage: "eatList"
     };
   },
   methods: {
     handleClick(tab, event) {
-      this.$router.push({ path: '/parkMapAdmin/' + tab.name });
+      this.$router.push({ path: "/parkMapAdmin/" + tab.name });
     }
   }
 };
 </script>
 <style>
 .el-tabs__header {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
-.a-in-top{
-    background: #fafbfc;
-    margin-bottom: 30px;
-    padding-top: 60px;
-    padding-left: 25px;
+.a-in-top {
+  background: #fafbfc;
+  margin-bottom: 30px;
+  padding-top: 60px;
+  padding-left: 25px;
 }
 </style>
