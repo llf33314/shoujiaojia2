@@ -34,7 +34,7 @@
                         <p class="a-in-stop-prompt">建议上传360*200尺寸图片</p>
                     </el-form-item>
                     <el-form-item label="酒店介绍：" prop="remark">
-                        <el-input type="textarea" v-model="addHotelReq.remark" style="width: 400px!important;" rows="4"></el-input>
+                        <el-input type="textarea" v-model="addHotelReq.remark" style="width: 400px!important;"></el-input>
                     </el-form-item>
                     <el-form-item style="margin-top: 80px;">
                         <el-button type="primary" @click="submitForm('addHotelReq')">保存</el-button>
