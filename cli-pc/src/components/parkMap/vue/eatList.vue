@@ -1,10 +1,10 @@
 <template>
-    <div style="padding: 0 40px 0 20px;">
-        <div class="a-in-add">
+    <div>
+        <div>
             <el-button type="primary" @click="addEatClick">新增</el-button>
         </div>
-        <div class="a-in-add-list"> 
-              已创建店铺列表 
+        <div>
+            已创建店铺列表
         </div>
         <el-table :data="eatListData" border highlight-current-row style="width: 100%">
             <el-table-column prop="name" label="店铺名称"></el-table-column>
@@ -85,6 +85,7 @@ export default {
 };
 </script>
 <style>
+<<<<<<< HEAD
 .a-in-add{
    width: 100%;
     height: 91px;
@@ -114,4 +115,7 @@ export default {
     transition: color .15s linear;
     color: #2d8dfd;
 }
+=======
+
+>>>>>>> ec9f8075d5b7094bb53e40c94e0290ed2868b585
 </style>
