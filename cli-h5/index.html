@@ -45,7 +45,17 @@
   <div id="app"></div>
 
   <script src="http://api.map.baidu.com/api?v=2.0&ak=K8enAGrguh6EPQyQT5FyoR6KQx9Frvkq&callback=init" ref></script>
-  
+  <script>
+    window.onload = function () {
+      console.log(window.innerHeight)
+      var ww = window.innerHeight
+      setTimeout(function () {
+        if(ww <=480) window.scrollTo(1250, 800);
+        if(ww >=480 && ww <=667) window.scrollTo(1250, 750);
+        if(ww >667) window.scrollTo(1250, 700);
+      }, 1000)
+    }
+  </script>
 </body>
 
 </html>
