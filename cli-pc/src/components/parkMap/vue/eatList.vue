@@ -85,7 +85,6 @@ export default {
 };
 </script>
 <style>
-<<<<<<< HEAD
 .a-in-add{
    width: 100%;
     height: 91px;
@@ -115,7 +114,4 @@ export default {
     transition: color .15s linear;
     color: #2d8dfd;
 }
-=======
-
->>>>>>> ec9f8075d5b7094bb53e40c94e0290ed2868b585
 </style>

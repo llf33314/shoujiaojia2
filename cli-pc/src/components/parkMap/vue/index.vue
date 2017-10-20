@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
   <div class="a-in-top" >
-=======
-  <div>
->>>>>>> ec9f8075d5b7094bb53e40c94e0290ed2868b585
     <el-tabs v-model="manage" type="card" @tab-click="handleClick">
       <el-tab-pane label="餐饮管理" name="eatList"></el-tab-pane>
       <el-tab-pane label="住宿管理" name="hotelList"></el-tab-pane>
@@ -24,7 +20,6 @@ export default {
     }
   }
 };
-<<<<<<< HEAD
 </script>
 <style>
 .el-tabs__header {
@@ -37,6 +32,3 @@ export default {
     padding-left: 25px;
 }
 </style>
-=======
-</script>
->>>>>>> ec9f8075d5b7094bb53e40c94e0290ed2868b585
