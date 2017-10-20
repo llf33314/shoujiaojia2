@@ -45,6 +45,7 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
      */
     @Override
     public ResponseDTO<List<MListEatRes>> listEatsByPage(BusUser busUser, MListEatReq mListEatReq) throws MiniParkException {
+
         return null;
     }
 

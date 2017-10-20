@@ -21,7 +21,7 @@
                         <el-input v-model="addHotelReq.introduce" style="width: 251px!important;"></el-input>
                     </el-form-item>
                     <el-form-item label="酒店地址：" prop="address">
-                        <gt-map :mapInformation.sync="mapBean"></gt-map>
+                        <gtmap :gtmapInformation.sync="mapBean"></gtmap>
                     </el-form-item>
                     <el-form-item label="酒店电话：" prop="phone">
                         <el-input v-model="addHotelReq.phone" style="width: 251px!important;"></el-input>
@@ -47,7 +47,7 @@
 </template>
 <script>
 import { requestAddHotel } from "../api/api";
-import GtMap from "@/components/PublicVue/map/map.vue";
+import gtmap from "@/components/PublicVue/map/gtMap.vue";
 export default {
   data() {
     return {
@@ -64,9 +64,7 @@ export default {
       },
       mapBean: {
         label: "",
-        Charactron: [],
-        address: "",
-        detailedAddress: "广东省惠州市惠城区惠州大道20号"
+        detailedAddress: ""
       },
       addHotelRules: {
         name: [
@@ -88,6 +86,12 @@ export default {
   },
   methods: {
     submitForm(formName) {
+      console.log(this.mapBean);
+      try {
+        this.addHotelReq.address = this.mapBean.MapData.address;
+        this.addHotelReq.lat = this.mapBean.MapData.latLng.lat;
+        this.addHotelReq.lon = this.mapBean.MapData.latLng.lng;
+      } catch (error) {}
       console.log(this.addHotelReq);
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -106,13 +110,6 @@ export default {
       this.addHotelReq[e.prop] = e.url;
     },
     addHotel() {
-      console.log(this.mapBean);
-      try {
-        this.addHotelReq.address = this.mapBean.MapData.address;
-        this.addHotelReq.lat = this.mapBean.MapData.latLng.lat;
-        this.addHotelReq.lon = this.mapBean.MapData.latLng.lng;
-      } catch (error) {}
-
       requestAddHotel(this.addHotelReq).then(data => {
         // console.log(data);
         var _code = data.code;
@@ -129,7 +126,7 @@ export default {
     }
   },
   components: {
-    GtMap
+    gtmap
   }
 };
 </script>

@@ -21,7 +21,7 @@
                         <el-input v-model="modifyEatReq.introduce" style="width: 251px!important;"></el-input>
                     </el-form-item>
                     <el-form-item label="店铺地址" prop="address">
-                        <gt-map :mapInformation.sync="mapBean"></gt-map>
+                        <gtmap :gtmapInformation.sync="mapBean"></gtmap>
                     </el-form-item>
                     <el-form-item label="店铺电话" prop="phone">
                         <el-input v-model="modifyEatReq.phone" style="width: 251px!important;"></el-input>
@@ -47,7 +47,7 @@
 </template>
 <script>
 import { requestModifyEat } from "../api/api";
-import GtMap from "@/components/PublicVue/map/map.vue";
+import gtmap from "@/components/PublicVue/map/gtMap.vue";
 export default {
   data() {
     return {
@@ -64,9 +64,7 @@ export default {
       },
       mapBean: {
         label: "",
-        Charactron: ["440000", "441300", "441302"],
-        address: "广东省惠州市惠城区",
-        detailedAddress: "广东省惠州市惠城区惠州大道20号"
+        detailedAddress: ""
       },
       modifyEatRules: {
         name: [
@@ -88,6 +86,12 @@ export default {
   },
   methods: {
     submitForm(formName) {
+      console.log(this.mapBean);
+      try {
+        this.modifyEatReq.address = this.mapBean.MapData.address;
+        this.modifyEatReq.lat = this.mapBean.MapData.latLng.lat;
+        this.modifyEatReq.lon = this.mapBean.MapData.latLng.lng;
+      } catch (error) {}
       console.log(this.modifyEatReq);
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -106,12 +110,6 @@ export default {
       this.modifyEatReq[e.prop] = e.url;
     },
     modifyEat() {
-      console.log(this.mapBean);
-      try {
-        this.modifyEatReq.address = this.mapBean.MapData.address;
-        this.modifyEatReq.lat = this.mapBean.MapData.latLng.lat;
-        this.modifyEatReq.lon = this.mapBean.MapData.latLng.lng;
-      } catch (error) {}
       console.log("save obj : " + this.modifyEatReq);
       requestModifyEat(this.modifyEatReq).then(data => {
         // console.log(data);
@@ -131,9 +129,10 @@ export default {
   created() {
     console.log(this.$route.query);
     this.modifyEatReq = this.$route.query;
+    this.mapBean.detailedAddress = this.modifyEatReq.address;
   },
   components: {
-    GtMap
+    gtmap
   }
 };
 </script>

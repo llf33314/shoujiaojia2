@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <el-button type="primary" @click="addEatClick">新增</el-button>
+            <el-button type="primary" @click="addHotelClick">新增</el-button>
         </div>
         <div>
             已创建店铺列表
@@ -77,7 +77,7 @@ export default {
         });
       });
     },
-    addEatClick() {
+    addHotelClick() {
       this.$router.push({ path: "/parkMapAdmin/addHotel" });
     }
   },

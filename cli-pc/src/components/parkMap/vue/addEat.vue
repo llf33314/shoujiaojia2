@@ -21,7 +21,7 @@
                         <el-input v-model="addEatReq.introduce" style="width: 251px!important;"></el-input>
                     </el-form-item>
                     <el-form-item label="店铺地址：" prop="address">
-                        <gt-map :mapInformation.sync="mapBean"></gt-map>
+                        <gtmap :gtmapInformation.sync="mapBean"></gtmap>
                     </el-form-item>
                     <el-form-item label="店铺电话：" prop="phone">
                         <el-input v-model="addEatReq.phone" style="width: 251px!important;"></el-input>
@@ -47,7 +47,7 @@
 </template>
 <script>
 import { requestAddEat } from "../api/api";
-import GtMap from "@/components/PublicVue/map/map.vue";
+import gtmap from "@/components/PublicVue/map/gtMap.vue";
 export default {
   data() {
     return {
@@ -64,9 +64,7 @@ export default {
       },
       mapBean: {
         label: "",
-        Charactron: [],
-        address: "",
-        detailedAddress: "广东省惠州市惠城区惠州大道20号"
+        detailedAddress: ""
       },
       addEatRules: {
         name: [
@@ -134,7 +132,7 @@ export default {
     }
   },
   components: {
-    GtMap
+    gtmap
   }
 };
 </script>
