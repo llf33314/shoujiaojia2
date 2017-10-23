@@ -29,8 +29,8 @@
                         detailedAddress:详细地址信息
                         region 地址的省份 region='广东省惠州市惠阳区',
                     -->
-                    <gt-map :selectedOptions="mapBean.selectedOptions" :detailedAddress.sync="mapBean.address" :region='mapBean.region' style="width: 381px!important;"></gt-map>
-                    {{mapBean.address}}
+                    <gt-map :selectedOptions="mapBean.selectedOptions" :detailedAddress.sync="mapBean.address" :region='mapBean.region' style="width: 381px!important;">{{mapBean.address}}</gt-map>
+                    
                     <el-form-item label="店铺电话：" prop="phone">
                         <el-input v-model="addEatReq.phone" style="width: 251px!important;"></el-input>
                     </el-form-item>
