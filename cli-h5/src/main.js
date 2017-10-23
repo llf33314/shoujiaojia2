@@ -12,6 +12,7 @@ import  util  from './assets/js/util'
 /*
 * 加载全局样式
 * */
+import 'animate.css'
 /*
 * 加载全局阿里iconfont
 * */

@@ -21,16 +21,8 @@
                         <el-input v-model="addEatReq.introduce" style="width: 251px!important;"></el-input>
                     </el-form-item>
                     <el-form-item label="店铺地址：" prop="address">
-                        <el-input v-model="addEatReq.address" style="width: 251px!important;"></el-input>
+                        <gtmap :gtmapInformation.sync="mapBean"></gtmap>
                     </el-form-item>
-
-                    <!--
-                        selectedOptions 地址的省份selectedOptions= ["130000", "130200", "130203"]
-                        detailedAddress:详细地址信息
-                        region 地址的省份 region='广东省惠州市惠阳区',
-                    -->
-                    <gt-map :selectedOptions="mapBean.selectedOptions" :detailedAddress.sync="mapBean.address" :region='mapBean.region' style="width: 381px!important;">{{mapBean.address}}</gt-map>
-                    
                     <el-form-item label="店铺电话：" prop="phone">
                         <el-input v-model="addEatReq.phone" style="width: 251px!important;"></el-input>
                     </el-form-item>
@@ -42,7 +34,7 @@
                         <p class="a-in-stop-prompt">建议上传360*200尺寸图片</p>
                     </el-form-item>
                     <el-form-item label="店铺介绍：" prop="remark">
-                        <el-input type="textarea" v-model="addEatReq.remark" style="width: 400px!important;" rows="4"></el-input>
+                        <el-input type="textarea" v-model="addEatReq.remark" style="width: 400px!important;"></el-input>
                     </el-form-item>
                     <el-form-item style="margin-top: 80px;">
                         <el-button type="primary" @click="submitForm('addEatReq')">保存</el-button>
@@ -52,139 +44,97 @@
             </el-form>
         </div>
     </div>
-  </div>
 </template>
 <script>
-  import {
-    requestAddEat
-  } from "../api/api";
-  import GtMap from "@/components/PublicVue/map/map.vue";
-  export default {
-    data() {
-      return {
-        addEatReq: {
-          name: "", // 名称
-          logoUrl: "", // logo
-          introduce: "", // 简介
-          address: "", // 地址
-          phone: "", // 手机
-          bannerUrl: "", // banner
-          remark: "", // 详细介绍
-          lat: "", // 经度
-          lon: "" // 纬度
-        },
-        mapBean: {
-          selectedOptions: [
-            "130000",
-            "130200",
-            "130203"
-          ],
-          address: {},
-          region: "河北省唐山市路北区"
-        },
-        addEatRules: {
-          name: [{
-              required: true,
-              message: "请输入店铺名称",
-              trigger: "blur"
-            },
-            {
-              min: 1,
-              max: 7,
-              message: "长度不超过7个字符",
-              trigger: "blur"
-            }
-          ],
-          logoUrl: [{
-            required: true,
-            message: "请选择上传的logo图",
-            trigger: "blur"
-          }],
-          introduce: [{
-              required: true,
-              message: "请输入介绍文案",
-              trigger: "blur"
-            },
-            {
-              min: 1,
-              max: 7,
-              message: "长度不超过7个字符",
-              trigger: "blur"
-            }
-          ],
-          address: [{
-            required: true,
-            message: "请选择店铺地址",
-            trigger: "blur"
-          }],
-          phone: [{
-            required: true,
-            message: "请输入店铺电话",
-            trigger: "blur"
-          }],
-          lat: [{
-            required: true,
-            message: "请选择地图信息",
-            trigger: "blur"
-          }],
-          bannerUrl: [{
-            required: true,
-            message: "请选择上传banner图",
-            trigger: "blur"
-          }]
-        }
-      };
-    },
-    methods: {
-      submitForm(formName) {
-        console.log(this.mapBean);
-        try {
-          this.addEatReq.lat = this.mapBean.address.latLng.lat;
-          this.addEatReq.lon = this.mapBean.address.latLng.lng;
-        } catch (error) {}
-
-        console.log(this.addEatReq);
-        this.$refs[formName].validate(valid => {
-          if (valid) {
-            this.addEat();
-          } else {
-            return false;
-          }
-        });
+import { requestAddEat } from "../api/api";
+import gtmap from "@/components/PublicVue/map/gtMap.vue";
+export default {
+  data() {
+    return {
+      addEatReq: {
+        name: "", // 名称
+        logoUrl: "", // logo
+        introduce: "", // 简介
+        address: "", // 地址
+        phone: "", // 手机
+        bannerUrl: "", // banner
+        remark: "", // 详细介绍
+        lat: "", // 经度
+        lon: "" // 纬度
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-        this.$router.push({
-          path: "/parkMapAdmin/index"
-        });
+      mapBean: {
+        label: "",
+        detailedAddress: ""
       },
-      getChangeUrl(e) {
-        // 获取素材库的图片url
-        this.addEatReq[e.prop] = e.url;
-      },
-      addEat() {
-        requestAddEat(this.addEatReq).then(data => {
-          // console.log(data);
-          var _code = data.code;
-          if (_code == 100) {
-            this.$message({
-              message: "新增餐饮店铺成功！",
-              type: "success"
-            });
-            this.$router.push({
-              path: "/parkMapAdmin/index"
-            });
-          } else {
-            this.$message.error(data.msg + "[错误码：" + _code + "]");
-          }
-        });
+      addEatRules: {
+        name: [
+          { required: true, message: "请输入店铺名称", trigger: "blur" },
+          { min: 1, max: 7, message: "长度不超过7个字符", trigger: "blur" }
+        ],
+        logoUrl: [{ required: true, message: "请选择上传的logo图", trigger: "blur" }],
+        introduce: [
+          { required: true, message: "请输入介绍文案", trigger: "blur" },
+          { min: 1, max: 7, message: "长度不超过7个字符", trigger: "blur" }
+        ],
+        address: [{ required: true, message: "请选择店铺地址", trigger: "blur" }],
+        phone: [{ required: true, message: "请输入店铺电话", trigger: "blur" }],
+        lat: [{ required: true, message: "请选择地图信息", trigger: "blur" }],
+        bannerUrl: [
+          { required: true, message: "请选择上传banner图", trigger: "blur" }
+        ]
       }
-    },
-    components: {
-      GtMap
-    }
-  };
+    };
+  },
+  methods: {
+    submitForm(formName) {
+      console.log(this.mapBean);
+      try {
+        this.addEatReq.address = this.mapBean.MapData.address;
+        this.addEatReq.lat = this.mapBean.MapData.latLng.lat;
+        this.addEatReq.lon = this.mapBean.MapData.latLng.lng;
+      } catch (error) {}
 
+      console.log(this.addEatReq);
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.addEat();
+        } else {
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+      this.$router.push({
+        path: "/parkMapAdmin/index"
+      });
+    },
+    getChangeUrl(e) {
+      // 获取素材库的图片url
+      this.addEatReq[e.prop] = e.url;
+    },
+    addEat() {
+      requestAddEat(this.addEatReq).then(data => {
+        // console.log(data);
+        var _code = data.code;
+        if (_code == 100) {
+          this.$message({
+            message: "新增餐饮店铺成功！",
+            type: "success"
+          });
+          this.$router.push({
+            path: "/parkMapAdmin/index"
+          });
+        } else {
+          this.$message.error(data.msg + "[错误码：" + _code + "]");
+        }
+      });
+    }
+  },
+  components: {
+    gtmap
+  }
+};
 </script>
 <style>
 .a-in-stop-head{

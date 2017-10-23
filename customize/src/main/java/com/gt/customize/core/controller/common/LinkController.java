@@ -58,7 +58,7 @@ public class LinkController {
         try {
 //            String url = course.urlquery(key);
             String url = "https://v.qq.com/iframe/player.html?vid=g0550rl08hs&tiny=0&auto=0";
-            if(!url.equals("")){
+            if(!"".equals(url)){
                 if(!(url.indexOf("http:")>-1 || url.indexOf("https:")>-1)){
                     url = "http://" + url;
                 }

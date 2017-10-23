@@ -1,6 +1,8 @@
 package com.gt.customize.core.service.minipark.impl;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.gt.axis.bean.wxmp.bus.BusUser;
+import com.gt.customize.common.dto.PageDTO;
 import com.gt.customize.common.dto.ResponseDTO;
 import com.gt.customize.common.enums.ResponseEnums;
 import com.gt.customize.core.bean.minipark.req.MEatInfoReq;
@@ -45,7 +47,10 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
      */
     @Override
     public ResponseDTO<List<MListEatRes>> listEatsByPage(BusUser busUser, MListEatReq mListEatReq) throws MiniParkException {
-        return null;
+        Page<MListEatRes> page = new Page<>(mListEatReq.getCurrent(), mListEatReq.getSize());
+        List<MListEatRes> mListEatResList = customizeMiniparkEatService.selectListOrderDistanceByPage(page, Double.valueOf(mListEatReq.getLon()), Double.valueOf(mListEatReq.getLat()));
+        PageDTO pageDTO = new PageDTO(page.getPages(), page.getTotal());
+        return ResponseDTO.createBySuccessPage("分页获取餐饮店铺列表成功", mListEatResList, pageDTO);
     }
 
     /**
@@ -61,7 +66,7 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
         if (CommonUtil.isEmpty(customizeMiniparkEat)){
             throw new MiniParkException(ResponseEnums.INFO_NULL);
         }
-        if (busUser.getId() != customizeMiniparkEat.getBusId()){
+        if (!busUser.getId().equals(customizeMiniparkEat.getBusId())){
             throw new MiniParkException(ResponseEnums.DIFF_USER);
         }
         MEatInfoRes mEatInfoRes = new MEatInfoRes();
@@ -84,7 +89,10 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
      */
     @Override
     public ResponseDTO<List<MListHotelRes>> listHotelsByPage(BusUser busUser, MListHotelReq mListHotelReq) throws MiniParkException {
-        return null;
+        Page<MListHotelRes> page = new Page<>(mListHotelReq.getCurrent(), mListHotelReq.getSize());
+        List<MListHotelRes> mListHotelResList = customizeMiniparkHotelService.selectListOrderDistanceByPage(page, Double.valueOf(mListHotelReq.getLon()), Double.valueOf(mListHotelReq.getLat()));
+        PageDTO pageDTO = new PageDTO(page.getPages(), page.getTotal());
+        return ResponseDTO.createBySuccessPage("分页获取酒店店铺列表成功", mListHotelResList, pageDTO);
     }
 
     /**
@@ -100,7 +108,7 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
         if (CommonUtil.isEmpty(customizeMiniparkHotel)){
             throw new MiniParkException(ResponseEnums.INFO_NULL);
         }
-        if (busUser.getId() != customizeMiniparkHotel.getBusId()){
+        if (!busUser.getId().equals(customizeMiniparkHotel.getBusId())){
             throw new MiniParkException(ResponseEnums.DIFF_USER);
         }
         MHotelInfoRes mHotelInfoRes = new MHotelInfoRes();
@@ -113,4 +121,5 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
         mHotelInfoRes.setLon(customizeMiniparkHotel.getShopLon());
         return mHotelInfoRes;
     }
+
 }
