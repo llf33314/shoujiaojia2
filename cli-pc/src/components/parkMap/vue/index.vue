@@ -28,6 +28,6 @@ export default {
 .a-in-top{
     background: #fafbfc;
     margin-bottom: 30px;
-    padding:60px 25px 70px;
+    padding:30px 25px 70px;
 }
 </style>

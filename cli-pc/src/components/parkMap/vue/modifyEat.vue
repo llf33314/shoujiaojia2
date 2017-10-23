@@ -21,7 +21,7 @@
                         <el-input v-model="modifyEatReq.introduce" style="width: 251px!important;"></el-input>
                     </el-form-item>
                     <el-form-item label="店铺地址" prop="address">
-                        <gtmap :gtmapInformation.sync="mapBean"></gtmap>
+                        <gtmap :gtmapInformation.sync="mapBean" style="width: 251px!important;" ></gtmap>
                     </el-form-item>
                     <el-form-item label="店铺电话" prop="phone">
                         <el-input v-model="modifyEatReq.phone" style="width: 251px!important;"></el-input>
@@ -34,7 +34,7 @@
                         <p class="a-in-stop-prompt">建议上传360*200尺寸图片</p>
                     </el-form-item>
                     <el-form-item label="店铺介绍" prop="remark">
-                        <el-input type="textarea" v-model="modifyEatReq.remark" style="width: 400px!important;"></el-input>
+                        <el-input type="textarea" v-model="modifyEatReq.remark" style="width: 300px!important;"></el-input>
                     </el-form-item>
                     <el-form-item style="margin-top: 80px;">
                         <el-button type="primary" @click="submitForm('modifyEatReq')">保存</el-button>
@@ -168,5 +168,8 @@ export default {
 }
 .el-form-item {
   margin-bottom: 26px;
+}
+.el-textarea__inner{
+    height:150px;
 }
 </style>

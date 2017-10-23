@@ -21,7 +21,7 @@
                         <el-input v-model="addHotelReq.introduce" style="width: 251px!important;"></el-input>
                     </el-form-item>
                     <el-form-item label="酒店地址：" prop="address">
-                        <gtmap :gtmapInformation.sync="mapBean"></gtmap>
+                        <gtmap :gtmapInformation.sync="mapBean" style="width: 251px!important;" ></gtmap>
                     </el-form-item>
                     <el-form-item label="酒店电话：" prop="phone">
                         <el-input v-model="addHotelReq.phone" style="width: 251px!important;"></el-input>
@@ -34,7 +34,7 @@
                         <p class="a-in-stop-prompt">建议上传360*200尺寸图片</p>
                     </el-form-item>
                     <el-form-item label="酒店介绍：" prop="remark">
-                        <el-input type="textarea" v-model="addHotelReq.remark" style="width: 400px!important;"></el-input>
+                        <el-input type="textarea" v-model="addHotelReq.remark" style="width: 300px!important;"></el-input>
                     </el-form-item>
                     <el-form-item style="margin-top: 80px;">
                         <el-button type="primary" @click="submitForm('addHotelReq')">保存</el-button>
@@ -162,5 +162,8 @@ export default {
 }
 .el-form-item {
   margin-bottom: 26px;
+}
+.el-textarea__inner{
+    height:300px;
 }
 </style>
