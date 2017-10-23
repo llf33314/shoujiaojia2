@@ -105,7 +105,7 @@ public class CommonUtil {
 	public static String Blob2String(Object obj) {
 		String string = null;
 		try {
-			if (obj == null || obj.equals("")) {
+			if (obj == null || "".equals(obj)) {
 				return "";
 			}
 			byte[] bytes = (byte[]) obj;

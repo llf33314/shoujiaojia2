@@ -64,7 +64,7 @@ public class DateTimeKit {
 	public static final String MMDDHHMMSS = "MMddHHmmss";
 
 	public java.sql.Timestamp getTimestamp() {
-		return new java.sql.Timestamp(new Date().getTime());
+		return new java.sql.Timestamp(System.currentTimeMillis());
 	}
 
 	/**
@@ -812,7 +812,7 @@ public class DateTimeKit {
 	 * @return
 	 */
 	public static java.sql.Timestamp getDateDb() {
-		return new java.sql.Timestamp(new Date().getTime());
+		return new java.sql.Timestamp(System.currentTimeMillis());
 	}
 
 	/**
@@ -1076,7 +1076,7 @@ public class DateTimeKit {
 		 * @return
 		 */
 		public static boolean laterThanNow(Date date){
-			return date.getTime()>new Date().getTime();
+			return date.getTime()>System.currentTimeMillis();
 		}
 		
 		/**

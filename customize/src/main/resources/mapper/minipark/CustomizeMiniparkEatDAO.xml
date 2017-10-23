@@ -20,9 +20,27 @@
 		<result column="deleteflag" property="deleteflag" />
 	</resultMap>
 
+	<!-- 移动端查询映射结果 -->
+	<resultMap id="MListEatResultMap" type="com.gt.customize.core.bean.minipark.res.MListEatRes">
+		<id column="id" property="id" />
+		<result column="shop_name" property="name" />
+		<result column="shop_logo_url" property="logoUrl" />
+		<result column="shop_introduce" property="introduce" />
+		<result column="shop_add" property="address" />
+		<result column="shop_phone" property="phone" />
+		<result column="shop_disctanse" property="distance" />
+	</resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, bus_id, shop_name, shop_logo_url, shop_introduce, shop_add, shop_lon, shop_lat, shop_phone, shop_banner_url, shop_remark, shop_status, create_time, deleteflag
     </sql>
+
+	<select id="selectListOrderDistanceByPage" resultMap="MListEatResultMap">
+		SELECT id, shop_logo_url, shop_name, shop_introduce, shop_add, shop_phone, getDistanse( ${lon}, ${lat}, shop_lon, shop_lat) AS shop_disctanse
+		FROM t_customize_minipark_eat
+		WHERE shop_status = 0 AND deleteflag = 0
+		ORDER BY getDistanse( ${lon}, ${lat}, shop_lon, shop_lat)
+	</select>
 
 </mapper>

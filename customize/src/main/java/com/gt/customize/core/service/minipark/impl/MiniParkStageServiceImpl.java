@@ -108,7 +108,7 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
         if (CommonUtil.isEmpty(customizeMiniparkEat)){
             throw new MiniParkException(ResponseEnums.INFO_NULL);
         }
-        if (busUser.getId() != customizeMiniparkEat.getBusId()){
+        if (!busUser.getId().equals(customizeMiniparkEat.getBusId())){
             throw new MiniParkException(ResponseEnums.DIFF_USER);
         }
         customizeMiniparkEat.setShopName(modifyEatReq.getName());
@@ -135,7 +135,7 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
         if (CommonUtil.isEmpty(customizeMiniparkEat)){
             throw new MiniParkException(ResponseEnums.INFO_NULL);
         }
-        if (busUser.getId() != customizeMiniparkEat.getBusId()){
+        if (!busUser.getId().equals(customizeMiniparkEat.getBusId())){
             throw new MiniParkException(ResponseEnums.DIFF_USER);
         }
         customizeMiniparkEat.setDeleteflag(1);
@@ -214,7 +214,7 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
         if (CommonUtil.isEmpty(customizeMiniparkHotel)){
             throw new MiniParkException(ResponseEnums.INFO_NULL);
         }
-        if (busUser.getId() != customizeMiniparkHotel.getBusId()){
+        if (!busUser.getId().equals(customizeMiniparkHotel.getBusId())){
             throw new MiniParkException(ResponseEnums.DIFF_USER);
         }
         customizeMiniparkHotel.setShopName(modifyHotelReq.getName());
@@ -241,7 +241,7 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
         if (CommonUtil.isEmpty(customizeMiniparkHotel)){
             throw new MiniParkException(ResponseEnums.INFO_NULL);
         }
-        if (busUser.getId() != customizeMiniparkHotel.getBusId()){
+        if (!busUser.getId().equals(customizeMiniparkHotel.getBusId())){
             throw new MiniParkException(ResponseEnums.DIFF_USER);
         }
         customizeMiniparkHotel.setDeleteflag(1);

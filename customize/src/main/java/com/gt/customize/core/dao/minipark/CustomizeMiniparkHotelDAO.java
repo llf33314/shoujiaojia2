@@ -1,7 +1,12 @@
 package com.gt.customize.core.dao.minipark;
 
-import com.gt.customize.core.entity.minipark.CustomizeMiniparkHotel;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.gt.customize.core.bean.minipark.res.MListHotelRes;
+import com.gt.customize.core.entity.minipark.CustomizeMiniparkHotel;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +18,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface CustomizeMiniparkHotelDAO extends BaseMapper<CustomizeMiniparkHotel> {
 
+    List<MListHotelRes> selectListOrderDistanceByPage(@Param("page") Page<MListHotelRes> page, @Param("lon") Double lon, @Param("lat") Double lat);
 }
