@@ -6,8 +6,8 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
   <meta name="robots" content="index,follow">
-  <meta name="description" content="一个页面描述">
-  <meta name="subject" content="你的网站主题">
+  <meta name="description" content="小公园">
+  <meta name="subject" content="小公园">
   <meta http-equiv="set-cookie" content="name=value; expires=date; path=url">
   <link rel="icon" type="image/png" sizes="16x16" href="/path/to/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/path/to/favicon-32x32.png" />
@@ -23,7 +23,6 @@
     //adapter(320)
 
   </script>
-  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <script>
     // 设置全局域名引用方式 window.DOMAIN
     var DOMAIN = 'http://maint.deeptel.com.cn/upload/web_resource/develop'
@@ -43,18 +42,10 @@
 <body>
 
   <div id="app"></div>
-
-  <script src="http://api.map.baidu.com/api?v=2.0&ak=K8enAGrguh6EPQyQT5FyoR6KQx9Frvkq&callback=init" ref></script>
   <script>
-    window.onload = function () {
-      console.log(window.innerHeight)
-      var ww = window.innerHeight
-      setTimeout(function () {
-        if(ww <=480) window.scrollTo(1250, 800);
-        if(ww >=480 && ww <=667) window.scrollTo(1250, 750);
-        if(ww >667) window.scrollTo(1250, 700);
-      }, 1000)
-    }
+    // setTimeout(function () {
+    //   window.location.reload()
+    // }, 200)
   </script>
 </body>
 

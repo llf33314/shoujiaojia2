@@ -1,127 +1,518 @@
 <template>
   <section>
-    <div v-show="showMapContent">
-      <div class="map-content">
-        <div class="map-item-c" id="largeOrSmall">
-          <div class="map-mask" id="mapMask">
-            <div class="red-station" id="redStation" @click.stop="test2">红色交通站</div>
-            <div class="shantou-mansion" id="shantouMansion" @click.stop="test2">汕头大厦 </div>
+    <div class="map-p-style" :style="wStyle">
+      <div class="map-c-style" :style="wStyle" id="mapPs">
+        <div class="map-cc-style" ref="mapScale">
+          <div id="mapCstyle" class="map-c" style="z-index:8">
+            <div v-for="(item,index) in tourList" @click="showDetail(item)" :style="item.position" v-text="item.name" class="detail-item"></div>
           </div>
-          <iframe class="map-iframe1" src="./static/imgs/map.svg">
-          </iframe>
+          <embed src="./static/imgs/map.svg" class="map-c" style="z-index:1" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"
+          />
         </div>
       </div>
-      <div class="tab">
-        <div class="item" @click="showTourItem">景点</div>
-        <div class="item" @click="largeOrNarrow(false)">周边吃住</div>
+    </div>
+    <div class="tab">
+      <div class="item" @click="showTourItem">景点</div>
+      <div class="item" @click="showRoomBoard">周边吃住</div>
+    </div>
+    <ul class="tour-item left" id="tourItem" v-show="tourItemsState" :style="tourIitemHeight">
+      <li v-for="(item,index) in tourList" @click="goToTour(item)" v-text="item.name"></li>
+    </ul>
+    <ul class="tour-item right"  v-show="roomAndBoradListState" :style="tourIitemHeight">
+      <li v-for="(item,index) in roomAndBoradList" @click="goToRoomAndBorad(item)" v-text="item.name"></li>
+    </ul>
+
+    <div class="tour-detail-mask" v-if="showTourDetailMask" @click="showTourDetailMask=false">
+      <div class="tour-detail-top" v-if="audioViewState">
+        <span v-text="tourName" style="padding-left:15px;"></span>
+        <audio style="width:50px" id="myAudio1">
+          <source :src="audioSrcGroup.chUrl" type="audio/mp4" />
+        </audio>
+        <audio style="width:50px" id="myAudio2">
+          <source :src="audioSrcGroup.enUrl" type="audio/mp4" />
+        </audio>
+        <ul>
+          <li>
+            <img @click.stop="switchAudioType" v-show="audioType == true" src="./../img/ch.png" />
+            <img @click.stop="switchAudioType" v-show="audioType == false" src="./../img/en.png" />
+          </li>
+          <li>
+            <img @click.stop="openOrcloseVideo" v-show="audioSrcIcon == true" src="./../img/commentary.png" />
+            <img @click.stop="openOrcloseVideo" v-show="audioSrcIcon == false" src="./../img/closeVideo.png" />
+          </li>
+        </ul>
       </div>
-      <ul class="tour-item" id="tourItem" v-show="tourItemsState" :style="tourIitemHeight">
-        <li v-for="(item,index) in tourList" @click="goToTour(item)" v-text="item.name"></li>
-      </ul>
+      <div class="tour-detail">
+        <div class="tour-items">
+          <ul>
+            <li v-show="tourTabView==1">
+              <swiper :options="swiperOption" style="min-height:200px;max-height:300px;">
+                <swiper-slide v-for="(item,index) in swiperSlides" :key="index">
+                  <img :src="item" alt="item" style="max-width:100%;">
+                </swiper-slide>
+                <div v-show="swiperSlides.length >1" class="swiper-pagination" slot="pagination"></div>
+              </swiper>
+
+            </li>
+            <li v-show="tourTabView==2" class="tour-introduce" v-html="tourIntroduce"></li>
+          </ul>
+          <div class="tour-title swiper-pagination">小公园</div>
+          <ul class="tour-tab">
+            <li @click.stop="tourTab(1)">
+              <img src="./../img/commentary.png" />
+              <p>语音解说</p>
+            </li>
+            <li @click.stop="tourTab(2)">
+              <img src="./../img/introduce.png" />
+              <p>景点介绍</p>
+            </li>
+            <li @click.stop="tourTab(3)">
+              <img src="./../img/navigation.png" />
+              <p>定位导航</p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 <script>
+  import {
+    swiper,
+    swiperSlide
+  } from 'vue-awesome-swiper'
   import touch from 'touchjs'
   import {
-    tourList
+    tourList,roomAndBoradList
   } from './../api/tourList.js'
+
+  
   export default {
     name: 'index',
+    components: {
+      swiper,
+      swiperSlide
+    },
     data() {
       return {
-        width: '3205',
-        height: '7147',
-        num: 1,
-        touchDistance: 0,
-        type: 0,
-        test: '',
-        scale: null,
+        scale: 1,
+        pinNum: 0,
+        pinType: true,
+        tourList: tourList,
+        wStyle: {
+          width: '500px',
+          height: '500px'
+        },
+        flag: true,
+        xy: '',
         tourItemsState: false,
         tourIitemHeight: {},
-        showMapContent: false,
-        tourList: tourList
+        tourTabView: 1,
+        showTourDetailMask: false,
+        swiperOption: {
+          autoplay: 5500,
+          pagination: '.swiper-pagination',
+          height: 500,
+          loop: true,
+          lazyLoading: true,
+        },
+        swiperSlides: [],
+        tourIntroduce: '',
+        tourName: '',
+        audioType: true,
+        audioSrcIcon: true,
+        audioSrcGroup: {},
+        audioSrc: '',
+        playAudioType: 'chUrl',
+        playFlag: true,
+        audioViewState: false,
+        coordinate: '',
+        roomAndBoradList:roomAndBoradList,
+        roomAndBoradListState:false
       }
     },
     mounted() {
-      this.width = window.innerWidth
-      this.height = window.innerHeight
-      this.tourIitemHeight.maxHeight = window.innerHeight - 45 + 'px'
-
-
-      touch.on(document.getElementById('mapMask'), 'pinchin', (e) => {
-        this.type = -1
-        this.scale = e.scale
+      touch.on(document.getElementById('mapCstyle'), 'pinchstart', (e) => {
+        this.flag = true
       });
-      touch.on(document.getElementById('mapMask'), 'pinchout', (e) => {
-        this.type = 1
-        this.scale = e.scale
+      touch.on(document.getElementById('mapCstyle'), 'pinchin', (e) => {
+        this.pinNum = e.scale
+        this.pinType = false
+      });
+      touch.on(document.getElementById('mapCstyle'), 'pinchout', (e) => {
+        this.pinNum = e.scale
+        this.pinType = true
       })
-      touch.on(document.getElementById('mapMask'), 'pinchend', (e) => {
-        this.touchDistance = (e.scale * this.type).toFixed(2)
+      touch.on(document.getElementById('mapCstyle'), 'pinchend', (e) => {
+        this.flag = false
       });
-
-      setTimeout(() => {
-        this.showMapContent = true
-        this.showOpenMap()
-
-      }, 1000)
-    },
-    created() {
+      this.wSetStyle()
       this.showOpenMap()
     },
     watch: {
-      touchDistance() {
-        this.test = this.touchDistance
-      },
-      scale() {
-        if (this.scale > 2 || this.scale < 0.5) return
-        setTimeout(() => {
-          $("#largeOrSmall").css({
-            'transform': 'scale(' + this.scale + ')',
-          });
-        }, 100)
+      pinNum() {
+        console.log(this.pinNum)
+        if (this.pinType == true) { //放大
+          this.scale = parseFloat(this.scale) + parseFloat(this.pinNum)
+        } else { //缩小
+          this.scale = parseFloat(this.scale) - parseFloat(this.pinNum)
+        }
+        if (this.flag) this.setMapScale()
+        this.flag = false
       }
     },
     methods: {
-      test2() {
-        alert(2)
+      //初始化div
+      wSetStyle() {
+        this.wStyle = {
+          width: window.innerWidth + 'px',
+          height: window.innerHeight + 'px'
+        }
+        this.tourIitemHeight.maxHeight = window.innerHeight - 45 + 'px'
+
       },
-      // 初始化显示地图景点
+      // 初始化中心显示区域
       showOpenMap() {
-        var ww = window.innerHeight
-        if (ww <= 480) window.scrollTo(1250, 800);
-        if (ww >= 480 && ww <= 667) window.scrollTo(1250, 750);
-        if (ww > 667) window.scrollTo(1250, 700);
-        $("#largeOrSmall").css({
-          'transform': 'scale(0.4)',
-        });
+        this.$refs.mapScale.style.transform = 'scale(0.5)'
+        document.querySelectorAll('#mapPs')[0].scrollLeft = 1170
+        document.querySelectorAll('#mapPs')[0].scrollTop = 1020 - window.innerHeight * 0.5
       },
       // open景点列表
       showTourItem() {
         this.tourItemsState = !this.tourItemsState
       },
+      // 地图缩放
+      setMapScale(type) {
+
+        const scrollLeft = document.querySelectorAll('#mapPs')[0].scrollLeft + window.innerWidth * 0.5 + 'px'
+        const scrollTop = document.querySelectorAll('#mapPs')[0].scrollTop + window.innerHeight * 0.5 + 'px'
+
+        this.$refs.mapScale.style.transition = 'transform 0.8s'
+        this.$refs.mapScale.style.transformOrigin = '' + scrollLeft + ' ' + scrollTop + ''
+
+        if (this.scale > 1.5) {
+          this.scale = 1.5
+        }
+        if (this.scale < 0.5) {
+          this.scale = 0.5
+        }
+
+        this.$refs.mapScale.style.transform = 'scale(' + this.scale + ')'
+
+        this.flag = true
+      },
       // 跳到景点
       goToTour(item) {
-        console.log(item)
         this.tourItemsState = false
-        $("#largeOrSmall").css({
-          'transform': 'scale(1)',
-        });
+
         if (item.name == '全部景点') {
           this.showOpenMap();
         } else {
-          window.scrollTo(item.scrollTo.x, item.scrollTo.y);
+          document.querySelectorAll('#mapPs')[0].scrollLeft = item.scrollTo.x - window.innerWidth * 0.5
+          document.querySelectorAll('#mapPs')[0].scrollTop = item.scrollTo.y - window.innerHeight * 0.5
         }
+        this.$refs.mapScale.style.transform = 'scale(1)'
+      },
+      //查看详情
+      showDetail(item) {
+        this.tourData = item
+        this.showTourDetailMask = true
+        this.swiperSlides = item.picture
+        this.tourIntroduce = item.introduce
+        this.tourName = item.name
+        this.audioSrcGroup = item.audio
+        this.coordinate = item.coordinate
+        console.log(item)
+      },
+      // 切换详情信息
+      tourTab(type) {
+        if (type == 1) {
+
+          this.audioViewState = true
+          setTimeout(() => {
+            this.defaultAudio()
+          }, 10)
+        } else {
+          this.audioViewState = false
+        }
+
+        if (type == 3) {
+          this.goToNavigation()
+          return
+        }
+
+        this.tourTabView = type
+      },
+      // 初始化语音解说
+      defaultAudio() {
+        this.loadAudio('myAudio1')
+        this.loadAudio('myAudio2')
+        this.playAudio('myAudio1')
+        this.audioSrcIcon = true
+        this.audioType = true
+        this.playAudioType == 'chUrl'
+      },
+      // 切换语音
+      switchAudioType(type) {
+        this.audioType = !this.audioType
+        this.audioSrcIcon = true
+
+        if (this.audioType == true) {
+          this.playAudioType = 'chUrl'
+          this.pauseAudio('myAudio2')
+          this.loadAudio('myAudio1')
+          this.playAudio('myAudio1')
+        } else {
+          this.playAudioType = 'enUrl'
+          this.pauseAudio('myAudio1')
+          this.loadAudio('myAudio2')
+          this.playAudio('myAudio2')
+        }
+      },
+      // 播放
+      playAudio(id) {
+        var myAudio = document.getElementById(id);
+        myAudio.play();
+      },
+      // 暂停
+      pauseAudio(id) {
+        var myAudio = document.getElementById(id);
+        myAudio.pause();
+      },
+      // 重新加载
+      loadAudio(id) {
+        var myAudio = document.getElementById(id);
+        myAudio.load();
+      },
+      // 播放/暂停
+      openOrcloseVideo() {
+        this.audioSrcIcon = !this.audioSrcIcon
+        this.pauseAudio('myAudio1')
+        this.pauseAudio('myAudio2')
+        if (this.playAudioType == 'chUrl' && this.audioSrcIcon) {
+          this.playAudio('myAudio1')
+        }
+        if (this.playAudioType == 'enUrl' && this.audioSrcIcon) {
+          this.playAudio('myAudio2')
+        }
+
+      },
+      // 跳转到导航
+      goToNavigation() {
+        console.log(this.tourData)
+        const self = this
+        navigator.geolocation.getCurrentPosition( // 该函数有如下三个参数
+          function (pos) { // 如果成果则执行该回调函数
+            // alert(
+            //   '  经度：' + pos.coords.latitude +
+            //   '  纬度：' + pos.coords.longitude +
+            //   '  高度：' + pos.coords.altitude +
+            //   '  精确度(经纬)：' + pos.coords.accuracy +
+            //   '  精确度(高度)：' + pos.coords.altitudeAccuracy +
+            //   '  速度：' + pos.coords.speed
+            // );
+            self.goToMap(pos.coords.latitude, pos.coords.longitude)
+          },
+          function (err) { // 如果失败则执行该回调函数
+            alert('获取失败，请重新刷新' || err.message);
+          }, { // 附带参数
+            enableHighAccuracy: false, // 提高精度(耗费资源)
+            timeout: 3000, // 超过timeout则调用失败的回调函数
+            maximumAge: 1000 // 获取到的地理信息的有效期，超过有效期则重新获取一次位置信息
+          }
+        );
+      },
+      //跳转腾讯地图
+      goToMap(latitude, longitude) {
+        const domain = 'http://apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
+        window.location.href = domain + latitude + ',' + longitude + '&to=' + this.tourData.name + '&tocoord=' + this.tourData
+          .coordinate + '&policy=1&referer=myapp'
+      },
+      // 显示周边吃住list
+      showRoomBoard(){
+        this.roomAndBoradListState = !this.roomAndBoradListState
+      },
+      // 跳转周边吃住
+      goToRoomAndBorad(item){
+        console.log(item)
+        this.$router.push({path: '/parkMap/roomAndBorad/'+item.type})
       }
     }
   }
 
 </script>
 <style>
+  @import "./../../../../static/css/swiper-3.4.2.min.css";
+  .tour-detail-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: Center;
+  }
+
+  .tour-detail-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #efeff4;
+    color: #353535;
+    font-size: 15px;
+    text-align: left;
+  }
+
+  .tour-detail-top ul {
+    float: right;
+  }
+
+  .tour-detail-top ul li {
+    float: left;
+    padding: 0 15px;
+    list-style-type: none;
+  }
+
+  .tour-detail-top ul li img {
+    max-height: 25px;
+    vertical-align: middle;
+  }
+
+  .tour-detail-top ul li:nth-of-type(1) {
+    border-right: 1px solid #cccccc;
+  }
+
+  .swiper-pagination-bullet {
+    background: #ffffff;
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #007aff;
+  }
+
+  .tour-detail {
+    display: inline-block;
+    width: 90%;
+    position: relative;
+    background-color: #fafafa;
+  }
+
+  .tour-detail li {
+    list-style-type: none;
+  }
+
+  .tour-detail .tour-tab {
+
+    overflow: hidden;
+  }
+
+  .tour-detail .tour-tab li {
+    width: 33.33%;
+    text-align: center;
+    float: left;
+    box-sizing: border-box;
+    color: #353535;
+    padding-bottom: 10px;
+    border: 1px solid #e4e4e4;
+    border-bottom: 0;
+  }
+
+  .tour-tab li img {
+    height: 30px;
+    margin: 5px 0;
+  }
+
+  .tour-introduce {
+    text-align: left;
+    color: #666666;
+    font-size: 14px;
+    padding: 15px 15px 50px;
+  }
+
+  .tour-detail .tour-tab li:nth-of-type(2) {
+    border-left: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+  }
+
+  .tour-title {
+    line-height: 30px;
+    height: 30px;
+    color: #fff;
+    font-size: 14px;
+    text-align: left;
+    text-indent: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 100%;
+    bottom: 74px;
+    z-index: 1;
+  }
+
+  body {
+    overflow: hidden
+  }
+
   * {
     padding: 0;
     margin: 0
+  }
+
+  .map-p-style {
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    z-index: 9;
+  }
+
+  .map-c-style {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch
+  }
+
+  .map-cc-style {
+    width: 3205px;
+    height: 1970px;
+    position: relative;
+    z-index: 8
+  }
+
+  .map-c {
+    width: 3205px;
+    height: 1970px;
+    position: absolute;
+    left: 0;
+    top: 0
+  }
+
+  .map-iframe-style {
+    width: 3205px;
+    height: 1970px;
+    border: 0px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .detail-item {
+    position: absolute;
+    border: 1px solid red;
+  }
+  /* end */
+
+  .map-content-p {
+    width: 375px;
+    height: 667px;
+    overflow: auto;
+    position: relative;
   }
 
   .map-content {
@@ -167,12 +558,16 @@
     left: 5%;
   }
 
-  .red-station {
+  .address {
     position: absolute;
-    top: 1231px;
-    left: 822px;
     border: 1px solid red;
-    height: 50px;
+  }
+
+  .red-station {
+    top: 1214px;
+    left: 808px;
+    height: 100px;
+    width: 100px;
   }
 
   .shantou-mansion {
@@ -213,7 +608,6 @@
 
   .tour-item {
     position: fixed;
-    left: 0;
     bottom: 45px;
     width: 50%;
     text-align: center;
@@ -223,7 +617,12 @@
     border-right: 1px solid #cccccc;
     overflow-y: auto;
   }
-
+  .tour-item.left{
+    left: 0;
+  }
+  .tour-item.right{
+    right: 0;
+  }
   .tour-item li {
     height: 45px;
     line-height: 45px;
