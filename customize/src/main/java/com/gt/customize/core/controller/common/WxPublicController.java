@@ -7,19 +7,19 @@ import com.gt.axis.bean.wxmp.wxpublic.WxPublicUsers;
 import com.gt.axis.server.wxmp.WxPublicServer;
 import com.gt.customize.common.base.BaseController;
 import com.gt.customize.common.dto.ResponseDTO;
-import com.gt.customize.core.bean.minipark.req.MEatInfoReq;
 import com.gt.customize.core.bean.minipark.res.MEatInfoRes;
 import com.gt.customize.core.bean.wxpublic.req.WxJsSDKReq;
 import com.gt.customize.core.exception.minipark.MiniParkException;
 import com.gt.customize.core.util.CommonUtil;
-import com.gt.customize.core.util.QRcodeKit;
 import io.swagger.annotations.*;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by psr on 2017/10/23 0023.
@@ -33,7 +33,7 @@ public class WxPublicController extends BaseController {
 
     @ApiResponses({
             @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
-            @ApiResponse(code = 1, message = "data对象", response = MEatInfoRes.class),
+            @ApiResponse(code = 1, message = "data对象", response = WxJsSdkResult.class),
     })
     @ApiOperation(value = "获取微信js-sdk", notes = "获取微信js-sdk")
     @RequestMapping(value = "/getWxJsSDK", method = RequestMethod.POST)
