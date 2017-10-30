@@ -33,7 +33,7 @@ public class CustomizeMiniparkEatServiceImpl extends ServiceImpl<CustomizeMinipa
      * @return
      */
     @Override
-    public List<MListEatRes> selectListOrderDistanceByPage(Page<MListEatRes> page, Double lon, Double lat) {
-        return customizeMiniparkEatDAO.selectListOrderDistanceByPage(page, lon, lat);
+    public List<MListEatRes> selectListOrderDistanceByPage(Page<MListEatRes> page, Integer busId, Double lon, Double lat) {
+        return customizeMiniparkEatDAO.selectListOrderDistanceByPage(page, busId, lon, lat);
     }
 }

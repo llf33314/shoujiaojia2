@@ -40,6 +40,7 @@
 		SELECT id, shop_logo_url, shop_name, shop_introduce, shop_add, shop_phone, getDistanse( ${lon}, ${lat}, shop_lon, shop_lat) AS shop_disctanse
 		FROM t_customize_minipark_hotel
 		WHERE shop_status = 0 AND deleteflag = 0
+		AND bus_id = #{busId}
 		ORDER BY getDistanse( ${lon}, ${lat}, shop_lon, shop_lat)
 	</select>
 

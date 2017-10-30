@@ -19,5 +19,5 @@ import java.util.List;
  */
 public interface CustomizeMiniparkEatDAO extends BaseMapper<CustomizeMiniparkEat> {
 
-    List<MListEatRes> selectListOrderDistanceByPage(@Param("page") Page<MListEatRes> page, @Param("lon") Double lon, @Param("lat") Double lat);
+    List<MListEatRes> selectListOrderDistanceByPage(@Param("page") Page<MListEatRes> page, @Param("busId") Integer busId, @Param("lon") Double lon, @Param("lat") Double lat);
 }

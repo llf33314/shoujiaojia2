@@ -48,7 +48,7 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
     @Override
     public ResponseDTO<List<MListEatRes>> listEatsByPage(BusUser busUser, MListEatReq mListEatReq) throws MiniParkException {
         Page<MListEatRes> page = new Page<>(mListEatReq.getCurrent(), mListEatReq.getSize());
-        List<MListEatRes> mListEatResList = customizeMiniparkEatService.selectListOrderDistanceByPage(page, Double.valueOf(mListEatReq.getLon()), Double.valueOf(mListEatReq.getLat()));
+        List<MListEatRes> mListEatResList = customizeMiniparkEatService.selectListOrderDistanceByPage(page, busUser.getId(), Double.valueOf(mListEatReq.getLon()), Double.valueOf(mListEatReq.getLat()));
         PageDTO pageDTO = new PageDTO(page.getPages(), page.getTotal());
         return ResponseDTO.createBySuccessPage("分页获取餐饮店铺列表成功", mListEatResList, pageDTO);
     }
@@ -90,7 +90,7 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
     @Override
     public ResponseDTO<List<MListHotelRes>> listHotelsByPage(BusUser busUser, MListHotelReq mListHotelReq) throws MiniParkException {
         Page<MListHotelRes> page = new Page<>(mListHotelReq.getCurrent(), mListHotelReq.getSize());
-        List<MListHotelRes> mListHotelResList = customizeMiniparkHotelService.selectListOrderDistanceByPage(page, Double.valueOf(mListHotelReq.getLon()), Double.valueOf(mListHotelReq.getLat()));
+        List<MListHotelRes> mListHotelResList = customizeMiniparkHotelService.selectListOrderDistanceByPage(page, busUser.getId(), Double.valueOf(mListHotelReq.getLon()), Double.valueOf(mListHotelReq.getLat()));
         PageDTO pageDTO = new PageDTO(page.getPages(), page.getTotal());
         return ResponseDTO.createBySuccessPage("分页获取酒店店铺列表成功", mListHotelResList, pageDTO);
     }
