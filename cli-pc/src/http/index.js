@@ -49,7 +49,6 @@ Axios.interceptors.request.use(
 // http response 拦截器 返回状态判断
 Axios.interceptors.response.use(
   response => {
-    debugger;
     if (response.data.code == 201) {
       window.location.href = window.LOGIN_URL;
     }
