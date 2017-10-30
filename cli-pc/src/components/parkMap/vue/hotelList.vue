@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="a-in-add">
-            <el-button type="primary" @click="addEatClick">新增</el-button>
+            <el-button type="primary" @click="addHotelClick">新增</el-button>
         </div>
         <div class="a-in-add-list">
             已创建店铺列表

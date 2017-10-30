@@ -86,12 +86,6 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      console.log(this.mapBean);
-      try {
-        this.addHotelReq.address = this.mapBean.MapData.address;
-        this.addHotelReq.lat = this.mapBean.MapData.latLng.lat;
-        this.addHotelReq.lon = this.mapBean.MapData.latLng.lng;
-      } catch (error) {}
       console.log(this.addHotelReq);
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -127,6 +121,14 @@ export default {
   },
   components: {
     gtmap
+  },
+  watch:{
+    mapBean: function(val) { //此处不要使用箭头函数
+      console.log("watch", val)
+      this.addHotelReq.address = val.MapData.address;
+      this.addHotelReq.lat = val.MapData.latLng.lat;
+      this.addHotelReq.lon = val.MapData.latLng.lng;
+    }
   }
 };
 </script>

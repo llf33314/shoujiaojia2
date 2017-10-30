@@ -1,5 +1,6 @@
 package com.gt.customize.core.controller.common;
 
+import com.gt.axis.bean.wxmp.bus.BusUser;
 import com.gt.customize.core.util.CommonUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,8 +20,8 @@ public class TestController {
 
     @ApiOperation(value = "获取session中的用户", notes = "获取session中的用户")
     @RequestMapping(value = "/getSessionUser", method = RequestMethod.POST)
-    public String getSessionUser(HttpServletRequest httpServletRequest){
-        return CommonUtil.getSessionLoginUser(httpServletRequest);
+    public BusUser getSessionUser(HttpServletRequest httpServletRequest){
+        return CommonUtil.getLoginUser(httpServletRequest);
     }
 
 }

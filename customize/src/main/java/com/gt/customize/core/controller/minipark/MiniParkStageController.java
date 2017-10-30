@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class MiniParkStageController extends BaseController {
     })
     @ApiOperation(value = "分页获取餐饮店铺列表", notes = "分页获取餐饮店铺列表")
     @RequestMapping(value = "/listEats", method = RequestMethod.POST)
-    public ResponseDTO listEats(@RequestBody @ApiParam("分页获取餐饮店铺列表对象") ListEatReq listEatReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO listEats(@RequestBody @ApiParam("分页获取餐饮店铺列表对象") @Valid ListEatReq listEatReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
             logger.debug(listEatReq.toString());
@@ -63,7 +64,7 @@ public class MiniParkStageController extends BaseController {
     })
     @ApiOperation(value = "新增餐饮店铺", notes = "新增餐饮店铺")
     @RequestMapping(value = "/addEat", method = RequestMethod.POST)
-    public ResponseDTO addEat(@RequestBody @ApiParam("新增餐饮店铺对象") AddEatReq addEatReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO addEat(@RequestBody @ApiParam("新增餐饮店铺对象") @Valid AddEatReq addEatReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
             logger.debug(addEatReq.toString());
@@ -84,7 +85,7 @@ public class MiniParkStageController extends BaseController {
     })
     @ApiOperation(value = "编辑餐饮店铺", notes = "编辑餐饮店铺")
     @RequestMapping(value = "/modifyEat", method = RequestMethod.POST)
-    public ResponseDTO modifyEat(@RequestBody @ApiParam("编辑餐饮店铺对象") ModifyEatReq modifyEatReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO modifyEat(@RequestBody @ApiParam("编辑餐饮店铺对象") @Valid ModifyEatReq modifyEatReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
             logger.debug(modifyEatReq.toString());
@@ -105,7 +106,7 @@ public class MiniParkStageController extends BaseController {
     })
     @ApiOperation(value = "删除餐饮店铺", notes = "删除餐饮店铺")
     @RequestMapping(value = "/delEat", method = RequestMethod.POST)
-    public ResponseDTO delEat(@RequestBody @ApiParam("删除餐饮店铺对象") DelEatReq delEatReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO delEat(@RequestBody @ApiParam("删除餐饮店铺对象") @Valid DelEatReq delEatReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
             BusUser busUser = CommonUtil.getLoginUser(request);
@@ -127,7 +128,7 @@ public class MiniParkStageController extends BaseController {
     })
     @ApiOperation(value = "分页获取酒店店铺列表", notes = "分页获取酒店店铺列表")
     @RequestMapping(value = "/listHotels", method = RequestMethod.POST)
-    public ResponseDTO listHotels(@RequestBody @ApiParam("分页获取酒店店铺列表对象") ListHotelReq listHotelReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO listHotels(@RequestBody @ApiParam("分页获取酒店店铺列表对象") @Valid ListHotelReq listHotelReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
             BusUser busUser = CommonUtil.getLoginUser(request);
@@ -147,7 +148,7 @@ public class MiniParkStageController extends BaseController {
     })
     @ApiOperation(value = "新增酒店店铺", notes = "新增酒店店铺")
     @RequestMapping(value = "/addHotel", method = RequestMethod.POST)
-    public ResponseDTO addHotel(@RequestBody @ApiParam("新增酒店店铺对象") AddHotelReq addHotelReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO addHotel(@RequestBody @ApiParam("新增酒店店铺对象") @Valid AddHotelReq addHotelReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
             BusUser busUser = CommonUtil.getLoginUser(request);
@@ -167,7 +168,7 @@ public class MiniParkStageController extends BaseController {
     })
     @ApiOperation(value = "编辑酒店店铺", notes = "编辑酒店店铺")
     @RequestMapping(value = "/modifyHotel", method = RequestMethod.POST)
-    public ResponseDTO modifyHotel(@RequestBody @ApiParam("编辑酒店店铺对象") ModifyHotelReq modifyHotelReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO modifyHotel(@RequestBody @ApiParam("编辑酒店店铺对象") @Valid ModifyHotelReq modifyHotelReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
             BusUser busUser = CommonUtil.getLoginUser(request);
@@ -188,7 +189,7 @@ public class MiniParkStageController extends BaseController {
     })
     @ApiOperation(value = "删除酒店店铺", notes = "删除酒店店铺")
     @RequestMapping(value = "/delHotel", method = RequestMethod.POST)
-    public ResponseDTO delHotel(@RequestBody @ApiParam("删除餐饮店铺对象") DelHotelReq delHotelReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO delHotel(@RequestBody @ApiParam("删除餐饮店铺对象") @Valid DelHotelReq delHotelReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
             BusUser busUser = CommonUtil.getLoginUser(request);
