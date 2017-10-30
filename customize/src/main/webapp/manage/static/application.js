@@ -13,9 +13,6 @@ var PCBASEDOMAIN = 'http://constomize.yifriend.net:7077'
 // 遮罩层的父级域名
 var PARANETMASKMAIN = 'http://localhost:8011/index.html'
 
-
-
-
  
 /**
  * 手机配置
