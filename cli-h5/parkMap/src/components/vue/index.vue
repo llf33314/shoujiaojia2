@@ -191,8 +191,8 @@
     methods: {
       //获取微信js-sdk
       getWxConfig() {
-        requestGetWxJsSDK({
-          "shareUrl": window.location.href
+        requestGetWxJsSDK(this.$route.params.busId,{
+          "shareUrl": window.location.href,
         }).then((res) => {
           console.log(res.data)
           wx.config({

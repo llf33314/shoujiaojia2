@@ -12,4 +12,4 @@ export const requestGetEat = params => { return axios.post(`${base}/m/minipark/g
 // 获取酒店店铺详情
 export const requestGetHotel = params => { return axios.post(`${base}/m/minipark/getHotel`, params).then(res => res.data) }
 //getWxJsSDK
-export const requestGetWxJsSDK = params => { return axios.post(`${base}/app/wxPublic/getWxJsSDK`, params).then(res => res.data) }
+export const requestGetWxJsSDK = (busId,params) => { return axios.post(`${base}/app/wxPublic/getWxJsSDK/`+busId, params).then(res => res.data) }
