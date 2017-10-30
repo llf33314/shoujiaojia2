@@ -95,7 +95,7 @@
             var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
             var speed = res.speed; // 速度，以米/每秒计
             var accuracy = res.accuracy; // 位置精度
-            alert(latitude,'latitude')
+            alert(latitude, 'latitude')
           }
         });
       },
@@ -112,7 +112,8 @@
           "current": this.hotelsCurrent,
           "lat": this.lat,
           "lon": this.lon,
-          "size": 6
+          "size": 6,
+          "busId": this.$route.params.busId
         }).then((res) => {
           console.log(res)
           if (res.code != 100) {
@@ -140,7 +141,8 @@
           "current": this.eatsCurrent,
           "lat": this.lat,
           "lon": this.lon,
-          "size": 6
+          "size": 6,
+          "busId": this.$route.params.busId
         }).then((res) => {
           console.log(res)
           if (res.code != 100) {
@@ -223,7 +225,7 @@
       // 跳转详情
       goToDetail(id, type) {
         this.$router.push({
-          path: '/parkMap/detail/' + id + '/' + type
+          path: '/parkMap/detail/' + this.$route.params.busId + '/' + id + '/' + type
         })
       }
 

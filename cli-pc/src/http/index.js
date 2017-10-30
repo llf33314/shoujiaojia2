@@ -8,7 +8,7 @@ const Axios = axios.create({
   //baseURL: "http://192.168.3.98:7072",
   timeout: 3000,
   // responseType: "json",
-  // withCredentials: true, // 是否允许带cookie这些
+  withCredentials: true, // 是否允许带cookie这些
 });
 
 // Axios.defaults.withCredentials=true;
