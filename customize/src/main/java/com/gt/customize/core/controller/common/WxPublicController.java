@@ -1,32 +1,26 @@
 package com.gt.customize.core.controller.common;
 
-import com.gt.axis.bean.wxmp.bus.BusUser;
 import com.gt.axis.bean.wxmp.wxpublic.WxJsSdk;
 import com.gt.axis.bean.wxmp.wxpublic.WxJsSdkResult;
 import com.gt.axis.bean.wxmp.wxpublic.WxPublicUsers;
 import com.gt.axis.server.wxmp.WxPublicServer;
 import com.gt.customize.common.base.BaseController;
 import com.gt.customize.common.dto.ResponseDTO;
-import com.gt.customize.core.bean.minipark.res.MEatInfoRes;
 import com.gt.customize.core.bean.wxpublic.req.WxJsSDKReq;
 import com.gt.customize.core.exception.minipark.MiniParkException;
-import com.gt.customize.core.util.CommonUtil;
 import io.swagger.annotations.*;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by psr on 2017/10/23 0023.
  */
-@Api(value = "/app/wxPublic", description = "微信公众号服务")
+@Api(value = "/m/wxPublic", description = "微信公众号服务")
 @RestController
-@RequestMapping(value = "/app/wxPublic")
+@RequestMapping(value = "/m/wxPublic")
 public class WxPublicController extends BaseController {
 
     private static Logger logger = Logger.getLogger(WxPublicController.class);
@@ -36,12 +30,11 @@ public class WxPublicController extends BaseController {
             @ApiResponse(code = 1, message = "data对象", response = WxJsSdkResult.class),
     })
     @ApiOperation(value = "获取微信js-sdk", notes = "获取微信js-sdk")
-    @RequestMapping(value = "/getWxJsSDK", method = RequestMethod.POST)
-    public ResponseDTO getWxJsSDK(@RequestBody @ApiParam("获取微信js-sdk对象") WxJsSDKReq wxJsSDKReq, BindingResult bindingResult, HttpServletRequest request){
+    @RequestMapping(value = "/getWxJsSDK/{busId}", method = RequestMethod.POST)
+    public ResponseDTO getWxJsSDK(@RequestBody @ApiParam("获取微信js-sdk对象") WxJsSDKReq wxJsSDKReq, BindingResult bindingResult, @PathVariable("busId") Integer busId, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
-            BusUser busUser = CommonUtil.getLoginUser(request);
-            WxPublicUsers wxPublicUsers = WxPublicServer.selectByBusId(busUser.getId()).getData();
+            WxPublicUsers wxPublicUsers = WxPublicServer.selectByBusId(busId).getData();
             WxJsSdk wxJsSdk = new WxJsSdk();
             wxJsSdk.setPublicId(wxPublicUsers.getId());
             wxJsSdk.setUrl(wxJsSDKReq.getShareUrl());
