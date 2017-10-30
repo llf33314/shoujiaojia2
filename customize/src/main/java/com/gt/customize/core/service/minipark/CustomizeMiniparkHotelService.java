@@ -5,6 +5,7 @@ import com.gt.customize.core.bean.minipark.req.MListHotelReq;
 import com.gt.customize.core.bean.minipark.res.MListHotelRes;
 import com.gt.customize.core.entity.minipark.CustomizeMiniparkHotel;
 import com.baomidou.mybatisplus.service.IService;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 
@@ -21,9 +22,10 @@ public interface CustomizeMiniparkHotelService extends IService<CustomizeMinipar
     /**
      * 根据距离分页获取店铺信息
      * @param page
+     * @param busId
      * @param lon
      * @param lat
      * @return
      */
-    List<MListHotelRes> selectListOrderDistanceByPage(Page<MListHotelRes> page, Double lon, Double lat);
+    List<MListHotelRes> selectListOrderDistanceByPage(Page<MListHotelRes> page, Integer busId, Double lon, Double lat);
 }

@@ -18,5 +18,5 @@ import java.util.List;
  */
 public interface CustomizeMiniparkHotelDAO extends BaseMapper<CustomizeMiniparkHotel> {
 
-    List<MListHotelRes> selectListOrderDistanceByPage(@Param("page") Page<MListHotelRes> page, @Param("lon") Double lon, @Param("lat") Double lat);
+    List<MListHotelRes> selectListOrderDistanceByPage(@Param("page") Page<MListHotelRes> page, @Param("busId") Integer busId, @Param("lon") Double lon, @Param("lat") Double lat);
 }

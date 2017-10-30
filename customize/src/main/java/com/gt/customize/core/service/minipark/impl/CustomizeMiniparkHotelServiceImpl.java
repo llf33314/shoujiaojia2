@@ -34,7 +34,7 @@ public class CustomizeMiniparkHotelServiceImpl extends ServiceImpl<CustomizeMini
      * @return
      */
     @Override
-    public List<MListHotelRes> selectListOrderDistanceByPage(Page<MListHotelRes> page, Double lon, Double lat) {
-        return customizeMiniparkHotelDAO.selectListOrderDistanceByPage(page, lon, lat);
+    public List<MListHotelRes> selectListOrderDistanceByPage(Page<MListHotelRes> page, Integer busId, Double lon, Double lat) {
+        return customizeMiniparkHotelDAO.selectListOrderDistanceByPage(page, busId, lon, lat);
     }
 }

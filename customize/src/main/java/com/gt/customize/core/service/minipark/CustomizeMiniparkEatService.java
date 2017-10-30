@@ -23,5 +23,5 @@ public interface CustomizeMiniparkEatService extends IService<CustomizeMiniparkE
      * @param page
      * @return
      */
-    List<MListEatRes> selectListOrderDistanceByPage(Page<MListEatRes> page, Double lon, Double lat);
+    List<MListEatRes> selectListOrderDistanceByPage(Page<MListEatRes> page, Integer busId, Double lon, Double lat);
 }
