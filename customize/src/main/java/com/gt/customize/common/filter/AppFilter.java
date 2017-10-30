@@ -34,7 +34,7 @@ public class AppFilter implements Filter {
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
         httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
-        httpServletResponse.setHeader("Access-Control-Allow-Headers", "Accept, Origin, XRequestedWith, Content-Type, LastModified, token");
+        httpServletResponse.setHeader("Access-Control-Allow-Headers", "Accept, Origin, XRequestedWith, Content-Type, LastModified, token, Cookie");
         httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
 
         servletResponse.setCharacterEncoding("UTF-8");
@@ -51,7 +51,7 @@ public class AppFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         }
 
-//        filterChain.doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
