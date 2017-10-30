@@ -1,6 +1,6 @@
 import axios from './../../../http'
 
-let base = window.BASEDOMAIN;
+let base = window.PCBASEDOMAIN;
 /* 分页获取餐饮店铺 */
 export const requestListEats = params => { return axios.post(`${base}/app/minipark/listEats`, params).then(res => res.data) }
 /* 新增餐饮店铺 */
