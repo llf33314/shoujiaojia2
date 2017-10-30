@@ -8,12 +8,12 @@ export const parkMapAppRouter = [
     component: index,
   },
   {
-    path: '/parkMap/roomAndBorad/:type',
+    path: '/parkMap/roomAndBorad/:busId/:type',
     name: 'roomAndBorad',
     component: roomAndBorad,
   },
   {
-    path: '/parkMap/detail/:id/:type',
+    path: '/parkMap/detail/:busId/:id/:type',
     name: 'detail',
     component: detail,
   }

@@ -191,7 +191,7 @@
     methods: {
       //获取微信js-sdk
       getWxConfig() {
-        requestGetWxJsSDK(this.$route.params.busId,{
+        requestGetWxJsSDK(this.$route.params.busId, {
           "shareUrl": window.location.href,
         }).then((res) => {
           console.log(res.data)
@@ -374,7 +374,7 @@
       },
       //跳转腾讯地图
       goToMap(latitude, longitude) {
-        const domain = 'http://apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
+        const domain = '//apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
         window.location.href = domain + latitude + ',' + longitude + '&to=' + this.tourData.name + '&tocoord=' + this.tourData
           .coordinate + '&policy=1&referer=myapp'
       },
@@ -387,7 +387,7 @@
       goToRoomAndBorad(item) {
         console.log(item)
         this.$router.push({
-          path: '/parkMap/roomAndBorad/' + item.type
+          path: '/parkMap/roomAndBorad/' + this.$route.params.busId + '/' + item.type
         })
       }
     }

@@ -35,10 +35,6 @@
   </section>
 </template>
 <script>
-  // import {
-  //   swiper,
-  //   swiperSlide
-  // } from 'vue-awesome-swiper'
   import {
     requestGetEat,
     requestGetHotel
@@ -59,10 +55,6 @@
         }
       }
     },
-    // components: {
-    //   swiper,
-    //   swiperSlide
-    // },
     mounted() {
       this.type = this.$route.params.type
       this.getDetail(this.$route.params.id, this.$route.params.type)
@@ -75,7 +67,8 @@
       getDetail(id, type) {
         if (type == 0) { //酒店
           requestGetHotel({
-            "id": id
+            "id": id,
+            "busId": this.$route.params.busId
           }).then((res) => {
             if (res.code == 100) {
               console.log(res.data)
@@ -88,7 +81,8 @@
         }
         if (type == 1) { //餐饮
           requestGetEat({
-            "id": id
+            "id": id,
+            "busId": this.$route.params.busId
           }).then((res) => {
             if (res.code == 100) {
               console.log(res.data)
@@ -102,7 +96,7 @@
       },
       //跳转地图
       goToNav(latitude, longitude) {
-        const domain = 'http://apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
+        const domain = '//apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
         if (localStorage.latitude == undefined) {
           const self = this
           navigator.geolocation.getCurrentPosition( // 该函数有如下三个参数
