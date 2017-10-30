@@ -4,11 +4,17 @@ import com.gt.customize.common.base.PageReq;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by psr on 2017/10/18 0018.
  */
 @ApiModel(value = "分页获取酒店店铺列表（移动端）")
 public class MListHotelReq extends PageReq{
+
+    @ApiModelProperty(value = "商家id")
+    @NotNull(message = "商家id不能为空")
+    private Integer busId;
 
     @ApiModelProperty(value = "经度")
     private String lon; // 经度
@@ -32,10 +38,19 @@ public class MListHotelReq extends PageReq{
         this.lat = lat;
     }
 
+    public Integer getBusId() {
+        return busId;
+    }
+
+    public void setBusId(Integer busId) {
+        this.busId = busId;
+    }
+
     @Override
     public String toString() {
-        return "MListEatReq{" +
+        return "MListHotelReq{" +
                 "current=" + current +
+                ", busId=" + busId +
                 ", lon='" + lon + '\'' +
                 ", lat='" + lat + '\'' +
                 ", size=" + size +

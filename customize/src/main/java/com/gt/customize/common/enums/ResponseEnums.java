@@ -10,6 +10,7 @@ public enum ResponseEnums {
     // 200+针对请求失败
     ERROR(200, "请求失败"),
     LOGIN(201, "请先登录"),
+    BUS_NULL(202, "数据不存在"),
     // 300+针对统一错误
     DIFF_USER(301, "无权操作的信息"),
     INFO_NULL(302, "操作信息不存在"),

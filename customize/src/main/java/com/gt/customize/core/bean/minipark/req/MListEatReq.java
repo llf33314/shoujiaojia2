@@ -5,11 +5,17 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by psr on 2017/10/18 0018.
  */
 @ApiModel(value = "分页获取餐饮店铺列表（移动端）")
 public class MListEatReq extends PageReq{
+
+    @ApiModelProperty(value = "商家id")
+    @NotNull(message = "商家id不能为空")
+    private Integer busId;
 
     @ApiModelProperty(value = "经度")
     private String lon; // 经度
@@ -33,10 +39,19 @@ public class MListEatReq extends PageReq{
         this.lat = lat;
     }
 
+    public Integer getBusId() {
+        return busId;
+    }
+
+    public void setBusId(Integer busId) {
+        this.busId = busId;
+    }
+
     @Override
     public String toString() {
         return "MListEatReq{" +
                 "current=" + current +
+                ", busId=" + busId +
                 ", lon='" + lon + '\'' +
                 ", lat='" + lat + '\'' +
                 ", size=" + size +

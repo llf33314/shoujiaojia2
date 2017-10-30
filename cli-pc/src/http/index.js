@@ -8,7 +8,7 @@ const Axios = axios.create({
   //baseURL: "http://192.168.3.98:7072",
   timeout: 3000,
   // responseType: "json",
-  withCredentials: true, // 是否允许带cookie这些
+  // withCredentials: true, // 是否允许带cookie这些
 });
 
 // Axios.defaults.withCredentials=true;
@@ -49,7 +49,6 @@ Axios.interceptors.request.use(
 // http response 拦截器 返回状态判断
 Axios.interceptors.response.use(
   response => {
-    debugger;
     if (response.data.code == 201) {
       window.location.href = window.LOGIN_URL;
     }

@@ -1,11 +1,12 @@
 package com.gt.customize.core.util;
 
 
-import com.alibaba.fastjson.JSONObject;
 import com.gt.api.util.SessionUtils;
 import com.gt.axis.bean.wxmp.bus.BusUser;
 import com.gt.axis.bean.wxmp.bus.BusUserApiReq;
 import com.gt.axis.server.wxmp.BusServer;
+import com.gt.customize.common.enums.ResponseEnums;
+import com.gt.customize.common.exception.SystemException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,25 +22,16 @@ public class CommonUtil {
 	private static final Logger log = Logger.getLogger(CommonUtil.class);
 
 	/**
-	 * 获取session中的登录用户（开发中）
-	 *
+	 * 获取session中的登录用户
 	 * @param request
 	 * @return
 	 */
 	public static BusUser getLoginUser(HttpServletRequest request) {
 		try {
 			com.gt.api.bean.session.BusUser apiBusUser = SessionUtils.getLoginUser(request);
-//			BusUser busUser = new BusUser();
-//			busUser.setId(apiBusUser.getId());
 			BusUserApiReq busUserApiReq = new BusUserApiReq();
 			busUserApiReq.setUserId(apiBusUser.getId());
-//			busUser.setAddSource();
-//			busUser.setAdvert();
-//			busUser.setAgentid();
-//			busUser.setBusmoneyLevel();
-//			busUser.setCityId();
-//			busUser.setCtime();
-//			return busUser;
+//			busUserApiReq.setUserId(33);
 			return BusServer.getBusUserApi(busUserApiReq).getData();
 		} catch (Exception e) {
 			log.info(e.getLocalizedMessage());
@@ -49,40 +41,20 @@ public class CommonUtil {
 	};
 
 	/**
-	 * 获取session中的登录用户（开发中）
-	 *
-	 * @param request
+	 * 根据busId查询bus信息
+	 * @param busId
 	 * @return
 	 */
-	public static BusUser getDevLoginUser(HttpServletRequest request) {
-		try {
-			BusUserApiReq busUserApiReq = new BusUserApiReq();
-			// TODO 后续应该从共享的session中获取
-			busUserApiReq.setUserId(33);
-			return BusServer.getBusUserApi(busUserApiReq).getData();
-		} catch (Exception e) {
-			log.info(e.getLocalizedMessage());
-			e.printStackTrace();
+	public static BusUser getBusUserById(Integer busId) throws Exception{
+		BusUserApiReq busUserApiReq = new BusUserApiReq();
+		// 查询busId
+		busUserApiReq.setUserId(busId);
+		BusUser busUser = BusServer.getBusUserApi(busUserApiReq).getData();
+		if (CommonUtil.isEmpty(busId)){
+			throw new SystemException(ResponseEnums.BUS_NULL.getCode(), ResponseEnums.BUS_NULL.getDesc());
 		}
-		return null;
-	};
-
-	/**
-	 * 获取session中的用户
-	 * @param request
-	 * @return
-	 */
-	public static String getSessionLoginUser(HttpServletRequest request) {
-		try {
-			com.gt.api.bean.session.BusUser busUser = SessionUtils.getLoginUser(request);
-			String busStr = JSONObject.toJSONString(busUser);
-			return busStr;
-		} catch (Exception e) {
-			log.info(e.getLocalizedMessage());
-			e.printStackTrace();
-		}
-		return null;
-	};
+		return busUser;
+	}
 
 	/**
 	 * 判断对象是否为空

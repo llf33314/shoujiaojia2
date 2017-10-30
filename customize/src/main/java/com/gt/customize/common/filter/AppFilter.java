@@ -51,7 +51,7 @@ public class AppFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         }
 
-        filterChain.doFilter(servletRequest, servletResponse);
+//        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

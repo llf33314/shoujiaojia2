@@ -78,7 +78,7 @@ export default {
         ],
         address: [{ required: true, message: "请选择店铺地址", trigger: "blur" }],
         phone: [{ required: true, message: "请输入店铺电话", trigger: "blur" }],
-        lat: [{ required: true, message: "请选择地图信息", trigger: "blur" }],
+        // lat: [{ required: true, message: "请选择地图信息", trigger: "blur" }],
         bannerUrl: [
           { required: true, message: "请选择上传banner图", trigger: "blur" }
         ]
@@ -87,13 +87,6 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      console.log(this.mapBean);
-      try {
-        this.addEatReq.address = this.mapBean.MapData.address;
-        this.addEatReq.lat = this.mapBean.MapData.latLng.lat;
-        this.addEatReq.lon = this.mapBean.MapData.latLng.lng;
-      } catch (error) {}
-
       console.log(this.addEatReq);
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -133,6 +126,15 @@ export default {
   },
   components: {
     gtmap
+  },
+  watch:{
+    mapBean: function(val) { //此处不要使用箭头函数
+      console.log("watch", val)
+      this.addEatReq.address = val.MapData.address;
+      this.addEatReq.lat = val.MapData.latLng.lat;
+      this.addEatReq.lon = val.MapData.latLng.lng;
+      console.log(this.addEatReq)
+    }
   }
 };
 </script>

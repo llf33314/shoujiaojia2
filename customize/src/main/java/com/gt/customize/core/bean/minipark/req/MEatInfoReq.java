@@ -12,6 +12,10 @@ import javax.validation.constraints.NotNull;
 @ApiModel(value = "获取餐饮店铺详情（移动端）")
 public class MEatInfoReq {
 
+    @ApiModelProperty(value = "商家id")
+    @NotNull(message = "商家id不能为空")
+    private Integer busId;
+
     @NotNull(message = "id不能为空")
     @ApiModelProperty(value = "主键id")
     private Integer id;
@@ -24,10 +28,19 @@ public class MEatInfoReq {
         this.id = id;
     }
 
+    public Integer getBusId() {
+        return busId;
+    }
+
+    public void setBusId(Integer busId) {
+        this.busId = busId;
+    }
+
     @Override
     public String toString() {
         return "MEatInfoReq{" +
-                "id=" + id +
+                "busId=" + busId +
+                ", id=" + id +
                 '}';
     }
 }

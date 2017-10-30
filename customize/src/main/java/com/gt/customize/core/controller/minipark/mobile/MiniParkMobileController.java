@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -46,10 +47,10 @@ public class MiniParkMobileController extends BaseController {
     })
     @ApiOperation(value = "分页获取餐饮店铺列表", notes = "分页获取餐饮店铺列表")
     @RequestMapping(value = "/listEats", method = RequestMethod.POST)
-    public ResponseDTO listEats(@RequestBody @ApiParam("分页获取餐饮店铺列表对象") MListEatReq mListEatReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO listEats(@RequestBody @ApiParam("分页获取餐饮店铺列表对象") @Valid MListEatReq mListEatReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
-            BusUser busUser = CommonUtil.getLoginUser(request);
+            BusUser busUser = CommonUtil.getBusUserById(mListEatReq.getBusId());
             ResponseDTO<List<MListEatRes>> responseDTO = miniParkMobileService.listEatsByPage(busUser, mListEatReq);
             return responseDTO;
         } catch (MiniParkException e){
@@ -67,10 +68,10 @@ public class MiniParkMobileController extends BaseController {
     })
     @ApiOperation(value = "获取餐饮店铺详情", notes = "获取餐饮店铺详情")
     @RequestMapping(value = "/getEat", method = RequestMethod.POST)
-    public ResponseDTO getEat(@RequestBody @ApiParam("获取餐饮店铺详情对象") MEatInfoReq mEatInfoReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO getEat(@RequestBody @ApiParam("获取餐饮店铺详情对象") @Valid MEatInfoReq mEatInfoReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
-            BusUser busUser = CommonUtil.getLoginUser(request);
+            BusUser busUser = CommonUtil.getBusUserById(mEatInfoReq.getBusId());
             MEatInfoRes mEatInfoRes = miniParkMobileService.getEat(busUser, mEatInfoReq);
             return ResponseDTO.createBySuccess("获取餐饮店铺详情成功", mEatInfoRes);
         } catch (MiniParkException e){
@@ -89,10 +90,10 @@ public class MiniParkMobileController extends BaseController {
     })
     @ApiOperation(value = "分页获取酒店店铺列表", notes = "分页获取酒店店铺列表")
     @RequestMapping(value = "/listHotels", method = RequestMethod.POST)
-    public ResponseDTO listHotels(@RequestBody @ApiParam("分页获取酒店店铺列表对象") MListHotelReq mListHotelReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO listHotels(@RequestBody @ApiParam("分页获取酒店店铺列表对象") @Valid MListHotelReq mListHotelReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
-            BusUser busUser = CommonUtil.getLoginUser(request);
+            BusUser busUser = CommonUtil.getBusUserById(mListHotelReq.getBusId());
             ResponseDTO<List<MListHotelRes>> responseDTO = miniParkMobileService.listHotelsByPage(busUser, mListHotelReq);
             return responseDTO;
         } catch (MiniParkException e){
@@ -110,10 +111,10 @@ public class MiniParkMobileController extends BaseController {
     })
     @ApiOperation(value = "获取酒店店铺详情", notes = "获取酒店店铺详情")
     @RequestMapping(value = "/getHotel", method = RequestMethod.POST)
-    public ResponseDTO getHotel(@RequestBody @ApiParam("获取酒店店铺详情对象") MHotelInfoReq mHotelInfoReq, BindingResult bindingResult, HttpServletRequest request){
+    public ResponseDTO getHotel(@RequestBody @ApiParam("获取酒店店铺详情对象") @Valid MHotelInfoReq mHotelInfoReq, BindingResult bindingResult, HttpServletRequest request){
         InvalidParameter(bindingResult);
         try {
-            BusUser busUser = CommonUtil.getLoginUser(request);
+            BusUser busUser = CommonUtil.getBusUserById(mHotelInfoReq.getBusId());
             MHotelInfoRes mHotelInfoRes = miniParkMobileService.getHotel(busUser, mHotelInfoReq);
             return ResponseDTO.createBySuccess("获取酒店店铺详情成功", mHotelInfoRes);
         } catch (MiniParkException e){
