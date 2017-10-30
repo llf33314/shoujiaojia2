@@ -1,6 +1,8 @@
 package com.gt.customize.core.util;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.gt.api.util.SessionUtils;
 import com.gt.axis.bean.wxmp.bus.BusUser;
 import com.gt.axis.bean.wxmp.bus.BusUserApiReq;
 import com.gt.axis.server.wxmp.BusServer;
@@ -26,10 +28,55 @@ public class CommonUtil {
 	 */
 	public static BusUser getLoginUser(HttpServletRequest request) {
 		try {
+			com.gt.api.bean.session.BusUser apiBusUser = SessionUtils.getLoginUser(request);
+//			BusUser busUser = new BusUser();
+//			busUser.setId(apiBusUser.getId());
+			BusUserApiReq busUserApiReq = new BusUserApiReq();
+			busUserApiReq.setUserId(apiBusUser.getId());
+//			busUser.setAddSource();
+//			busUser.setAdvert();
+//			busUser.setAgentid();
+//			busUser.setBusmoneyLevel();
+//			busUser.setCityId();
+//			busUser.setCtime();
+//			return busUser;
+			return BusServer.getBusUserApi(busUserApiReq).getData();
+		} catch (Exception e) {
+			log.info(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return null;
+	};
+
+	/**
+	 * 获取session中的登录用户（开发中）
+	 *
+	 * @param request
+	 * @return
+	 */
+	public static BusUser getDevLoginUser(HttpServletRequest request) {
+		try {
 			BusUserApiReq busUserApiReq = new BusUserApiReq();
 			// TODO 后续应该从共享的session中获取
 			busUserApiReq.setUserId(33);
 			return BusServer.getBusUserApi(busUserApiReq).getData();
+		} catch (Exception e) {
+			log.info(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return null;
+	};
+
+	/**
+	 * 获取session中的用户
+	 * @param request
+	 * @return
+	 */
+	public static String getSessionLoginUser(HttpServletRequest request) {
+		try {
+			com.gt.api.bean.session.BusUser busUser = SessionUtils.getLoginUser(request);
+			String busStr = JSONObject.toJSONString(busUser);
+			return busStr;
 		} catch (Exception e) {
 			log.info(e.getLocalizedMessage());
 			e.printStackTrace();
