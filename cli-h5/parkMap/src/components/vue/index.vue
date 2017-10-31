@@ -16,7 +16,8 @@
       <div class="item border05 border-top" @click="showRoomBoard">周边吃住</div>
     </div>
     <ul class="tour-item left" id="tourItem" v-show="tourItemsState" :style="tourIitemHeight">
-      <li class="border05 border-bottom border-right" v-for="(item,index) in tourList" @click="goToTour(item)" v-text="item.name"></li>
+      <li class="border05 border-bottom" v-for="(item,index) in tourList" @click="goToTour(item)" v-text="item.name"
+        :style="item.name.length > 12?'lineHeight:23px':''"></li>
     </ul>
     <ul class="tour-item right" v-show="roomAndBoradListState" :style="tourIitemHeight">
       <li class="border05 border-bottom  border-left" v-for="(item,index) in roomAndBoradList" @click="goToRoomAndBorad(item)"
@@ -55,9 +56,9 @@
               </swiper>
 
             </li>
-            <li v-show="tourTabView==2" class="tour-introduce" v-html="tourIntroduce"></li>
+            <li v-show="tourTabView==2" class="tour-introduce" v-html="tourIntroduce" style="max-height:300px;overflow-y:auto;"></li>
           </ul>
-          <div class="tour-title swiper-pagination">小公园</div>
+          <div class="tour-title swiper-pagination" v-text="tourName"></div>
           <ul class="tour-tab">
             <li @click.stop="tourTab(1)">
               <img src="./../../assets/img/commentary.png" />
@@ -133,10 +134,18 @@
         audioViewState: false,
         coordinate: '',
         roomAndBoradList: roomAndBoradList,
-        roomAndBoradListState: false
+        roomAndBoradListState: false,
+        latitude: '',
+        longitude: ''
       }
     },
     mounted() {
+      // 获取微信sdk
+      this._wx.getWxSDK(this.$route.params.busId, {
+        title: '我是首页',
+        link: window.location.href,
+        imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
+      })
       touch.on(document.getElementById('mapCstyle'), 'pinchstart', (e) => {
         this.flag = true
       });
@@ -153,32 +162,15 @@
       });
       this.wSetStyle()
       this.showOpenMap()
-
-      this.getWxConfig()
     },
     beforeMount() {
       document.title = '景区地图'
     },
     created() {
-      wx.ready(function () {
-        wx.getLocation({
-          type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-          success: function (res) {
-            alert(window.JSON.stringify(res))
-            var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-            var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-            var speed = res.speed; // 速度，以米/每秒计
-            var accuracy = res.accuracy; // 位置精度
-          }
-        });
-      });
-      wx.error(function (res) {
-        alert('config信息验证失败')
-      });
+
     },
     watch: {
       pinNum() {
-        console.log(this.pinNum)
         if (this.pinType == true) { //放大
           this.scale = parseFloat(this.scale) + parseFloat(this.pinNum)
         } else { //缩小
@@ -189,29 +181,13 @@
       }
     },
     methods: {
-      //获取微信js-sdk
-      getWxConfig() {
-        requestGetWxJsSDK(this.$route.params.busId, {
-          "shareUrl": window.location.href,
-        }).then((res) => {
-          console.log(res.data)
-          wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: res.data.appid, // 必填，企业号的唯一标识，此处填写企业号corpid
-            timestamp: res.data.timestamp, // 必填，生成签名的时间戳
-            nonceStr: res.data.nonce_str, // 必填，生成签名的随机串
-            signature: res.data.signature, // 必填，签名，见附录1
-            jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-          });
-        })
-      },
       //初始化div
       wSetStyle() {
         this.wStyle = {
           width: window.innerWidth + 'px',
           height: window.innerHeight + 'px'
         }
-        this.tourIitemHeight.maxHeight = window.innerHeight - 45 + 'px'
+        this.tourIitemHeight.maxHeight = window.innerHeight - 95 + 'px'
 
       },
       // 初始化中心显示区域
@@ -272,7 +248,6 @@
         this.audioSrcGroup = item.audio
         this.coordinate = item.coordinate
         this.audioViewState = false
-        console.log(item)
       },
       // 切换详情信息
       tourTab(type) {
@@ -347,36 +322,12 @@
         }
 
       },
-      // 跳转到导航
+      // 跳转到导航--跳转腾讯地图
       goToNavigation() {
-        console.log(this.tourData)
-        const self = this
-        navigator.geolocation.getCurrentPosition( // 该函数有如下三个参数
-          function (pos) { // 如果成果则执行该回调函数
-            // alert(
-            //   '  经度：' + pos.coords.latitude +
-            //   '  纬度：' + pos.coords.longitude +
-            //   '  高度：' + pos.coords.altitude +
-            //   '  精确度(经纬)：' + pos.coords.accuracy +
-            //   '  精确度(高度)：' + pos.coords.altitudeAccuracy +
-            //   '  速度：' + pos.coords.speed
-            // );
-            self.goToMap(pos.coords.latitude, pos.coords.longitude)
-          },
-          function (err) { // 如果失败则执行该回调函数
-            alert('获取失败，请重新刷新' || err.message);
-          }, { // 附带参数
-            enableHighAccuracy: false, // 提高精度(耗费资源)
-            timeout: 3000, // 超过timeout则调用失败的回调函数
-            maximumAge: 1000 // 获取到的地理信息的有效期，超过有效期则重新获取一次位置信息
-          }
-        );
-      },
-      //跳转腾讯地图
-      goToMap(latitude, longitude) {
-        const domain = '//apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
-        window.location.href = domain + latitude + ',' + longitude + '&to=' + this.tourData.name + '&tocoord=' + this.tourData
-          .coordinate + '&policy=1&referer=myapp'
+        this._wx.gtToTXMap({
+          coordinate: this.tourData.coordinate,
+          name: this.tourData.name
+        })
       },
       // 显示周边吃住list
       showRoomBoard() {
@@ -385,7 +336,6 @@
       },
       // 跳转周边吃住
       goToRoomAndBorad(item) {
-        console.log(item)
         this.$router.push({
           path: '/parkMap/roomAndBorad/' + this.$route.params.busId + '/' + item.type
         })
@@ -394,7 +344,7 @@
   }
 
 </script>
-<style lang="scss" type="text/css" scoped>
+<style scoped>
   .tour-detail-mask {
     position: fixed;
     top: 0;
@@ -477,6 +427,11 @@
     font-size: 14px;
   }
 
+  .room-borad {
+    border-left: 1px solid #cccccc;
+    position: relative;
+  }
+
   .tour-tab li img {
     height: 20px;
     margin: 5px 0;
@@ -487,6 +442,10 @@
     color: #666666;
     font-size: 14px;
     padding: 15px 15px 50px;
+  }
+
+  .introduce-indent {
+    text-indent: 20px;
   }
 
   .tour-detail .tour-tab li:nth-of-type(2) {

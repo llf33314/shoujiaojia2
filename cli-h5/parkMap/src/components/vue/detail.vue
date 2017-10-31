@@ -6,18 +6,22 @@
       </swiper-slide>
       <div v-show="data.swiperSlides.length >1" class="swiper-pagination" slot="pagination"></div>
     </swiper> -->
-    <div>
+    <div style="width: 100%;
+    overflow: hidden;">
       <img :src="data.bannerUrl" style="min-width:100%;height:250px;" alt="">
     </div>
     <ul class="detail-list">
       <li v-text="data.name"></li>
       <li class="has-img" @click="goToNav(data.lat,data.lon)">
         <img class="left-img" src="./../../assets/img/address-icon.png" />
-        <span class="address" v-text="data.address"></span>
+        <span class="address" v-text="data.address" style="overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;"></span>
         <img class="right-icon" src="./../../assets/img/right-icon.png" />
       </li>
       <li class="has-img">
-        <a href="tel:2016480">
+        <a :href="'tel:'+data.phone" style="display: block;">
           <img class="left-img" src="./../../assets/img/phone-icon.png" />
           <span v-text="data.phone"></span>
           <img class="right-icon" src="./../../assets/img/right-icon.png" />
@@ -51,11 +55,17 @@
         },
         type: 0,
         data: {
-         
+
         }
       }
     },
     mounted() {
+      // 获取微信sdk
+      this._wx.getWxSDK(this.$route.params.busId,{
+        title:'我是首页',
+        link:window.location.href,
+        imgUrl:'//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
+      })
       this.type = this.$route.params.type
       this.getDetail(this.$route.params.id, this.$route.params.type)
     },
@@ -96,27 +106,11 @@
       },
       //跳转地图
       goToNav(latitude, longitude) {
-        const domain = '//apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
-        if (localStorage.latitude == undefined) {
-          const self = this
-          navigator.geolocation.getCurrentPosition( // 该函数有如下三个参数
-            function (pos) { // 如果成果则执行该回调函数
-              window.location.href = domain + pos.coords.latitude + ',' + pos.coords.longitude + '&to=' + self.data.name +
-                '&tocoord=' + '' + self.data.lat + ',' + self.data.lon + '' + '&policy=1&referer=myapp'
-            },
-            function (err) { // 如果失败则执行该回调函数
-              //alert('获取失败，请重新刷新' || err.message);
-              alert('获取定位失败，请重新刷新' || err.message);
-            }, { // 附带参数
-              enableHighAccuracy: false, // 提高精度(耗费资源)
-              timeout: 1000, // 超过timeout则调用失败的回调函数
-              maximumAge: 10000 // 获取到的地理信息的有效期，超过有效期则重新获取一次位置信息
-            }
-          );
-        } else {
-          window.location.href = domain + localStorage.latitude + ',' + localStorage.longitude + '&to=' + self.data.name +
-            '&tocoord=' + '' + self.data.lat + ',' + self.data.lon + '' + '&policy=1&referer=myapp'
-        }
+        const coordinate = latitude + ',' + longitude
+        this._wx.gtToTXMap({
+          coordinate: coordinate,
+          name: this.data.name
+        })
       }
     }
   }
@@ -139,6 +133,9 @@
   .detail-list li {
     padding: 0 20px;
     position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .detail-list li:not(dps) {
@@ -169,12 +166,12 @@
   }
 
   .detail-list li img {
-    width: 20px;
+    width: 17px;
   }
 
   .left-img {
     position: absolute;
-    top: 10px;
+    top: 12px;
     left: 20px;
   }
 
