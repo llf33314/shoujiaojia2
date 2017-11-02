@@ -7,7 +7,7 @@
         <div class="a-in-add-list">
             已创建直播视频列表
         </div>
-        <el-table :data="videoListData" border highlight-current-row style="width: 100%">
+        <el-table :data="videoListData" border highlight-current-row v-loading="loading" style="width: 100%">
             <el-table-column prop="videoName" label="直播视频"></el-table-column>
             <el-table-column label="创建时间">
                 <template slot-scope="scope">
@@ -60,14 +60,16 @@ export default {
       },
       dialogStaffVisible: false,
       formLabelWidth: '120px',
-      videoMainRule:{
-        mainImgUrl: [{ required: true, message: "请上传封面图", trigger: "blur" }],
-        mainVideoUrl: [{ required: true, message: "请设置直播链接", trigger: "blur" }]
-      }
+      videoMainRule: {
+        mainImgUrl: [{ required: true, message: '请上传封面图', trigger: 'blur' }],
+        mainVideoUrl: [{ required: true, message: '请设置直播链接', trigger: 'blur' }]
+      },
+      loading: false
     };
   },
   methods: {
     listVideos() {
+      this.loading = true;
       requestListVideos().then(data => {
         console.log(data);
         var _code = data.code;
@@ -76,6 +78,7 @@ export default {
         } else {
           this.$message.error(data.msg + '[错误码：' + _code + ']');
         }
+        this.loading = false;
       });
     },
     getMainVideo() {
@@ -95,8 +98,8 @@ export default {
         var _code = data.code;
         if (_code == 100) {
           this.$message({
-            message: "主视频设置成功！",
-            type: "success"
+            message: '主视频设置成功！',
+            type: 'success'
           });
         } else {
           this.$message.error(data.msg + '[错误码：' + _code + ']');
@@ -105,7 +108,10 @@ export default {
     },
     editVideo(videoInfo) {
       console.log(videoInfo);
-      this.$router.push({ path: "/parkMapAdmin/modifyVideo/", query: videoInfo });
+      this.$router.push({
+        path: '/parkMapAdmin/modifyVideo/',
+        query: videoInfo
+      });
     },
     delVideo(id) {
       this.$confirm('此操作将永久删除，是否继续？', '提示', {

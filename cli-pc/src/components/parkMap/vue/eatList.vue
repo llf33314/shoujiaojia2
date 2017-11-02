@@ -6,7 +6,7 @@
         <div class="a-in-add-list">
             已创建店铺列表
         </div>
-        <el-table :data="eatListData" border highlight-current-row style="width: 100%">
+        <el-table :data="eatListData" border highlight-current-row v-loading="loading" style="width: 100%">
             <el-table-column prop="name" label="店铺名称"></el-table-column>
             <el-table-column prop="address" label="地址"></el-table-column>
             <el-table-column prop="phone" label="电话"></el-table-column>
@@ -26,7 +26,7 @@
     </div>
 </template>
 <script>
-import { requestListEats, requestDelEat } from "../api/api";
+import { requestListEats, requestDelEat } from '../api/api';
 export default {
   data() {
     return {
@@ -34,50 +34,53 @@ export default {
       eatListReq: {
         current: 0,
         size: 10
-      }
+      },
+      loading: false
     };
   },
   methods: {
     listEats() {
+      this.loading = true;
       requestListEats(this.eatListReq).then(data => {
         // console.log(data);
         var _code = data.code;
         if (_code == 100) {
           this.eatListData = data.data;
         } else {
-          this.$message.error(data.msg + "[错误码：" + _code + "]");
+          this.$message.error(data.msg + '[错误码：' + _code + ']');
         }
+        this.loading = false;
       });
     },
     editEat(eatInfo) {
       console.log(eatInfo);
-      this.$router.push({ path: "/parkMapAdmin/modifyEat/", query: eatInfo });
+      this.$router.push({ path: '/parkMapAdmin/modifyEat/', query: eatInfo });
     },
     delEat(id) {
-      this.$confirm("此操作将永久删除该店铺以及相关数据，是否继续？", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+      this.$confirm('此操作将永久删除该店铺以及相关数据，是否继续？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       }).then(() => {
         requestDelEat({ id: id }).then(data => {
           var _code = data.code;
           if (_code == 100) {
             this.$message({
-              type: "success",
-              message: "您已删除该店铺信息！"
+              type: 'success',
+              message: '您已删除该店铺信息！'
             });
             this.listEats();
           } else {
-            this.$message.error(data.msg + "[错误码：" + _code + "]");
+            this.$message.error(data.msg + '[错误码：' + _code + ']');
           }
         });
       });
     },
     addEatClick() {
-      this.$router.push({ path: "/parkMapAdmin/addEat" });
+      this.$router.push({ path: '/parkMapAdmin/addEat' });
     }
   },
-  created(){
+  created() {
     this.listEats();
   }
 };

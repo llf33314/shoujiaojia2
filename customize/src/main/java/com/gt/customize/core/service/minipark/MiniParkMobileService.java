@@ -2,14 +2,8 @@ package com.gt.customize.core.service.minipark;
 
 import com.gt.axis.bean.wxmp.bus.BusUser;
 import com.gt.customize.common.dto.ResponseDTO;
-import com.gt.customize.core.bean.minipark.req.MEatInfoReq;
-import com.gt.customize.core.bean.minipark.req.MHotelInfoReq;
-import com.gt.customize.core.bean.minipark.req.MListEatReq;
-import com.gt.customize.core.bean.minipark.req.MListHotelReq;
-import com.gt.customize.core.bean.minipark.res.MEatInfoRes;
-import com.gt.customize.core.bean.minipark.res.MHotelInfoRes;
-import com.gt.customize.core.bean.minipark.res.MListEatRes;
-import com.gt.customize.core.bean.minipark.res.MListHotelRes;
+import com.gt.customize.core.bean.minipark.req.*;
+import com.gt.customize.core.bean.minipark.res.*;
 import com.gt.customize.core.exception.minipark.MiniParkException;
 
 import java.util.List;
@@ -51,4 +45,19 @@ public interface MiniParkMobileService {
      * @return
      */
     MHotelInfoRes getHotel(BusUser busUser, MHotelInfoReq mHotelInfoReq) throws MiniParkException;
+
+    /**
+     * 获取主视频
+     * @param busUser
+     * @return
+     */
+    MVideoMainRes getVideoMain(BusUser busUser);
+
+    /**
+     * 获取视频列表
+     * @param busUser
+     * @param mListVideoReq
+     * @return
+     */
+    ResponseDTO<List<MListVideoRes>> listVideos(BusUser busUser, MListVideoReq mListVideoReq);
 }

@@ -2,7 +2,7 @@
     <div style="overflow: hidden;">
         <div class="a-in-stop-head">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/parkMapAdmin/videoList' }">直播视频管理</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/parkMapAdmin/index', query: { manage: 'videoList' } }">直播视频管理</el-breadcrumb-item>
                 <el-breadcrumb-item>编辑视频</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -42,9 +42,9 @@ export default {
         videoUrl: ''
       },
       modifyVideoRules: {
-        videoName: [{ required: true, message: "请填写视频名称", trigger: "blur" }],
-        imgUrl: [{ required: true, message: "请上传封面图", trigger: "blur" }],
-        videoUrl: [{ required: true, message: "请设置直播链接", trigger: "blur" }]
+        videoName: [{ required: true, message: '请填写视频名称', trigger: 'blur' }],
+        imgUrl: [{ required: true, message: '请上传封面图', trigger: 'blur' }],
+        videoUrl: [{ required: true, message: '请设置直播链接', trigger: 'blur' }]
       }
     };
   },
@@ -61,14 +61,17 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-      this.$router.push({ path: '/parkMapAdmin/index' });
+      this.$router.push({
+        path: '/parkMapAdmin/index',
+        query: { manage: 'videoList' }
+      });
     },
     getChangeUrl(e) {
       // 获取素材库的图片url
       this.modifyVideoReq[e.prop] = e.url;
     },
     modifyVideo() {
-      console.log('save obj : ' , this.modifyVideoReq);
+      console.log('save obj : ', this.modifyVideoReq);
       requestModifyVideo(this.modifyVideoReq).then(data => {
         // console.log(data);
         var _code = data.code;
@@ -77,7 +80,10 @@ export default {
             message: '编辑视频成功！',
             type: 'success'
           });
-          this.$router.push({ path: '/parkMapAdmin/index' });
+          this.$router.push({
+            path: '/parkMapAdmin/index',
+            query: { manage: 'videoList' }
+          });
         } else {
           this.$message.error(data.msg + '[错误码：' + _code + ']');
         }

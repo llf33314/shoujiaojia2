@@ -2,7 +2,7 @@
     <div style="overflow: hidden;">
         <div class="a-in-stop-head">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/parkMapAdmin/videoList' }">直播视频管理</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/parkMapAdmin/index', query: { manage: 'videoList' } }">直播视频管理</el-breadcrumb-item>
                 <el-breadcrumb-item>新建视频</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -32,19 +32,19 @@
     </div>
 </template>
 <script>
-import { requestAddVideo } from "../api/api";
+import { requestAddVideo } from '../api/api';
 export default {
   data() {
     return {
       addVideoReq: {
-        videoName:'',
-        imgUrl:'',
-        videoUrl:''
+        videoName: '',
+        imgUrl: '',
+        videoUrl: ''
       },
       addVideoRules: {
-        videoName: [{ required: true, message: "请填写视频名称", trigger: "blur" }],
-        imgUrl: [{ required: true, message: "请上传封面图", trigger: "blur" }],
-        videoUrl: [{ required: true, message: "请设置直播链接", trigger: "blur" }]
+        videoName: [{ required: true, message: '请填写视频名称', trigger: 'blur' }],
+        imgUrl: [{ required: true, message: '请上传封面图', trigger: 'blur' }],
+        videoUrl: [{ required: true, message: '请设置直播链接', trigger: 'blur' }]
       }
     };
   },
@@ -62,7 +62,8 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
       this.$router.push({
-        path: "/parkMapAdmin/index"
+        path: '/parkMapAdmin/index',
+        query: { manage: 'videoList' }
       });
     },
     getChangeUrl(e) {
@@ -75,14 +76,15 @@ export default {
         var _code = data.code;
         if (_code == 100) {
           this.$message({
-            message: "新增视频成功！",
-            type: "success"
+            message: '新增视频成功！',
+            type: 'success'
           });
           this.$router.push({
-            path: "/parkMapAdmin/index"
+            path: '/parkMapAdmin/index',
+            query: { manage: 'videoList' }
           });
         } else {
-          this.$message.error(data.msg + "[错误码：" + _code + "]");
+          this.$message.error(data.msg + '[错误码：' + _code + ']');
         }
       });
     }
@@ -90,39 +92,39 @@ export default {
 };
 </script>
 <style>
-.a-in-stop-head{
-    display: inline-block;
-    padding: 30px 0 0 29px;
-    font-size: 16px;
-    width: 100%;
-    height: 51px;
-    background-color: rgba(248, 248, 248, 1);
+.a-in-stop-head {
+  display: inline-block;
+  padding: 30px 0 0 29px;
+  font-size: 16px;
+  width: 100%;
+  height: 51px;
+  background-color: rgba(248, 248, 248, 1);
 }
 .a-in-stop-title {
-    width: 749px;
-    height: 60px;
-    font-size: 14px;
-    line-height: 60px;
-    margin: 2px 0 35px;
-    color: #666;
-    border-bottom: 1px solid #ddd;
+  width: 749px;
+  height: 60px;
+  font-size: 14px;
+  line-height: 60px;
+  margin: 2px 0 35px;
+  color: #666;
+  border-bottom: 1px solid #ddd;
 }
-.a-in-stop-box{
-    width:600px;
-    padding-left:80px;
+.a-in-stop-box {
+  width: 600px;
+  padding-left: 80px;
 }
-.a-in-stop-prompt{
-    display: inline-block;
-    position: absolute;
-    top: 25px;
-    left: 100px;
-    color: #999;
-    font-size: 12px;
+.a-in-stop-prompt {
+  display: inline-block;
+  position: absolute;
+  top: 25px;
+  left: 100px;
+  color: #999;
+  font-size: 12px;
 }
 .el-form-item {
-    margin-bottom: 26px;
+  margin-bottom: 26px;
 }
-.el-textarea__inner{
-    height:150px;
+.el-textarea__inner {
+  height: 150px;
 }
 </style>
