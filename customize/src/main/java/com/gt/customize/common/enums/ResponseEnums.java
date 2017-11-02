@@ -14,6 +14,7 @@ public enum ResponseEnums {
     // 300+针对统一错误
     DIFF_USER(301, "无权操作的信息"),
     INFO_NULL(302, "操作信息不存在"),
+    DATA_ERROR(303, "数据不合法");
     // 400+针对自己的错误
     ;
 

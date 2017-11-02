@@ -9,12 +9,13 @@ import com.gt.customize.common.enums.ResponseEnums;
 import com.gt.customize.core.bean.minipark.req.*;
 import com.gt.customize.core.bean.minipark.res.ListEatRes;
 import com.gt.customize.core.bean.minipark.res.ListHotelRes;
+import com.gt.customize.core.bean.minipark.res.VideoMainRes;
 import com.gt.customize.core.entity.minipark.CustomizeMiniparkEat;
 import com.gt.customize.core.entity.minipark.CustomizeMiniparkHotel;
+import com.gt.customize.core.entity.minipark.CustomizeMiniparkVideo;
+import com.gt.customize.core.entity.minipark.CustomizeMiniparkVideoMain;
 import com.gt.customize.core.exception.minipark.MiniParkException;
-import com.gt.customize.core.service.minipark.CustomizeMiniparkEatService;
-import com.gt.customize.core.service.minipark.CustomizeMiniparkHotelService;
-import com.gt.customize.core.service.minipark.MiniParkStageService;
+import com.gt.customize.core.service.minipark.*;
 import com.gt.customize.core.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,12 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
 
     @Autowired
     CustomizeMiniparkHotelService customizeMiniparkHotelService;
+
+    @Autowired
+    CustomizeMiniparkVideoService customizeMiniparkVideoService;
+
+    @Autowired
+    CustomizeMiniparkVideoMainService customizeMiniparkVideoMainService;
 
     /**
      * 获取餐饮店铺列表
@@ -246,5 +253,143 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
         }
         customizeMiniparkHotel.setDeleteflag(1);
         customizeMiniparkHotelService.updateById(customizeMiniparkHotel);
+    }
+
+    /**
+     * 获取商家下的所有视频
+     *
+     * @param busUser
+     * @return
+     * @exception MiniParkException
+     */
+    @Override
+    public List<CustomizeMiniparkVideo> listVideoAll(BusUser busUser) throws MiniParkException {
+        EntityWrapper<CustomizeMiniparkVideo> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("bus_id", busUser.getId());
+        entityWrapper.eq("delete_flag", 0);
+        entityWrapper.orderBy("video_sort", true);
+        return customizeMiniparkVideoService.selectList(entityWrapper);
+    }
+
+    /**
+     * 新增视频
+     *
+     * @param busUser
+     * @param addVideoReq
+     */
+    @Override
+    public void addVideo(BusUser busUser, AddVideoReq addVideoReq) {
+        EntityWrapper<CustomizeMiniparkVideo> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("bus_id", busUser.getId());
+        entityWrapper.orderBy("video_sort", false);
+        Page<CustomizeMiniparkVideo> page = new Page<>(1, 1);
+        List<CustomizeMiniparkVideo> cmvList =  customizeMiniparkVideoService.selectPage(page, entityWrapper).getRecords();
+        int videoSort = 1;
+        if (CommonUtil.isNotEmpty(cmvList) && cmvList.size() > 0){
+            videoSort = cmvList.get(0).getVideoSort() + 1;
+        }
+        CustomizeMiniparkVideo customizeMiniparkVideo = new CustomizeMiniparkVideo();
+        customizeMiniparkVideo.setBusId(busUser.getId());
+        customizeMiniparkVideo.setCreateTime(new Date());
+        customizeMiniparkVideo.setDeleteFlag(0);
+        customizeMiniparkVideo.setImgUrl(addVideoReq.getImgUrl());
+        customizeMiniparkVideo.setVideoName(addVideoReq.getVideoName());
+        customizeMiniparkVideo.setVideoUrl(addVideoReq.getVideoUrl());
+        customizeMiniparkVideo.setVideoSort(videoSort);
+        customizeMiniparkVideoService.insertAllColumn(customizeMiniparkVideo);
+    }
+
+    /**
+     * 修改视频
+     *
+     * @param busUser
+     * @param modifyVideoReq
+     */
+    @Override
+    public void modifyVideo(BusUser busUser, ModifyVideoReq modifyVideoReq) {
+        EntityWrapper<CustomizeMiniparkVideo> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("id", modifyVideoReq.getId());
+        entityWrapper.eq("bus_id", busUser.getId());
+        entityWrapper.eq("delete_flag", 0);
+        CustomizeMiniparkVideo customizeMiniparkVideo =  customizeMiniparkVideoService.selectOne(entityWrapper);
+        if (CommonUtil.isEmpty(customizeMiniparkVideo)){
+            throw new MiniParkException(ResponseEnums.INFO_NULL);
+        }
+        customizeMiniparkVideo.setVideoUrl(modifyVideoReq.getVideoUrl());
+        customizeMiniparkVideo.setVideoName(modifyVideoReq.getVideoName());
+        customizeMiniparkVideo.setImgUrl(modifyVideoReq.getImgUrl());
+        customizeMiniparkVideoService.updateAllColumnById(customizeMiniparkVideo);
+    }
+
+    /**
+     * 删除视频
+     *
+     * @param busUser
+     * @param delVideoReq
+     */
+    @Override
+    public void delVideo(BusUser busUser, DelVideoReq delVideoReq) {
+        EntityWrapper<CustomizeMiniparkVideo> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("id", delVideoReq.getId());
+        entityWrapper.eq("bus_id", busUser.getId());
+        entityWrapper.eq("delete_flag", 0);
+        CustomizeMiniparkVideo customizeMiniparkVideo =  customizeMiniparkVideoService.selectOne(entityWrapper);
+        if (CommonUtil.isEmpty(customizeMiniparkVideo)){
+            throw new MiniParkException(ResponseEnums.INFO_NULL);
+        }
+        customizeMiniparkVideoService.deleteById(delVideoReq.getId());
+    }
+
+    /**
+     * 获取主视频信息
+     *
+     * @param busUser
+     * @return
+     */
+    @Override
+    public VideoMainRes getMainVideo(BusUser busUser) {
+        VideoMainRes videoMainRes = new VideoMainRes();
+        EntityWrapper<CustomizeMiniparkVideoMain> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("bus_id", busUser.getId());
+        entityWrapper.eq("delete_flag", 0);
+        CustomizeMiniparkVideoMain customizeMiniparkVideoMain = customizeMiniparkVideoMainService.selectOne(entityWrapper);
+        if (CommonUtil.isNotEmpty(customizeMiniparkVideoMain)){
+            videoMainRes.setId(customizeMiniparkVideoMain.getId());
+            videoMainRes.setMainImgUrl(customizeMiniparkVideoMain.getMainImgUrl());
+            videoMainRes.setMainVideoUrl(customizeMiniparkVideoMain.getMainVideoUrl());
+        }
+        return videoMainRes;
+    }
+
+    /**
+     * 新增或修改主视频信息
+     *
+     * @param busUser
+     * @param videoMainReq
+     */
+    @Override
+    public void addOrModifyMainVideo(BusUser busUser, VideoMainReq videoMainReq) {
+        EntityWrapper<CustomizeMiniparkVideoMain> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("bus_id", busUser.getId());
+        CustomizeMiniparkVideoMain customizeMiniparkVideoMain = customizeMiniparkVideoMainService.selectOne(entityWrapper);
+        if (CommonUtil.isEmpty(customizeMiniparkVideoMain)){ // 新增
+            if (CommonUtil.isNotEmpty(videoMainReq.getId())){
+                throw new MiniParkException(ResponseEnums.DATA_ERROR);
+            }
+            customizeMiniparkVideoMain = new CustomizeMiniparkVideoMain();
+            customizeMiniparkVideoMain.setBusId(busUser.getId());
+            customizeMiniparkVideoMain.setCreateTime(new Date());
+            customizeMiniparkVideoMain.setDeleteFlag(0);
+            customizeMiniparkVideoMain.setMainVideoUrl(videoMainReq.getMainVideoUrl());
+            customizeMiniparkVideoMain.setMainImgUrl(videoMainReq.getMainImgUrl());
+            customizeMiniparkVideoMainService.insertAllColumn(customizeMiniparkVideoMain);
+        }else { // 修改
+            if (!customizeMiniparkVideoMain.getId().equals(videoMainReq.getId())){
+                throw new MiniParkException(ResponseEnums.DATA_ERROR);
+            }
+            customizeMiniparkVideoMain.setMainImgUrl(videoMainReq.getMainImgUrl());
+            customizeMiniparkVideoMain.setMainVideoUrl(videoMainReq.getMainVideoUrl());
+            customizeMiniparkVideoMainService.updateAllColumnById(customizeMiniparkVideoMain);
+        }
     }
 }

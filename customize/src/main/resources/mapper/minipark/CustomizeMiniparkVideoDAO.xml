@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gt.customize.core.dao.minipark.CustomizeMiniparkVideoDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.gt.customize.core.entity.minipark.CustomizeMiniparkVideo">
+		<id column="id" property="id" />
+		<result column="bus_id" property="busId" />
+		<result column="video_name" property="videoName" />
+		<result column="video_url" property="videoUrl" />
+		<result column="img_url" property="imgUrl" />
+		<result column="video_sort" property="videoSort" />
+		<result column="create_time" property="createTime" />
+		<result column="delete_flag" property="deleteFlag" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, bus_id, video_name, video_url, img_url, video_sort, create_time, delete_flag
+    </sql>
+
+</mapper>

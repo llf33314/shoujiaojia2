@@ -3,6 +3,7 @@
     <el-tabs v-model="manage" type="card" @tab-click="handleClick">
       <el-tab-pane label="餐饮管理" name="eatList"></el-tab-pane>
       <el-tab-pane label="住宿管理" name="hotelList"></el-tab-pane>
+      <el-tab-pane label="直播管理" name="videoList"></el-tab-pane>
     </el-tabs>
     <router-view></router-view>
   </div>

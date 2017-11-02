@@ -5,6 +5,8 @@ import com.gt.customize.common.dto.ResponseDTO;
 import com.gt.customize.core.bean.minipark.req.*;
 import com.gt.customize.core.bean.minipark.res.ListEatRes;
 import com.gt.customize.core.bean.minipark.res.ListHotelRes;
+import com.gt.customize.core.bean.minipark.res.VideoMainRes;
+import com.gt.customize.core.entity.minipark.CustomizeMiniparkVideo;
 import com.gt.customize.core.exception.minipark.MiniParkException;
 
 import java.util.List;
@@ -70,4 +72,47 @@ public interface MiniParkStageService {
      * @param delHotelReq
      */
     void delHotel(BusUser busUser, DelHotelReq delHotelReq) throws MiniParkException;
+
+    /**
+     * 获取商家下的所有视频
+     * @param busUser
+     * @return
+     * @throws MiniParkException
+     */
+    List<CustomizeMiniparkVideo> listVideoAll(BusUser busUser) throws MiniParkException;
+
+    /**
+     * 新增视频
+     * @param busUser
+     * @param addVideoReq
+     */
+    void addVideo(BusUser busUser, AddVideoReq addVideoReq);
+
+    /**
+     * 修改视频
+     * @param busUser
+     * @param modifyVideoReq
+     */
+    void modifyVideo(BusUser busUser, ModifyVideoReq modifyVideoReq);
+
+    /**
+     * 删除视频
+     * @param busUser
+     * @param delVideoReq
+     */
+    void delVideo(BusUser busUser, DelVideoReq delVideoReq);
+
+    /**
+     * 获取主视频信息
+     * @param busUser
+     * @return
+     */
+    VideoMainRes getMainVideo(BusUser busUser);
+
+    /**
+     * 新增或修改主视频信息
+     * @param busUser
+     * @param videoMainReq
+     */
+    void addOrModifyMainVideo(BusUser busUser, VideoMainReq videoMainReq);
 }
