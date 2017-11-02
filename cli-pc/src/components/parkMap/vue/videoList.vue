@@ -7,27 +7,36 @@
         <div class="a-in-add-list">
             已创建直播视频列表
         </div>
-        <el-table :data="videoListData" border highlight-current-row v-loading="loading" style="width: 100%">
-            <el-table-column prop="videoName" label="直播视频"></el-table-column>
-            <el-table-column label="创建时间">
-                <template slot-scope="scope">
-                    <el-icon name="time"></el-icon>
-                    <span style="margin-left: 10px">{{ $util.DateFormat(scope.row.createTime, "yyyy-MM-dd hh:mm") }}</span>
-                </template>
-            </el-table-column>
-            <el-table-column label="操作">
-                <template slot-scope="scope">
-                    <el-button size="small" @click="editVideo(scope.row)">编辑</el-button>
-                    <el-button size="small" type="danger" @click="delVideo(scope.row.id)">删除</el-button>
-                </template>
-            </el-table-column>
+        <el-table :data="videoListData" border highlight-current-row v-loading="loading" @header-click="headerClick" style="width: 100%">
+          <el-table-column prop="videoName" label="直播视频"></el-table-column>
+          <el-table-column :label="sortBean.label" prop="videoSort">
+            <template slot-scope="scope">
+              <span v-show="sortModifyBoolean == false">{{scope.row.videoSort}}</span>
+              <el-input v-show="sortModifyBoolean == true" v-model="scope.row.videoSort" type="number" auto-complete="off" placeholder="由小到大排序"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column label="创建时间">
+              <template slot-scope="scope">
+                  <el-icon name="time"></el-icon>
+                  <span style="margin-left: 10px">{{ $util.DateFormat(scope.row.createTime, "yyyy-MM-dd hh:mm") }}</span>
+              </template>
+          </el-table-column>
+          <el-table-column label="操作">
+              <template slot-scope="scope">
+                  <el-button size="small" @click="editVideo(scope.row)">编辑</el-button>
+                  <el-button size="small" type="danger" @click="delVideo(scope.row.id)">删除</el-button>
+              </template>
+          </el-table-column>
         </el-table>
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="videoListReq.current" 
+          :page-sizes="[10, 20, 50, 100]" :page-size="videoListReq.size" layout="total, sizes, prev, pager, next" :total="page.totalNums">
+        </el-pagination>
         <!-- 弹窗 -->
         <div>
           <el-dialog title="主视频管理" :visible.sync="dialogStaffVisible">
             <el-form :model="videoMainData" :rules="videoMainRule" ref="videoMainData">
               <el-form-item label="置顶封面图" prop="mainImgUrl" :label-width="formLabelWidth">
-                <gt-material prop="mainImgUrl" :url="videoMainData.mainImgUrl" v-on:getChangeUrl="getChangeUrl"  width="80" height="80"></gt-material>
+                <gt-material prop="mainImgUrl" :url="videoMainData.mainImgUrl" v-on:getChangeUrl="getChangeUrl"  width="144" height="80"></gt-material>
                 <p class="a-in-stop-prompt">建议上传360*200尺寸图片</p>
               </el-form-item>
               <el-form-item label="直播链接" prop="mainVideoUrl" :label-width="formLabelWidth">
@@ -47,12 +56,24 @@ import {
   requestListVideos,
   requestGetMainVideo,
   requestAddOrModifyMainVideo,
-  requestDelVideo
+  requestDelVideo,
+  requestModifySort
 } from '../api/api';
 export default {
   data() {
     return {
       videoListData: [],
+      videoListReq: {
+        current: 0,
+        size: 10
+      },
+      page: {
+        totalNums: 1,
+        totalPages: 1
+      },
+      sortBean: {
+        label: '排序（点击编辑）'
+      },
       videoMainData: {
         id: '',
         mainImgUrl: '',
@@ -64,17 +85,20 @@ export default {
         mainImgUrl: [{ required: true, message: '请上传封面图', trigger: 'blur' }],
         mainVideoUrl: [{ required: true, message: '请设置直播链接', trigger: 'blur' }]
       },
+      sortModifyBoolean: false,
       loading: false
     };
   },
   methods: {
     listVideos() {
       this.loading = true;
-      requestListVideos().then(data => {
+      requestListVideos(this.videoListReq).then(data => {
         console.log(data);
         var _code = data.code;
         if (_code == 100) {
           this.videoListData = data.data;
+          this.page.totalNums = data.page.totalNums;
+          this.page.totalPages = data.page.totalPages;
         } else {
           this.$message.error(data.msg + '[错误码：' + _code + ']');
         }
@@ -99,6 +123,21 @@ export default {
         if (_code == 100) {
           this.$message({
             message: '主视频设置成功！',
+            type: 'success'
+          });
+        } else {
+          this.$message.error(data.msg + '[错误码：' + _code + ']');
+        }
+      });
+    },
+    modifySort() {
+      this.loading = true;
+      requestModifySort(this.videoListData).then(data => {
+        console.log(data);
+        var _code = data.code;
+        if (_code == 100) {
+          this.$message({
+            message: '保存成功！',
             type: 'success'
           });
         } else {
@@ -156,6 +195,30 @@ export default {
           return false;
         }
       });
+    },
+    handleCurrentChange(val) {
+      this.listVideos();
+    },
+    handleSizeChange(val) {
+      this.videoListReq.size = val;
+      this.listVideos();
+    },
+    headerClick(column, event) {
+      // 表格排序
+      if (column.property == 'videoSort') {
+        if (this.sortModifyBoolean === true) {
+          // 保存
+          this.sortBean.label = '排序（点击编辑）';
+          this.modifySort();
+          this.sortModifyBoolean = false;
+          this.listVideos();
+        } else {
+          // 编辑
+          this.sortBean.label = '编辑排序中（点击保存）';
+          this.sortModifyBoolean = true;
+        }
+        console.log(this.sortModifyBoolean);
+      }
     }
   },
   created() {
@@ -194,5 +257,10 @@ export default {
 .el-breadcrumb__item__inner a {
   transition: color 0.15s linear;
   color: #2d8dfd;
+}
+.el-pagination {
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
 }
 </style>

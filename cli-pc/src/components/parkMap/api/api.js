@@ -29,3 +29,5 @@ export const requestModifyVideo = params => { return axios.post(`${base}/app/min
 export const requestGetMainVideo = params => { return axios.post(`${base}/app/minipark/getMainVideo`, params).then(res => res.data) }
 /* 新增或编辑主视频 */
 export const requestAddOrModifyMainVideo = params => { return axios.post(`${base}/app/minipark/addOrModifyMainVideo`, params).then(res => res.data) }
+/* 修改排序 */
+export const requestModifySort = params => { return axios.post(`${base}/app/minipark/modifySort`, params).then(res => res.data) }

@@ -212,11 +212,12 @@ public class MiniParkStageController extends BaseController {
     })
     @ApiOperation(value = "获取视频列表", notes = "获取视频列表")
     @RequestMapping(value = "/listVideos", method = RequestMethod.POST)
-    public ResponseDTO listVideos(HttpServletRequest request){
+    public ResponseDTO listVideos(@RequestBody @ApiParam("请求对象") @Valid ListVideoReq listVideoReq, BindingResult bindingResult, HttpServletRequest request){
+        InvalidParameter(bindingResult);
         try {
             BusUser busUser = CommonUtil.getLoginUser(request);
-            List<CustomizeMiniparkVideo> customizeMiniparkVideoList = miniParkStageService.listVideoAll(busUser);
-            return ResponseDTO.createBySuccess("获取视频列表成功", customizeMiniparkVideoList);
+            ResponseDTO<List<CustomizeMiniparkVideo>> responseDTO = miniParkStageService.listVideoAll(busUser, listVideoReq);
+            return responseDTO;
         } catch (MiniParkException e){
             logger.error(e.getMessage(), e.fillInStackTrace());
             return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
@@ -323,6 +324,25 @@ public class MiniParkStageController extends BaseController {
             BusUser busUser = CommonUtil.getLoginUser(request);
             miniParkStageService.addOrModifyMainVideo(busUser, videoMainReq);
             return ResponseDTO.createBySuccessMessage("新增或修改主视频成功");
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+    })
+    @ApiOperation(value = "修改视频排序", notes = "修改视频排序")
+    @RequestMapping(value = "/modifySort", method = RequestMethod.POST)
+    public ResponseDTO modifySort(@RequestBody List<CustomizeMiniparkVideo> customizeMiniparkVideoList){
+        try {
+            logger.debug("modifySort");
+            miniParkStageService.modifySort(customizeMiniparkVideoList);
+            return ResponseDTO.createBySuccessMessage("视频排序成功");
         } catch (MiniParkException e){
             logger.error(e.getMessage(), e.fillInStackTrace());
             return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());

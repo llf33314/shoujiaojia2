@@ -2,7 +2,7 @@
     <div style="overflow: hidden;">
         <div class="a-in-stop-head">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/parkMapAdmin/hotelList' }">酒店管理</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/parkMapAdmin/index', query: { manage: 'hotelList' } }">酒店管理</el-breadcrumb-item>
                 <el-breadcrumb-item>编辑店铺</el-breadcrumb-item>
             </el-breadcrumb>
         </div>

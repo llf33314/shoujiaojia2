@@ -76,10 +76,11 @@ public interface MiniParkStageService {
     /**
      * 获取商家下的所有视频
      * @param busUser
+     * @param listVideoReq
      * @return
      * @throws MiniParkException
      */
-    List<CustomizeMiniparkVideo> listVideoAll(BusUser busUser) throws MiniParkException;
+    ResponseDTO<List<CustomizeMiniparkVideo>> listVideoAll(BusUser busUser, ListVideoReq listVideoReq) throws MiniParkException;
 
     /**
      * 新增视频
@@ -115,4 +116,10 @@ public interface MiniParkStageService {
      * @param videoMainReq
      */
     void addOrModifyMainVideo(BusUser busUser, VideoMainReq videoMainReq);
+
+    /**
+     * 修改视频排序
+     * @param customizeMiniparkVideoList
+     */
+    void modifySort(List<CustomizeMiniparkVideo> customizeMiniparkVideoList);
 }

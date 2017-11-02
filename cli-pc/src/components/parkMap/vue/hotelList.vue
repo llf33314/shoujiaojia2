@@ -23,7 +23,9 @@
                 </template>
             </el-table-column>
         </el-table>
-
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="hotelListReq.current" 
+          :page-sizes="[10, 20, 50, 100]" :page-size="hotelListReq.size" layout="total, sizes, prev, pager, next" :total="page.totalNums">
+        </el-pagination>
     </div>
 </template>
 <script>
@@ -36,6 +38,10 @@ export default {
         current: 0,
         size: 10
       },
+      page:{
+        totalNums: 1,
+        totalPages: 1
+      },
       loading: false
     };
   },
@@ -47,6 +53,8 @@ export default {
         var _code = data.code;
         if (_code == 100) {
           this.hotelListData = data.data;
+          this.page.totalNums = data.page.totalNums;
+          this.page.totalPages = data.page.totalPages;
         } else {
           this.$message.error(data.msg + '[错误码：' + _code + ']');
         }
@@ -82,6 +90,13 @@ export default {
     },
     addHotelClick() {
       this.$router.push({ path: '/parkMapAdmin/addHotel' });
+    },
+    handleCurrentChange(val) {
+      this.listHotels();
+    },
+    handleSizeChange(val) {
+      this.hotelListReq.size = val;
+      this.listHotels();
     }
   },
   created() {
@@ -90,5 +105,9 @@ export default {
 };
 </script>
 <style>
-
+.el-pagination {
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
+}
 </style>

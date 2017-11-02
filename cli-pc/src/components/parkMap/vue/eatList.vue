@@ -23,6 +23,9 @@
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="eatListReq.current" 
+          :page-sizes="[10, 20, 50, 100]" :page-size="eatListReq.size" layout="total, sizes, prev, pager, next" :total="page.totalNums">
+        </el-pagination>
     </div>
 </template>
 <script>
@@ -35,6 +38,10 @@ export default {
         current: 0,
         size: 10
       },
+      page:{
+        totalNums: 1,
+        totalPages: 1
+      },
       loading: false
     };
   },
@@ -46,6 +53,8 @@ export default {
         var _code = data.code;
         if (_code == 100) {
           this.eatListData = data.data;
+          this.page.totalNums = data.page.totalNums;
+          this.page.totalPages = data.page.totalPages;
         } else {
           this.$message.error(data.msg + '[错误码：' + _code + ']');
         }
@@ -78,6 +87,13 @@ export default {
     },
     addEatClick() {
       this.$router.push({ path: '/parkMapAdmin/addEat' });
+    },
+    handleCurrentChange(val) {
+      this.listEats();
+    },
+    handleSizeChange(val) {
+      this.eatListReq.size = val;
+      this.listEats();
     }
   },
   created() {
@@ -116,5 +132,10 @@ export default {
 .el-breadcrumb__item__inner a {
   transition: color 0.15s linear;
   color: #2d8dfd;
+}
+.el-pagination {
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
 }
 </style>

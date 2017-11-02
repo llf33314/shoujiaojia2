@@ -157,12 +157,12 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
      */
     @Override
     public ResponseDTO<List<ListHotelRes>> listHotelsByPage(BusUser busUser, ListHotelReq listHotelReq) throws MiniParkException {
-        Page<CustomizeMiniparkEat> page = new Page<>(listHotelReq.getCurrent(), listHotelReq.getSize());
+        Page<CustomizeMiniparkHotel> page = new Page<>(listHotelReq.getCurrent(), listHotelReq.getSize());
         EntityWrapper<CustomizeMiniparkHotel> entityWrapper = new EntityWrapper<>();
         entityWrapper.eq("deleteflag", 0);
         entityWrapper.eq("shop_status", 0);
         entityWrapper.eq("bus_id", busUser.getId());
-        List<CustomizeMiniparkHotel> customizeMiniparkHotelList = customizeMiniparkHotelService.selectList(entityWrapper);
+        List<CustomizeMiniparkHotel> customizeMiniparkHotelList = customizeMiniparkHotelService.selectPage(page, entityWrapper).getRecords();
         List<ListHotelRes> listHotelResList = new ArrayList<>();
         for (CustomizeMiniparkHotel customizeMiniparkHotel : customizeMiniparkHotelList){
             ListHotelRes listHotelRes = new ListHotelRes();
@@ -259,16 +259,20 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
      * 获取商家下的所有视频
      *
      * @param busUser
+     * @param listVideoReq
      * @return
      * @exception MiniParkException
      */
     @Override
-    public List<CustomizeMiniparkVideo> listVideoAll(BusUser busUser) throws MiniParkException {
+    public ResponseDTO<List<CustomizeMiniparkVideo>> listVideoAll(BusUser busUser, ListVideoReq listVideoReq) throws MiniParkException {
+        Page<CustomizeMiniparkVideo> page = new Page<>(listVideoReq.getCurrent(), listVideoReq.getSize());
         EntityWrapper<CustomizeMiniparkVideo> entityWrapper = new EntityWrapper<>();
         entityWrapper.eq("bus_id", busUser.getId());
         entityWrapper.eq("delete_flag", 0);
         entityWrapper.orderBy("video_sort", true);
-        return customizeMiniparkVideoService.selectList(entityWrapper);
+        List<CustomizeMiniparkVideo> customizeMiniparkVideoList = customizeMiniparkVideoService.selectPage(page, entityWrapper).getRecords();
+        PageDTO pageDTO = new PageDTO(page.getPages(), page.getTotal());
+        return ResponseDTO.createBySuccessPage("获取视频列表成功", customizeMiniparkVideoList, pageDTO);
     }
 
     /**
@@ -391,5 +395,15 @@ public class MiniParkStageServiceImpl implements MiniParkStageService {
             customizeMiniparkVideoMain.setMainVideoUrl(videoMainReq.getMainVideoUrl());
             customizeMiniparkVideoMainService.updateAllColumnById(customizeMiniparkVideoMain);
         }
+    }
+
+    /**
+     * 修改视频排序
+     *
+     * @param customizeMiniparkVideoList
+     */
+    @Override
+    public void modifySort(List<CustomizeMiniparkVideo> customizeMiniparkVideoList) {
+        customizeMiniparkVideoService.updateBatchById(customizeMiniparkVideoList);
     }
 }
