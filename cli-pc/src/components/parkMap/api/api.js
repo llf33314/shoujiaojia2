@@ -17,3 +17,17 @@ export const requestAddHotel = params => { return axios.post(`${base}/app/minipa
 export const requestModifyHotel = params => { return axios.post(`${base}/app/minipark/modifyHotel`, params).then(res => res.data) }
 /* 删除酒店店铺 */
 export const requestDelHotel = params => { return axios.post(`${base}/app/minipark/delHotel`, params).then(res => res.data) }
+/* 分页获取视频 */
+export const requestListVideos = params => { return axios.post(`${base}/app/minipark/listVideos`, params).then(res => res.data) }
+/* 删除视频 */
+export const requestDelVideo = params => { return axios.post(`${base}/app/minipark/delVideo`, params).then(res => res.data) }
+/* 新增视频 */
+export const requestAddVideo = params => { return axios.post(`${base}/app/minipark/addVideo`, params).then(res => res.data) }
+/* 修改视频 */
+export const requestModifyVideo = params => { return axios.post(`${base}/app/minipark/modifyVideo`, params).then(res => res.data) }
+/* 获取主视频 */
+export const requestGetMainVideo = params => { return axios.post(`${base}/app/minipark/getMainVideo`, params).then(res => res.data) }
+/* 新增或编辑主视频 */
+export const requestAddOrModifyMainVideo = params => { return axios.post(`${base}/app/minipark/addOrModifyMainVideo`, params).then(res => res.data) }
+/* 修改排序 */
+export const requestModifySort = params => { return axios.post(`${base}/app/minipark/modifySort`, params).then(res => res.data) }

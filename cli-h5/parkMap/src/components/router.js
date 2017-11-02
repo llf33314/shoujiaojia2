@@ -1,6 +1,7 @@
 const index = ()=>import('@/components/vue/index')
 const roomAndBorad = ()=>import('@/components/vue/roomAndBorad')
 const detail = ()=>import('@/components/vue/detail')
+const video = ()=>import('@/components/vue/video')
 export const parkMapAppRouter = [
   {
     path: '/parkMap/index/:busId',
@@ -16,6 +17,11 @@ export const parkMapAppRouter = [
     path: '/parkMap/detail/:busId/:id/:type',
     name: 'detail',
     component: detail,
+  },
+  {
+    path: '/parkMap/video/:busId/',
+    name: 'video',
+    component: video,
   }
 ]
 

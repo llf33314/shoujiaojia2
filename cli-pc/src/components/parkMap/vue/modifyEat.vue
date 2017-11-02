@@ -2,7 +2,7 @@
     <div style="overflow: hidden;">
         <div class="a-in-stop-head">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/parkMapAdmin/eatList' }">餐饮管理</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/parkMapAdmin/index', query: { manage: 'eatList' } }">餐饮管理</el-breadcrumb-item>
                 <el-breadcrumb-item>编辑店铺</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -46,40 +46,40 @@
     </div>
 </template>
 <script>
-import { requestModifyEat } from "../api/api";
-import gtmap from "@/components/PublicVue/map/gtMap.vue";
+import { requestModifyEat } from '../api/api';
+import gtmap from '@/components/PublicVue/map/gtMap.vue';
 export default {
   data() {
     return {
       modifyEatReq: {
-        name: "", // 名称
-        logoUrl: "", // logo
-        introduce: "", // 简介
-        address: "", // 地址
-        phone: "", // 手机
-        bannerUrl: "", // banner
-        remark: "", // 详细介绍
-        lat: "", // 经度
-        lon: "" // 纬度
+        name: '', // 名称
+        logoUrl: '', // logo
+        introduce: '', // 简介
+        address: '', // 地址
+        phone: '', // 手机
+        bannerUrl: '', // banner
+        remark: '', // 详细介绍
+        lat: '', // 经度
+        lon: '' // 纬度
       },
       mapBean: {
-        label: "",
-        detailedAddress: ""
+        label: '',
+        detailedAddress: ''
       },
       modifyEatRules: {
         name: [
-          { required: true, message: "请输入店铺名称", trigger: "blur" },
-          { min: 1, max: 7, message: "长度不超过7个字符", trigger: "blur" }
+          { required: true, message: '请输入店铺名称', trigger: 'blur' },
+          { min: 1, max: 7, message: '长度不超过7个字符', trigger: 'blur' }
         ],
-        logoUrl: [{ required: true, message: "请选择上传的logo图", trigger: "blur" }],
+        logoUrl: [{ required: true, message: '请选择上传的logo图', trigger: 'blur' }],
         introduce: [
-          { required: true, message: "请输入介绍文案", trigger: "blur" },
-          { min: 1, max: 7, message: "长度不超过7个字符", trigger: "blur" }
+          { required: true, message: '请输入介绍文案', trigger: 'blur' },
+          { min: 1, max: 7, message: '长度不超过7个字符', trigger: 'blur' }
         ],
-        address: [{ required: true, message: "请选择店铺地址", trigger: "blur" }],
-        phone: [{ required: true, message: "请输入店铺电话", trigger: "blur" }],
+        address: [{ required: true, message: '请选择店铺地址', trigger: 'blur' }],
+        phone: [{ required: true, message: '请输入店铺电话', trigger: 'blur' }],
         bannerUrl: [
-          { required: true, message: "请选择上传banner图", trigger: "blur" }
+          { required: true, message: '请选择上传banner图', trigger: 'blur' }
         ]
       }
     };
@@ -103,25 +103,31 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-      this.$router.push({ path: "/parkMapAdmin/index" });
+      this.$router.push({
+        path: '/parkMapAdmin/index',
+        query: { manage: 'eatList' }
+      });
     },
     getChangeUrl(e) {
       // 获取素材库的图片url
       this.modifyEatReq[e.prop] = e.url;
     },
     modifyEat() {
-      console.log("save obj : " + this.modifyEatReq);
+      console.log('save obj : ' + this.modifyEatReq);
       requestModifyEat(this.modifyEatReq).then(data => {
         // console.log(data);
         var _code = data.code;
         if (_code == 100) {
           this.$message({
-            message: "编辑餐饮店铺成功！",
-            type: "success"
+            message: '编辑餐饮店铺成功！',
+            type: 'success'
           });
-          this.$router.push({ path: "/parkMapAdmin/eatList" });
+          this.$router.push({
+            path: '/parkMapAdmin/index',
+            query: { manage: 'eatList' }
+          });
         } else {
-          this.$message.error(data.msg + "[错误码：" + _code + "]");
+          this.$message.error(data.msg + '[错误码：' + _code + ']');
         }
       });
     }
@@ -169,7 +175,7 @@ export default {
 .el-form-item {
   margin-bottom: 26px;
 }
-.el-textarea__inner{
-    height:150px;
+.el-textarea__inner {
+  height: 150px;
 }
 </style>

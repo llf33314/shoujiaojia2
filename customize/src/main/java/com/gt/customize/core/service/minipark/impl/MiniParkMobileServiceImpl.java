@@ -1,28 +1,24 @@
 package com.gt.customize.core.service.minipark.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.gt.axis.bean.wxmp.bus.BusUser;
 import com.gt.customize.common.dto.PageDTO;
 import com.gt.customize.common.dto.ResponseDTO;
 import com.gt.customize.common.enums.ResponseEnums;
-import com.gt.customize.core.bean.minipark.req.MEatInfoReq;
-import com.gt.customize.core.bean.minipark.req.MHotelInfoReq;
-import com.gt.customize.core.bean.minipark.req.MListEatReq;
-import com.gt.customize.core.bean.minipark.req.MListHotelReq;
-import com.gt.customize.core.bean.minipark.res.MEatInfoRes;
-import com.gt.customize.core.bean.minipark.res.MHotelInfoRes;
-import com.gt.customize.core.bean.minipark.res.MListEatRes;
-import com.gt.customize.core.bean.minipark.res.MListHotelRes;
+import com.gt.customize.core.bean.minipark.req.*;
+import com.gt.customize.core.bean.minipark.res.*;
 import com.gt.customize.core.entity.minipark.CustomizeMiniparkEat;
 import com.gt.customize.core.entity.minipark.CustomizeMiniparkHotel;
+import com.gt.customize.core.entity.minipark.CustomizeMiniparkVideo;
+import com.gt.customize.core.entity.minipark.CustomizeMiniparkVideoMain;
 import com.gt.customize.core.exception.minipark.MiniParkException;
-import com.gt.customize.core.service.minipark.CustomizeMiniparkEatService;
-import com.gt.customize.core.service.minipark.CustomizeMiniparkHotelService;
-import com.gt.customize.core.service.minipark.MiniParkMobileService;
+import com.gt.customize.core.service.minipark.*;
 import com.gt.customize.core.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +33,12 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
 
     @Autowired
     CustomizeMiniparkHotelService customizeMiniparkHotelService;
+
+    @Autowired
+    CustomizeMiniparkVideoMainService customizeMiniparkVideoMainService;
+
+    @Autowired
+    CustomizeMiniparkVideoService customizeMiniparkVideoService;
 
     /**
      * 分页获取餐饮店铺列表
@@ -122,4 +124,44 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
         return mHotelInfoRes;
     }
 
+    /**
+     * 获取主视频
+     *
+     * @param busUser
+     * @return
+     */
+    @Override
+    public MVideoMainRes getVideoMain(BusUser busUser) {
+        MVideoMainRes mVideoMainRes = new MVideoMainRes();
+        EntityWrapper<CustomizeMiniparkVideoMain> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("bus_id", busUser.getId());
+        CustomizeMiniparkVideoMain customizeMiniparkVideoMain = customizeMiniparkVideoMainService.selectOne(entityWrapper);
+        if (CommonUtil.isNotEmpty(customizeMiniparkVideoMain)){
+            mVideoMainRes.setImgUrl(customizeMiniparkVideoMain.getMainImgUrl());
+            mVideoMainRes.setVideoUrl(customizeMiniparkVideoMain.getMainVideoUrl());
+        }
+        return mVideoMainRes;
+    }
+
+    /**
+     * 获取视频列表
+     *
+     * @param busUser
+     * @param mListVideoReq
+     * @return
+     */
+    @Override
+    public ResponseDTO<List<MListVideoRes>> listVideos(BusUser busUser, MListVideoReq mListVideoReq) {
+        List<MListVideoRes> mListVideoResList = new ArrayList<>();
+        EntityWrapper<CustomizeMiniparkVideo> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("bus_id", busUser.getId());
+        List<CustomizeMiniparkVideo> customizeMiniparkVideoList = customizeMiniparkVideoService.selectList(entityWrapper);
+        for (CustomizeMiniparkVideo customizeMiniparkVideo : customizeMiniparkVideoList){
+            MListVideoRes mListVideoRes = new MListVideoRes();
+            mListVideoRes.setImgUrl(customizeMiniparkVideo.getImgUrl());
+            mListVideoRes.setVideoUrl(customizeMiniparkVideo.getVideoUrl());
+            mListVideoResList.add(mListVideoRes);
+        }
+        return ResponseDTO.createBySuccess("获取视频列表成功", mListVideoResList);
+    }
 }

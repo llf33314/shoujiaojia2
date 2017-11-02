@@ -3,14 +3,8 @@ package com.gt.customize.core.controller.minipark.mobile;
 import com.gt.axis.bean.wxmp.bus.BusUser;
 import com.gt.customize.common.base.BaseController;
 import com.gt.customize.common.dto.ResponseDTO;
-import com.gt.customize.core.bean.minipark.req.MEatInfoReq;
-import com.gt.customize.core.bean.minipark.req.MHotelInfoReq;
-import com.gt.customize.core.bean.minipark.req.MListEatReq;
-import com.gt.customize.core.bean.minipark.req.MListHotelReq;
-import com.gt.customize.core.bean.minipark.res.MEatInfoRes;
-import com.gt.customize.core.bean.minipark.res.MHotelInfoRes;
-import com.gt.customize.core.bean.minipark.res.MListEatRes;
-import com.gt.customize.core.bean.minipark.res.MListHotelRes;
+import com.gt.customize.core.bean.minipark.req.*;
+import com.gt.customize.core.bean.minipark.res.*;
 import com.gt.customize.core.exception.minipark.MiniParkException;
 import com.gt.customize.core.service.minipark.MiniParkMobileService;
 import com.gt.customize.core.util.CommonUtil;
@@ -117,6 +111,49 @@ public class MiniParkMobileController extends BaseController {
             BusUser busUser = CommonUtil.getBusUserById(mHotelInfoReq.getBusId());
             MHotelInfoRes mHotelInfoRes = miniParkMobileService.getHotel(busUser, mHotelInfoReq);
             return ResponseDTO.createBySuccess("获取酒店店铺详情成功", mHotelInfoRes);
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+            @ApiResponse(code = 1, message = "data对象", response = MVideoMainRes.class),
+    })
+    @ApiOperation(value = "获取主视频", notes = "获取主视频")
+    @RequestMapping(value = "/getVideoMain", method = RequestMethod.POST)
+    public ResponseDTO getVideoMain(@RequestBody @ApiParam("获取主视频对象") @Valid MVideoMainReq mVideoMainReq, BindingResult bindingResult){
+        InvalidParameter(bindingResult);
+        try {
+            BusUser busUser = CommonUtil.getBusUserById(mVideoMainReq.getBusId());
+            MVideoMainRes mVideoMainRes = miniParkMobileService.getVideoMain(busUser);
+            return ResponseDTO.createBySuccess("获取主视频对象成功", mVideoMainRes);
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+            @ApiResponse(code = 1, message = "data对象（数组对象）", response = List.class),
+            @ApiResponse(code = 2, message = "活动对象", response = MListHotelRes.class),
+    })
+    @ApiOperation(value = "获取视频列表", notes = "获取视频列表")
+    @RequestMapping(value = "/listVideos", method = RequestMethod.POST)
+    public ResponseDTO listVideos(@RequestBody @ApiParam("获取视频列表对象") @Valid MListVideoReq mListVideoReq, BindingResult bindingResult){
+        InvalidParameter(bindingResult);
+        try {
+            BusUser busUser = CommonUtil.getBusUserById(mListVideoReq.getBusId());
+            ResponseDTO<List<MListVideoRes>> responseDTO = miniParkMobileService.listVideos(busUser, mListVideoReq);
+            return responseDTO;
         } catch (MiniParkException e){
             logger.error(e.getMessage(), e.fillInStackTrace());
             return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());

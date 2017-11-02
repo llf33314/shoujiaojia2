@@ -6,6 +6,8 @@ import com.gt.customize.common.dto.ResponseDTO;
 import com.gt.customize.core.bean.minipark.req.*;
 import com.gt.customize.core.bean.minipark.res.ListEatRes;
 import com.gt.customize.core.bean.minipark.res.ListHotelRes;
+import com.gt.customize.core.bean.minipark.res.VideoMainRes;
+import com.gt.customize.core.entity.minipark.CustomizeMiniparkVideo;
 import com.gt.customize.core.exception.minipark.MiniParkException;
 import com.gt.customize.core.service.minipark.MiniParkStageService;
 import com.gt.customize.core.util.CommonUtil;
@@ -183,7 +185,6 @@ public class MiniParkStageController extends BaseController {
         }
     }
 
-
     @ApiResponses({
             @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
     })
@@ -195,6 +196,153 @@ public class MiniParkStageController extends BaseController {
             BusUser busUser = CommonUtil.getLoginUser(request);
             miniParkStageService.delHotel(busUser, delHotelReq);
             return ResponseDTO.createBySuccessMessage("删除酒店店铺成功");
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+            @ApiResponse(code = 1, message = "data对象（数组对象）", response = List.class),
+            @ApiResponse(code = 2, message = "活动对象", response = ListEatRes.class),
+    })
+    @ApiOperation(value = "获取视频列表", notes = "获取视频列表")
+    @RequestMapping(value = "/listVideos", method = RequestMethod.POST)
+    public ResponseDTO listVideos(@RequestBody @ApiParam("请求对象") @Valid ListVideoReq listVideoReq, BindingResult bindingResult, HttpServletRequest request){
+        InvalidParameter(bindingResult);
+        try {
+            BusUser busUser = CommonUtil.getLoginUser(request);
+            ResponseDTO<List<CustomizeMiniparkVideo>> responseDTO = miniParkStageService.listVideoAll(busUser, listVideoReq);
+            return responseDTO;
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+    })
+    @ApiOperation(value = "新增视频", notes = "新增视频")
+    @RequestMapping(value = "/addVideo", method = RequestMethod.POST)
+    public ResponseDTO addVideo(@RequestBody @ApiParam("新增视频对象") @Valid AddVideoReq addVideoReq, BindingResult bindingResult, HttpServletRequest request){
+        InvalidParameter(bindingResult);
+        try {
+            logger.debug(addVideoReq.toString());
+            BusUser busUser = CommonUtil.getLoginUser(request);
+            miniParkStageService.addVideo(busUser, addVideoReq);
+            return ResponseDTO.createBySuccessMessage("新增视频成功");
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+    })
+    @ApiOperation(value = "修改视频", notes = "修改视频")
+    @RequestMapping(value = "/modifyVideo", method = RequestMethod.POST)
+    public ResponseDTO modifyVideo(@RequestBody @ApiParam("修改视频对象") @Valid ModifyVideoReq modifyVideoReq, BindingResult bindingResult, HttpServletRequest request){
+        InvalidParameter(bindingResult);
+        try {
+            logger.debug(modifyVideoReq.toString());
+            BusUser busUser = CommonUtil.getLoginUser(request);
+            miniParkStageService.modifyVideo(busUser, modifyVideoReq);
+            return ResponseDTO.createBySuccessMessage("修改视频成功");
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+    })
+    @ApiOperation(value = "删除视频", notes = "删除视频")
+    @RequestMapping(value = "/delVideo", method = RequestMethod.POST)
+    public ResponseDTO delVideo(@RequestBody @ApiParam("删除视频对象") @Valid DelVideoReq delVideoReq, BindingResult bindingResult, HttpServletRequest request){
+        InvalidParameter(bindingResult);
+        try {
+            logger.debug(delVideoReq.toString());
+            BusUser busUser = CommonUtil.getLoginUser(request);
+            miniParkStageService.delVideo(busUser, delVideoReq);
+            return ResponseDTO.createBySuccessMessage("修改视频成功");
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+            @ApiResponse(code = 1, message = "data对象（数组对象）", response = VideoMainRes.class),
+    })
+    @ApiOperation(value = "获取主视频", notes = "获取主视频")
+    @RequestMapping(value = "/getMainVideo", method = RequestMethod.POST)
+    public ResponseDTO getMainVideo(HttpServletRequest request){
+        try {
+            logger.debug("getMainVideo");
+            BusUser busUser = CommonUtil.getLoginUser(request);
+            VideoMainRes videoMainRes = miniParkStageService.getMainVideo(busUser);
+            return ResponseDTO.createBySuccess("获取主视频成功", videoMainRes);
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+            @ApiResponse(code = 1, message = "data对象（数组对象）", response = VideoMainRes.class),
+    })
+    @ApiOperation(value = "新增或修改主视频", notes = "新增或修改主视频")
+    @RequestMapping(value = "/addOrModifyMainVideo", method = RequestMethod.POST)
+    public ResponseDTO addOrModifyMainVideo(@RequestBody @ApiParam("请求对象") @Valid VideoMainReq videoMainReq, BindingResult bindingResult, HttpServletRequest request){
+        InvalidParameter(bindingResult);
+        try {
+            logger.debug(videoMainReq.toString());
+            BusUser busUser = CommonUtil.getLoginUser(request);
+            miniParkStageService.addOrModifyMainVideo(busUser, videoMainReq);
+            return ResponseDTO.createBySuccessMessage("新增或修改主视频成功");
+        } catch (MiniParkException e){
+            logger.error(e.getMessage(), e.fillInStackTrace());
+            return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseDTO.createByError();
+        }
+    }
+
+    @ApiResponses({
+            @ApiResponse(code = 0, message = "统一响应对象", response = ResponseDTO.class),
+    })
+    @ApiOperation(value = "修改视频排序", notes = "修改视频排序")
+    @RequestMapping(value = "/modifySort", method = RequestMethod.POST)
+    public ResponseDTO modifySort(@RequestBody List<CustomizeMiniparkVideo> customizeMiniparkVideoList){
+        try {
+            logger.debug("modifySort");
+            miniParkStageService.modifySort(customizeMiniparkVideoList);
+            return ResponseDTO.createBySuccessMessage("视频排序成功");
         } catch (MiniParkException e){
             logger.error(e.getMessage(), e.fillInStackTrace());
             return ResponseDTO.createByErrorCodeMessage(e.getCode(), e.getMessage());

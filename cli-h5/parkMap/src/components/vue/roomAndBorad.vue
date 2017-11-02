@@ -24,7 +24,7 @@
             </p>
           </div>
         </li>
-        <div class="no-more" v-if="eatsCurrent > eatsTotalPages">加载完了...</div>
+        <div class="no-more" v-if="eatsCurrent > eatsTotalPages && eatslsPageFlag">加载完毕</div>
       </ul>
       <ul class="type-list" v-show="type==0" ref="hotelsBox">
         <li class="type-list-item" v-for="(item,index) in listHotels" @click="goToDetail(item.id,0)">
@@ -45,7 +45,7 @@
             </p>
           </div>
         </li>
-        <div class="no-more" v-if="hotelsCurrent > hotelsTotalPages">加载完了...</div>
+        <div class="no-more" v-if="hotelsCurrent > hotelsTotalPages && hotelsPageFlag">加载完毕</div>
       </ul>
     </div>
   </section>
@@ -68,16 +68,26 @@
         hotelsFlag: true,
         eatsCurrent: 1,
         eatsTotalPages: '',
-        eatsFlag: true
+        eatsFlag: true,
+        hotelsPageFlag:false,
+        eatslsPageFlag:false
       }
     },
     mounted() {
+      // 获取微信sdk
+      this._wx.getWxSDK(this.$route.params.busId,{
+        title:'我是首页',
+        link:window.location.href,
+        imgUrl:'//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
+      })
+      const form = window.JSON.parse(window.localStorage.parkMapLatitudeAndLogitude)
+      this.lat = form.latitude
+      this.lon = form.longitude
       this.type = this.$route.params.type
-      this.getNavigator()
-      this.weixinGetLocation()
+      this.getListHotels()
+      this.getListEats()
       window.addEventListener('scroll', this.onScrollEates); //挂载滚动事件
       window.addEventListener('scroll', this.onScrollHotels); //挂载滚动事件
-
     },
     destroyed() {
       window.addEventListener('scroll', ''); //挂载滚动事件
@@ -86,19 +96,6 @@
       document.title = '周边吃住列表'
     },
     methods: {
-      // weixin
-      weixinGetLocation() {
-        wx.getLocation({
-          type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-          success: function (res) {
-            var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-            var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-            var speed = res.speed; // 速度，以米/每秒计
-            var accuracy = res.accuracy; // 位置精度
-            alert(latitude, 'latitude')
-          }
-        });
-      },
       // 选择餐饮、住宿
       selectType(type) {
         this.type = type
@@ -123,6 +120,7 @@
           setTimeout(() => {
             this.listHotels = this.listHotels.concat(res.data)
             this.hotelsTotalPages = res.page.totalPages
+            this.hotelsPageFlag = true
             if (res.page.totalPages >= 1) {
               this.hotelsCurrent += 1
             }
@@ -152,6 +150,7 @@
           setTimeout(() => {
             this.listEats = this.listEats.concat(res.data)
             this.eatsTotalPages = res.page.totalPages
+            this.eatslsPageFlag = true
             if (res.page.totalPages >= 1) {
               this.eatsCurrent += 1
             }
@@ -159,44 +158,6 @@
             this.showListBox = true
           }, 60)
         })
-      },
-      // 获取金纬度
-      getNavigator() {
-        const self = this
-        navigator.geolocation.getCurrentPosition( // 该函数有如下三个参数
-          function (pos) { // 如果成果则执行该回调函数
-            self.lat = pos.coords.latitude
-            self.lon = pos.coords.longitude
-
-            localStorage.latitude = pos.coords.latitude
-            localStorage.longitude = pos.coords.longitude
-            // alert(
-            //   '  经度：' + pos.coords.latitude +
-            //   '  纬度：' + pos.coords.longitude +
-            //   '  高度：' + pos.coords.altitude +
-            //   '  精确度(经纬)：' + pos.coords.accuracy +
-            //   '  精确度(高度)：' + pos.coords.altitudeAccuracy +
-            //   '  速度：' + pos.coords.speed
-            // );
-            self.getListHotels()
-            self.getListEats()
-          },
-          function (err) { // 如果失败则执行该回调函数
-            //alert('获取失败，请重新刷新' || err.message);
-            self.lat = '' || 23.091076
-            self.lon = '' || 114.431815
-            if (self.lat == '' || self.lon == '') {
-              alert('获取定位失败，请重新刷新' || err.message);
-            } else {
-              self.getListHotels()
-              self.getListEats()
-            }
-          }, { // 附带参数
-            enableHighAccuracy: false, // 提高精度(耗费资源)
-            timeout: 1000, // 超过timeout则调用失败的回调函数
-            maximumAge: 10000 // 获取到的地理信息的有效期，超过有效期则重新获取一次位置信息
-          }
-        );
       },
       //滚动加载餐饮
       onScrollEates(event) {
@@ -233,7 +194,7 @@
   }
 
 </script>
-<style lang="scss" type="text/css" scoped>
+<style scoped>
   * {
     padding: 0;
     margin: 0;
@@ -269,7 +230,7 @@
 
   .type-list-item {
     display: flex;
-    padding: 15px 10px 15px 15px;
+    padding: 10px;
     margin-bottom: 10px;
     background-color: #ffffff;
     overflow: hidden;
