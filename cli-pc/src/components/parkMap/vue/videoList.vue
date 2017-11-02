@@ -28,7 +28,7 @@
               </template>
           </el-table-column>
         </el-table>
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="videoListReq.current" 
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="videoListReq.current"
           :page-sizes="[10, 20, 50, 100]" :page-size="videoListReq.size" layout="total, sizes, prev, pager, next" :total="page.totalNums">
         </el-pagination>
         <!-- 弹窗 -->
@@ -262,5 +262,13 @@ export default {
     float: right;
     margin-top: 10px;
     margin-right: 20px;
+}
+  .a-in-stop-prompt{
+    position: relative;
+    left: 165px;
+    bottom: 65px;
+  }
+.el-form-item {
+  margin-bottom: 0px;
 }
 </style>
