@@ -42,16 +42,16 @@ public class AppFilter implements Filter {
 
         logger.debug("app filter");
 
-//        BusUser busUser = SessionUtils.getLoginUser(httpServletRequest);
-//        if(busUser == null){
-//            servletResponse.getWriter().write(JSONObject.toJSONString(ResponseDTO.createByErrorCodeMessage(ResponseEnums.LOGIN.getCode(), ResponseEnums.LOGIN.getDesc())));
-//            return;
-//        }else{
-//            //不为空
-//            filterChain.doFilter(servletRequest, servletResponse);
-//        }
+        BusUser busUser = SessionUtils.getLoginUser(httpServletRequest);
+        if(busUser == null){
+            servletResponse.getWriter().write(JSONObject.toJSONString(ResponseDTO.createByErrorCodeMessage(ResponseEnums.LOGIN.getCode(), ResponseEnums.LOGIN.getDesc())));
+            return;
+        }else{
+            //不为空
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
 
-        filterChain.doFilter(servletRequest, servletResponse);
+//        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

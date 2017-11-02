@@ -30,8 +30,8 @@ public class CommonUtil {
 		try {
 			com.gt.api.bean.session.BusUser apiBusUser = SessionUtils.getLoginUser(request);
 			BusUserApiReq busUserApiReq = new BusUserApiReq();
-//			busUserApiReq.setUserId(apiBusUser.getId());
-			busUserApiReq.setUserId(33);
+			busUserApiReq.setUserId(apiBusUser.getId());
+//			busUserApiReq.setUserId(33);
 			return BusServer.getBusUserApi(busUserApiReq).getData();
 		} catch (Exception e) {
 			log.info(e.getLocalizedMessage());
