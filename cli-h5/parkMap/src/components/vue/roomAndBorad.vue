@@ -11,7 +11,7 @@
           <div class="right-content">
             <h2 class="title">
               <span class="over" style="flex: 5;" v-text="item.name"></span>
-              <span style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
+              <span v-if="LatAndLogFlag" style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
             </h2>
             <p class="dps over" v-text="item.introduce"></p>
             <p class="icon-text over">
@@ -32,7 +32,7 @@
           <div class="right-content">
             <h2 class="title">
               <span class="over" style="flex: 5;" v-text="item.name"></span>
-              <span style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
+              <span v-if="LatAndLogFlag" style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
             </h2>
             <p class="dps over" v-text="item.introduce"></p>
             <p class="icon-text over">
@@ -70,18 +70,20 @@
         eatsTotalPages: '',
         eatsFlag: true,
         hotelsPageFlag: false,
-        eatslsPageFlag: false
+        eatslsPageFlag: false,
+        LatAndLogFlag:false
       }
     },
     mounted() {
       var form = {
-        latitude: '',
-        longitude: ''
+        latitude: '23.08828',
+        longitude: '114.43721'
       }
       this.getListHotels()
       this.getListEats()
       if (window.localStorage.parkMapLatitudeAndLogitude) {
         form = window.JSON.parse(window.localStorage.parkMapLatitudeAndLogitude)
+        this.LatAndLogFlag = true
       }
       this.lat = form.latitude
       this.lon = form.longitude

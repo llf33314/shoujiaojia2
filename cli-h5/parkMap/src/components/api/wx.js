@@ -10,9 +10,9 @@ export const wx = {
     }).then((res) => {
       //测试
       console.log(res)
-      if (res.code != 201) {
+      if (!res.code) {
         alert(res.msg) 
-        return
+        //return
       }
       this.wxReady(res,shareObj)
     })

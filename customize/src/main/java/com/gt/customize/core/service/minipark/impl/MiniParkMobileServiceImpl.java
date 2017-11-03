@@ -50,7 +50,15 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
     @Override
     public ResponseDTO<List<MListEatRes>> listEatsByPage(BusUser busUser, MListEatReq mListEatReq) throws MiniParkException {
         Page<MListEatRes> page = new Page<>(mListEatReq.getCurrent(), mListEatReq.getSize());
-        List<MListEatRes> mListEatResList = customizeMiniparkEatService.selectListOrderDistanceByPage(page, busUser.getId(), Double.valueOf(mListEatReq.getLon()), Double.valueOf(mListEatReq.getLat()));
+        Double lon = 114.43721;
+        Double lat = 23.08828;
+        if (CommonUtil.isNotEmpty(mListEatReq.getLon())){
+            lon = Double.valueOf(mListEatReq.getLon());
+        }
+        if (CommonUtil.isNotEmpty(mListEatReq.getLat())){
+            lat = Double.valueOf(mListEatReq.getLat());
+        }
+        List<MListEatRes> mListEatResList = customizeMiniparkEatService.selectListOrderDistanceByPage(page, busUser.getId(), lon, lat);
         PageDTO pageDTO = new PageDTO(page.getPages(), page.getTotal());
         return ResponseDTO.createBySuccessPage("分页获取餐饮店铺列表成功", mListEatResList, pageDTO);
     }
@@ -92,7 +100,15 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
     @Override
     public ResponseDTO<List<MListHotelRes>> listHotelsByPage(BusUser busUser, MListHotelReq mListHotelReq) throws MiniParkException {
         Page<MListHotelRes> page = new Page<>(mListHotelReq.getCurrent(), mListHotelReq.getSize());
-        List<MListHotelRes> mListHotelResList = customizeMiniparkHotelService.selectListOrderDistanceByPage(page, busUser.getId(), Double.valueOf(mListHotelReq.getLon()), Double.valueOf(mListHotelReq.getLat()));
+        Double lon = 114.43721;
+        Double lat = 23.08828;
+        if (CommonUtil.isNotEmpty(mListHotelReq.getLon())){
+            lon = Double.valueOf(mListHotelReq.getLon());
+        }
+        if (CommonUtil.isNotEmpty(mListHotelReq.getLat())){
+            lat = Double.valueOf(mListHotelReq.getLat());
+        }
+        List<MListHotelRes> mListHotelResList = customizeMiniparkHotelService.selectListOrderDistanceByPage(page, busUser.getId(), lon, lat);
         PageDTO pageDTO = new PageDTO(page.getPages(), page.getTotal());
         return ResponseDTO.createBySuccessPage("分页获取酒店店铺列表成功", mListHotelResList, pageDTO);
     }
