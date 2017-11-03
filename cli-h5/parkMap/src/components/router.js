@@ -19,7 +19,7 @@ export const parkMapAppRouter = [
     component: detail,
   },
   {
-    path: '/parkMap/video/:busId/',
+    path: '/parkMap/video/:busId',
     name: 'video',
     component: video,
   }

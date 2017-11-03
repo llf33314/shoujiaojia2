@@ -69,28 +69,36 @@
         eatsCurrent: 1,
         eatsTotalPages: '',
         eatsFlag: true,
-        hotelsPageFlag:false,
-        eatslsPageFlag:false
+        hotelsPageFlag: false,
+        eatslsPageFlag: false
       }
     },
     mounted() {
-      // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId,{
-        title:'我是首页',
-        link:window.location.href,
-        imgUrl:'//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
-      })
-      const form = window.JSON.parse(window.localStorage.parkMapLatitudeAndLogitude)
+      var form = {
+        latitude: '',
+        longitude: ''
+      }
+      this.getListHotels()
+      this.getListEats()
+      if (window.localStorage.parkMapLatitudeAndLogitude) {
+        form = window.JSON.parse(window.localStorage.parkMapLatitudeAndLogitude)
+      }
       this.lat = form.latitude
       this.lon = form.longitude
       this.type = this.$route.params.type
-      this.getListHotels()
-      this.getListEats()
       window.addEventListener('scroll', this.onScrollEates); //挂载滚动事件
       window.addEventListener('scroll', this.onScrollHotels); //挂载滚动事件
     },
     destroyed() {
       window.addEventListener('scroll', ''); //挂载滚动事件
+    },
+    created() {
+      // 获取微信sdk
+      this._wx.getWxSDK(this.$route.params.busId, {
+        title: '周边吃住列表',
+        link: window.location.href,
+        imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
+      })
     },
     beforeMount() {
       document.title = '周边吃住列表'
@@ -283,13 +291,6 @@
 
   .dps.over {
     margin-bottom: 7px;
-  }
-
-  .no-more {
-    text-align: center;
-    font-size: 14px;
-    line-height: 60px;
-    background-color: #fff;
   }
 
 </style>
