@@ -13,3 +13,7 @@ export const requestGetEat = params => { return axios.post(`${base}/m/minipark/g
 export const requestGetHotel = params => { return axios.post(`${base}/m/minipark/getHotel`, params).then(res => res.data) }
 //getWxJsSDK
 export const requestGetWxJsSDK = (busId,params) => { return axios.post(`${base}/m/wxPublic/getWxJsSDK/`+busId, params).then(res => res.data) }
+//获取主视频
+export const requestVideoMain = (params) => { return axios.post(`${base}/m/minipark/getVideoMain/`, params).then(res => res.data) }
+//获取视频列表
+export const requestListVideo = (params) => { return axios.post(`${base}/m/minipark/listVideos/`, params).then(res => res.data) }

@@ -537,3 +537,10 @@ ul li {
 .border05.border-bottom:before {
   border-bottom: 1px solid #cccccc;
 }
+
+.no-more {
+  text-align: center;
+  font-size: 14px;
+  line-height: 60px;
+  background-color: #fff;
+}
