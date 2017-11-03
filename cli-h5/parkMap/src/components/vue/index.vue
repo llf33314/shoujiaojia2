@@ -16,8 +16,7 @@
       <div class="item border05 border-top" @click="showRoomBoard">周边吃住</div>
     </div>
     <ul class="tour-item left" id="tourItem" v-show="tourItemsState" :style="tourIitemHeight">
-      <li class="border05 border-bottom" v-for="(item,index) in tourList" @click="goToTour(item)" v-text="item.name"
-        :style="item.name.length > 12?'lineHeight:23px':''"></li>
+      <li class="border05 border-bottom" v-for="(item,index) in tourList" @click="goToTour(item)" v-text="item.name" :style="item.name.length > 12?'lineHeight:23px':''"></li>
     </ul>
     <ul class="tour-item right" v-show="roomAndBoradListState" :style="tourIitemHeight">
       <li class="border05 border-bottom  border-left" v-for="(item,index) in roomAndBoradList" @click="goToRoomAndBorad(item)"
@@ -140,12 +139,7 @@
       }
     },
     mounted() {
-      // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId, {
-        title: '我是首页',
-        link: window.location.href,
-        imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
-      })
+
       touch.on(document.getElementById('mapCstyle'), 'pinchstart', (e) => {
         this.flag = true
       });
@@ -167,7 +161,12 @@
       document.title = '景区地图'
     },
     created() {
-
+      // 获取微信sdk
+      this._wx.getWxSDK(this.$route.params.busId, {
+        title: '景区地图',
+        link: window.location.href,
+        imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
+      })
     },
     watch: {
       pinNum() {

@@ -9,8 +9,9 @@ export const wx = {
       "shareUrl": window.location.href,
     }).then((res) => {
       //测试
+      console.log(res)
       if (res.code != 201) {
-        //alert(res.msg) 
+        alert(res.msg) 
         return
       }
       this.wxReady(res,shareObj)
@@ -59,7 +60,7 @@ export const wx = {
   gtToTXMap(to) {
     console.log(to, 'to')
     const domain = '//apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
-    if (window.localStorage.parkMapLatitudeAndLogitude != undefined) {
+    if (window.localStorage.parkMapLatitudeAndLogitude) {
       var form = window.JSON.parse(window.localStorage.parkMapLatitudeAndLogitude)
     } else {
       var form = {

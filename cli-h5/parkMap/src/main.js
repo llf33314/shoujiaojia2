@@ -15,7 +15,7 @@ Vue.prototype._wx = wx
 * 在启动时生成生产提示
 * */
 Vue.config.productionTip = false
-Vue.config.devtools = true
+// Vue.config.devtools = true
 /*
 * 注册全局组件
 * */
