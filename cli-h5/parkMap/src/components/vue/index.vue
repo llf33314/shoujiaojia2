@@ -6,7 +6,7 @@
           <div id="mapCstyle" class="map-c" style="z-index:8">
             <div v-for="(item,index) in tourList" @click="showDetail(item)" :style="item.position" class="detail-item"></div>
           </div>
-          <embed src="./static/imgs/map.svg" class="map-c" style="z-index:1" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"
+          <embed src="./static/imgs/map2.svg" class="map-c" style="z-index:1" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"
           />
         </div>
       </div>
@@ -154,6 +154,7 @@
       touch.on(document.getElementById('mapCstyle'), 'pinchend', (e) => {
         this.flag = false
       });
+      
       this.wSetStyle()
       this.showOpenMap()
     },
@@ -167,6 +168,8 @@
         link: window.location.href,
         imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
       })
+
+      
     },
     watch: {
       pinNum() {
@@ -192,8 +195,8 @@
       // 初始化中心显示区域
       showOpenMap() {
         this.$refs.mapScale.style.transform = 'scale(0.5)'
-        document.querySelectorAll('#mapPs')[0].scrollLeft = 1170
-        document.querySelectorAll('#mapPs')[0].scrollTop = 1020 - window.innerHeight * 0.5
+        document.querySelectorAll('#mapPs')[0].scrollLeft = 550
+        document.querySelectorAll('#mapPs')[0].scrollTop = 580 - window.innerHeight * 0.5
       },
       // open景点列表
       showTourItem() {
@@ -209,8 +212,8 @@
         this.$refs.mapScale.style.transition = 'transform 0.8s'
         this.$refs.mapScale.style.transformOrigin = '' + scrollLeft + ' ' + scrollTop + ''
 
-        if (this.scale > 1.5) {
-          this.scale = 1.5
+        if (this.scale > 1.7) {
+          this.scale = 1.7
         }
         if (this.scale < 0.5) {
           this.scale = 0.5
@@ -247,6 +250,7 @@
         this.audioSrcGroup = item.audio
         this.coordinate = item.coordinate
         this.audioViewState = false
+        this.tourTabView = 1
       },
       // 切换详情信息
       tourTab(type) {
@@ -343,7 +347,7 @@
   }
 
 </script>
-<style scoped>
+<style>
   .tour-detail-mask {
     position: fixed;
     top: 0;
@@ -480,6 +484,7 @@
     position: relative;
     overflow: hidden;
     z-index: 9;
+    background-color: #aad3e0;
   }
 
   .map-c-style {
@@ -488,8 +493,8 @@
   }
 
   .map-cc-style {
-    width: 3205px;
-    height: 1970px;
+    /* width: 3205px;
+    height: 1970px; */
     position: relative;
     z-index: 8
   }
@@ -499,7 +504,8 @@
     height: 1970px;
     position: absolute;
     left: 0;
-    top: 0
+    top: 0;
+    transition: transform 0.3s;
   }
 
   .map-iframe-style {
@@ -513,6 +519,7 @@
 
   .detail-item {
     position: absolute;
+  
   }
   /* end */
 
