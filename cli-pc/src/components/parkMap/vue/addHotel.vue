@@ -21,7 +21,7 @@
                         <el-input v-model="addHotelReq.introduce" style="width: 251px!important;"></el-input>
                     </el-form-item>
                     <el-form-item label="酒店地址：" prop="address">
-                        <gtmap :gtmapInformation.sync="mapBean" style="width: 251px!important;" ></gtmap>
+                        <gtmap :gtmapInformation.sync="mapBean" v-on:getMapData="getMapData" style="width: 251px!important;" ></gtmap>
                     </el-form-item>
                     <el-form-item label="酒店电话：" prop="phone">
                         <el-input v-model="addHotelReq.phone" style="width: 251px!important;"></el-input>
@@ -85,6 +85,10 @@ export default {
     };
   },
   methods: {
+    //自动获取地图信息
+    getMapData(e){
+      this.addEatReq.address = e.name
+    },
     submitForm(formName) {
       console.log(this.addHotelReq);
       this.$refs[formName].validate(valid => {
