@@ -1,5 +1,84 @@
+<style lang="stylus">
+  * {
+    padding: 0;
+    margin: 0
+  }
+
+  .park-map-detail {
+    .detail-list {
+      list-style-type: none;
+      overflow: hidden;
+      color: #666666;
+      font-size: 14px;
+      padding-bottom: 30px;
+    }
+
+    .detail-list li {
+      padding: 0 20px;
+      position: relative;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .detail-list li:not(dps) {
+      line-height: 45px;
+      height: 45px;
+    }
+
+    .detail-list li:nth-of-type(1) {
+      border-top: 8px solid #f4f4f4;
+      border-bottom: 1px solid #eeeeee;
+      font-weight: 700;
+    }
+
+    .detail-list li:nth-of-type(2) {
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .detail-list li.has-img {
+      padding-left: 50px;
+    }
+
+    .address {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      max-width: 85%;
+    }
+
+    .detail-list li img {
+      width: 17px;
+    }
+
+    .left-img {
+      position: absolute;
+      top: 12px;
+      left: 20px;
+    }
+
+    .detail-list li img.right-icon {
+      width: 8px;
+      position: absolute;
+      top: 16px;
+      right: 20px;
+    }
+
+    .detail-list li a {
+      color: #666666;
+      text-decoration: none;
+    }
+
+    .dps.title {
+      border-top: 8px solid #f4f4f4;
+    }
+  }
+
+</style>
+
 <template>
-  <section>
+  <section class="park-map-detail">
     <!-- <swiper :options="swiperOption" style="min-height:200px;max-height:300px;">
       <swiper-slide v-for="(item,index) in data.swiperSlides" :key="index">
         <img :src="item" alt="item" style="max-width:100%;">
@@ -116,79 +195,3 @@
   }
 
 </script>
-<style scoped>
-  * {
-    padding: 0;
-    margin: 0
-  }
-
-  .detail-list {
-    list-style-type: none;
-    overflow: hidden;
-    color: #666666;
-    font-size: 14px;
-    padding-bottom: 30px;
-  }
-
-  .detail-list li {
-    padding: 0 20px;
-    position: relative;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .detail-list li:not(dps) {
-    line-height: 45px;
-    height: 45px;
-  }
-
-  .detail-list li:nth-of-type(1) {
-    border-top: 8px solid #f4f4f4;
-    border-bottom: 1px solid #eeeeee;
-    font-weight: 700;
-  }
-
-  .detail-list li:nth-of-type(2) {
-    border-bottom: 1px solid #eeeeee;
-  }
-
-  .detail-list li.has-img {
-    padding-left: 50px;
-  }
-
-  .address {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    max-width: 85%;
-  }
-
-  .detail-list li img {
-    width: 17px;
-  }
-
-  .left-img {
-    position: absolute;
-    top: 12px;
-    left: 20px;
-  }
-
-  .detail-list li img.right-icon {
-    width: 8px;
-    position: absolute;
-    top: 16px;
-    right: 20px;
-  }
-
-  .detail-list li a {
-    color: #666666;
-    text-decoration: none;
-  }
-
-  .dps.title {
-    border-top: 8px solid #f4f4f4;
-  }
-
-</style>

@@ -1,5 +1,99 @@
+<style lang="stylus">
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  .park-map-room {
+    .top-title {
+      background-color: #efeff4;
+      overflow: hidden;
+      line-height: 45px;
+      height: 45px;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    .top-title li {
+      list-style-type: none;
+
+      padding: 0 25px;
+      font-size: 14px;
+      color: #353535;
+      float: left;
+    }
+
+    .top-title li.bg {
+      background-color: #75d377;
+      color: #ffffff;
+    }
+
+    .type-list {
+      background-color: #f4f4f4;
+      overflow: hidden;
+      -webkit-overflow-scrolling: touch
+    }
+
+    .type-list-item {
+      display: flex;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #ffffff;
+      overflow: hidden;
+      height: 100px;
+      position: relative;
+    }
+
+    .type-list-item .left-img {
+      width: 100px;
+      height: 100px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: absolute;
+    }
+
+    .right-content {
+      color: #666;
+      font-size: 14px;
+      height: 100px;
+      padding-left: 110px;
+      width: 100%;
+    }
+
+    .right-content .title {
+      font-size: 18px;
+      font-weight: normal;
+      color: #333;
+      display: flex;
+    }
+
+    .over {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+
+    .icon-text {
+      color: #666;
+      text-decoration: none;
+    }
+
+    .icon-text .icon {
+      width: 14px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    .dps.over {
+      margin-bottom: 7px;
+    }
+  }
+
+</style>
 <template>
-  <section v-show="showListBox">
+  <section class="park-map-room" v-show="showListBox">
     <ul class="top-title">
       <li :class="type==1? 'bg':''" @click="selectType(1)">餐饮</li>
       <li :class="type==0? 'bg':''" @click="selectType(0)">住宿</li>
@@ -71,7 +165,7 @@
         eatsFlag: true,
         hotelsPageFlag: false,
         eatslsPageFlag: false,
-        LatAndLogFlag:false
+        LatAndLogFlag: false
       }
     },
     mounted() {
@@ -204,95 +298,3 @@
   }
 
 </script>
-<style scoped>
-  * {
-    padding: 0;
-    margin: 0;
-  }
-
-  .top-title {
-    background-color: #efeff4;
-    overflow: hidden;
-    line-height: 45px;
-    height: 45px;
-    border-bottom: 1px solid #cccccc;
-  }
-
-  .top-title li {
-    list-style-type: none;
-
-    padding: 0 25px;
-    font-size: 14px;
-    color: #353535;
-    float: left;
-  }
-
-  .top-title li.bg {
-    background-color: #75d377;
-    color: #ffffff;
-  }
-
-  .type-list {
-    background-color: #f4f4f4;
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch
-  }
-
-  .type-list-item {
-    display: flex;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #ffffff;
-    overflow: hidden;
-    height: 100px;
-    position: relative;
-  }
-
-  .type-list-item .left-img {
-    width: 100px;
-    height: 100px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: absolute;
-  }
-
-  .right-content {
-    color: #666;
-    font-size: 14px;
-    height: 100px;
-    padding-left: 110px;
-    width: 100%;
-  }
-
-  .right-content .title {
-    font-size: 18px;
-    font-weight: normal;
-    color: #333;
-    display: flex;
-  }
-
-  .over {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    margin-bottom: 4px;
-  }
-
-  .icon-text {
-    color: #666;
-    text-decoration: none;
-  }
-
-  .icon-text .icon {
-    width: 14px;
-    vertical-align: middle;
-    margin-right: 10px;
-  }
-
-  .dps.over {
-    margin-bottom: 7px;
-  }
-
-</style>
