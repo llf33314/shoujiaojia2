@@ -90,6 +90,9 @@ export default {
     getMapData(e){
       console.log(e,'mapdata')
       this.addEatReq.address = e.name
+      this.addEatReq.lat = e.lat
+      this.addEatReq.lon = e.lng
+      
     },
     submitForm(formName) {
       console.log(this.addEatReq);

@@ -88,6 +88,8 @@ export default {
     //自动获取地图信息
     getMapData(e){
       this.addHotelReq.address = e.name
+      this.addHotelReq.lat = e.lat
+      this.addHotelReq.lon = e.lng
     },
     submitForm(formName) {
       console.log(this.addHotelReq);
