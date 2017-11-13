@@ -1,12 +1,320 @@
+<style lang="stylus">
+  .park-map-index {
+    .tour-detail-mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+      background-color: rgba(0, 0, 0, 0.1);
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: Center;
+    }
+
+    .tour-detail-top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      background-color: #efeff4;
+      color: #353535;
+      font-size: 15px;
+      text-align: left;
+    }
+
+    .tour-detail-top ul {
+      float: right;
+    }
+
+    .tour-detail-top ul li {
+      float: left;
+      padding: 0 15px;
+      list-style-type: none;
+    }
+
+    .tour-detail-top ul li img {
+      max-height: 25px;
+      vertical-align: middle;
+    }
+
+    .tour-detail-top ul li:nth-of-type(1) {
+      border-right: 1px solid #cccccc;
+    }
+
+    .swiper-pagination-bullet {
+      background: #ffffff;
+      opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+      opacity: 1;
+      background: #007aff;
+    }
+
+    .tour-detail {
+      display: inline-block;
+      width: 90%;
+      position: relative;
+      background-color: #fafafa;
+    }
+
+    .tour-detail li {
+      list-style-type: none;
+    }
+
+    .tour-detail .tour-tab {
+      overflow: hidden;
+    }
+    .over {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      max-width: 60%;
+    }
+    .tour-detail .tour-tab li {
+      width: 33.33%;
+      text-align: center;
+      float: left;
+      box-sizing: border-box;
+      color: #353535;
+      padding-bottom: 5px;
+      border-bottom: 0;
+      font-size: 14px;
+    }
+
+    .room-borad {
+      border-left: 1px solid #cccccc;
+      position: relative;
+    }
+
+    .tour-tab li img {
+      height: 20px;
+      margin: 5px 0;
+    }
+
+    .tour-introduce {
+      text-align: left;
+      color: #666666;
+      font-size: 14px;
+      padding: 15px 15px 50px;
+    }
+
+    .introduce-indent {
+      text-indent: 20px;
+    }
+
+    .tour-detail .tour-tab li:nth-of-type(2) {
+      border-left: 1px solid #dcdcdc;
+      border-right: 1px solid #dcdcdc;
+    }
+
+    .tour-title {
+      line-height: 40px;
+      height: 40px;
+      color: #fff;
+      font-size: 14px;
+      text-align: left;
+      text-indent: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      width: 100%;
+      bottom: 52px;
+      z-index: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .map-p-style {
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      z-index: 9;
+      background-color: #aad3e0;
+    }
+
+    .map-c-style {
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch
+    }
+
+    .map-cc-style {
+      position: relative;
+      z-index: 8
+    }
+
+    .map-c {
+      width: 3205px;
+      height: 1970px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: transform 0.3s;
+    }
+
+    .map-iframe-style {
+      width: 3205px;
+      height: 1970px;
+      border: 0px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .detail-item {
+      position: absolute;
+    }
+    /* end */
+    .map-content-p {
+      width: 375px;
+      height: 667px;
+      overflow: auto;
+      position: relative;
+    }
+
+    .map-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3205px;
+      overflow: hidden;
+      height: 1970px;
+      box-sizing: border-box;
+    }
+
+    .map-item-c {
+      width: 3205px;
+      height: 1970px;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 9;
+    }
+
+    .map-iframe1 {
+      position: absolute;
+      top: -2590px;
+      left: 0;
+
+      width: 3205px;
+      height: 7147px;
+      border: 0;
+    }
+
+    .map-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .map-iframe {
+      position: absolute;
+      top: 10%;
+      left: 5%;
+    }
+
+    .address {
+      position: absolute;
+    }
+
+    .red-station {
+      top: 1214px;
+      left: 808px;
+      height: 100px;
+      width: 100px;
+    }
+
+    .shantou-mansion {
+      position: absolute;
+      top: 1161px;
+      left: 1122px
+    }
+
+    .map {
+      height: 500px;
+      width: 500px;
+      border: 1px solid #000000;
+    }
+
+    .tab {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      text-align: center;
+      z-index: 9;
+    }
+
+    .item {
+      width: 50%;
+      float: left;
+      height: 45px;
+      line-height: 45px;
+      box-sizing: border-box;
+      font-size: 15px;
+    }
+    .tour-item {
+      position: fixed;
+      bottom: 45px;
+      width: 50%;
+      text-align: center;
+      background-color: #fff;
+      z-index: 9;
+      overflow-y: auto;
+    }
+
+    .tour-item.left {
+      left: 0;
+    }
+
+    .tour-item.right {
+      right: 0;
+    }
+
+    .tour-item li {
+      height: 45px;
+      line-height: 45px;
+      color: #353535;
+      /* border-bottom: 1px solid #cccccc; */
+      font-size: 15px;
+    }
+  }
+
+  body {
+    overflow: hidden
+  }
+
+  * {
+    padding: 0;
+    margin: 0
+  }
+
+  @media screen and (max-width: 320px) {
+    .park-map-index .over {
+      max-width: 54%;
+    }
+  }
+
+</style>
 <template>
-  <section>
+  <section class="park-map-index">
     <div class="map-p-style" :style="wStyle">
       <div class="map-c-style" :style="wStyle" id="mapPs">
         <div class="map-cc-style" ref="mapScale">
           <div id="mapCstyle" class="map-c" style="z-index:8">
             <div v-for="(item,index) in tourList" @click="showDetail(item)" :style="item.position" class="detail-item"></div>
           </div>
-          <embed src="./static/imgs/map.svg" class="map-c" style="z-index:1" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"
+          <embed src="./static/imgs/map2.svg" class="map-c" style="z-index:1" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/"
           />
         </div>
       </div>
@@ -25,7 +333,7 @@
 
     <div class="tour-detail-mask" v-if="showTourDetailMask" @click="showTourDetailMask=false">
       <div class="tour-detail-top" v-if="audioViewState">
-        <span v-text="tourName" style="padding-left:15px;"></span>
+        <span v-text="tourName" class="over" style="padding-left:15px;"></span>
         <audio style="width:50px" id="myAudio1">
           <source :src="audioSrcGroup.chUrl" type="audio/mp4" />
         </audio>
@@ -154,6 +462,7 @@
       touch.on(document.getElementById('mapCstyle'), 'pinchend', (e) => {
         this.flag = false
       });
+
       this.wSetStyle()
       this.showOpenMap()
     },
@@ -167,6 +476,8 @@
         link: window.location.href,
         imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
       })
+
+
     },
     watch: {
       pinNum() {
@@ -192,8 +503,8 @@
       // 初始化中心显示区域
       showOpenMap() {
         this.$refs.mapScale.style.transform = 'scale(0.5)'
-        document.querySelectorAll('#mapPs')[0].scrollLeft = 1170
-        document.querySelectorAll('#mapPs')[0].scrollTop = 1020 - window.innerHeight * 0.5
+        document.querySelectorAll('#mapPs')[0].scrollLeft = 550
+        document.querySelectorAll('#mapPs')[0].scrollTop = 580 - window.innerHeight * 0.5
       },
       // open景点列表
       showTourItem() {
@@ -209,8 +520,8 @@
         this.$refs.mapScale.style.transition = 'transform 0.8s'
         this.$refs.mapScale.style.transformOrigin = '' + scrollLeft + ' ' + scrollTop + ''
 
-        if (this.scale > 1.5) {
-          this.scale = 1.5
+        if (this.scale > 1.7) {
+          this.scale = 1.7
         }
         if (this.scale < 0.5) {
           this.scale = 0.5
@@ -243,10 +554,11 @@
         this.showTourDetailMask = true
         this.swiperSlides = item.picture
         this.tourIntroduce = item.introduce
-        this.tourName = item.name
+        this.tourName = item.title
         this.audioSrcGroup = item.audio
         this.coordinate = item.coordinate
         this.audioViewState = false
+        this.tourTabView = 1
       },
       // 切换详情信息
       tourTab(type) {
@@ -343,298 +655,3 @@
   }
 
 </script>
-<style scoped>
-  .tour-detail-mask {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.1);
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: Center;
-  }
-
-  .tour-detail-top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    background-color: #efeff4;
-    color: #353535;
-    font-size: 15px;
-    text-align: left;
-  }
-
-  .tour-detail-top ul {
-    float: right;
-  }
-
-  .tour-detail-top ul li {
-    float: left;
-    padding: 0 15px;
-    list-style-type: none;
-  }
-
-  .tour-detail-top ul li img {
-    max-height: 25px;
-    vertical-align: middle;
-  }
-
-  .tour-detail-top ul li:nth-of-type(1) {
-    border-right: 1px solid #cccccc;
-  }
-
-  .swiper-pagination-bullet {
-    background: #ffffff;
-    opacity: 1;
-  }
-
-  .swiper-pagination-bullet-active {
-    opacity: 1;
-    background: #007aff;
-  }
-
-  .tour-detail {
-    display: inline-block;
-    width: 90%;
-    position: relative;
-    background-color: #fafafa;
-  }
-
-  .tour-detail li {
-    list-style-type: none;
-  }
-
-  .tour-detail .tour-tab {
-    overflow: hidden;
-  }
-
-  .tour-detail .tour-tab li {
-    width: 33.33%;
-    text-align: center;
-    float: left;
-    box-sizing: border-box;
-    color: #353535;
-    padding-bottom: 5px;
-    border-bottom: 0;
-    font-size: 14px;
-  }
-
-  .room-borad {
-    border-left: 1px solid #cccccc;
-    position: relative;
-  }
-
-  .tour-tab li img {
-    height: 20px;
-    margin: 5px 0;
-  }
-
-  .tour-introduce {
-    text-align: left;
-    color: #666666;
-    font-size: 14px;
-    padding: 15px 15px 50px;
-  }
-
-  .introduce-indent {
-    text-indent: 20px;
-  }
-
-  .tour-detail .tour-tab li:nth-of-type(2) {
-    border-left: 1px solid #dcdcdc;
-    border-right: 1px solid #dcdcdc;
-  }
-
-  .tour-title {
-    line-height: 40px;
-    height: 40px;
-    color: #fff;
-    font-size: 14px;
-    text-align: left;
-    text-indent: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
-    width: 100%;
-    bottom: 52px;
-    z-index: 1;
-  }
-
-  body {
-    overflow: hidden
-  }
-
-  * {
-    padding: 0;
-    margin: 0
-  }
-
-  .map-p-style {
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-    z-index: 9;
-  }
-
-  .map-c-style {
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch
-  }
-
-  .map-cc-style {
-    width: 3205px;
-    height: 1970px;
-    position: relative;
-    z-index: 8
-  }
-
-  .map-c {
-    width: 3205px;
-    height: 1970px;
-    position: absolute;
-    left: 0;
-    top: 0
-  }
-
-  .map-iframe-style {
-    width: 3205px;
-    height: 1970px;
-    border: 0px;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .detail-item {
-    position: absolute;
-  }
-  /* end */
-
-  .map-content-p {
-    width: 375px;
-    height: 667px;
-    overflow: auto;
-    position: relative;
-  }
-
-  .map-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3205px;
-    overflow: hidden;
-    height: 1970px;
-    box-sizing: border-box;
-  }
-
-  .map-item-c {
-    width: 3205px;
-    height: 1970px;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 9;
-  }
-
-  .map-iframe1 {
-    position: absolute;
-    top: -2590px;
-    left: 0;
-
-    width: 3205px;
-    height: 7147px;
-    border: 0;
-  }
-
-  .map-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-  }
-
-  .map-iframe {
-    position: absolute;
-    top: 10%;
-    left: 5%;
-  }
-
-  .address {
-    position: absolute;
-  }
-
-  .red-station {
-    top: 1214px;
-    left: 808px;
-    height: 100px;
-    width: 100px;
-  }
-
-  .shantou-mansion {
-    position: absolute;
-    top: 1161px;
-    left: 1122px
-  }
-
-  .map {
-    height: 500px;
-    width: 500px;
-    border: 1px solid #000000;
-  }
-
-  .tab {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    text-align: center;
-    z-index: 9;
-  }
-
-  .item {
-    width: 50%;
-    float: left;
-    height: 45px;
-    line-height: 45px;
-    box-sizing: border-box;
-    font-size: 15px;
-  }
-  /* .item:last-child {
-    border-left: 1px solid #cccccc;
-  } */
-
-  .tour-item {
-    position: fixed;
-    bottom: 45px;
-    width: 50%;
-    text-align: center;
-    background-color: #fff;
-    z-index: 9;
-    overflow-y: auto;
-  }
-
-  .tour-item.left {
-    left: 0;
-  }
-
-  .tour-item.right {
-    right: 0;
-  }
-
-  .tour-item li {
-    height: 45px;
-    line-height: 45px;
-    color: #353535;
-    /* border-bottom: 1px solid #cccccc; */
-    font-size: 15px;
-  }
-
-</style>

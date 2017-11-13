@@ -1,65 +1,67 @@
-<style scoped>
-  .video-top {
-    height: 200px;
-    position: relative;
-  }
+<style lang="stylus">
+  .park-map-video {
+    .video-top {
+      height: 200px;
+      position: relative;
+    }
 
-  .video-icon {
-    max-width: 70px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -35px;
-    margin-left: -35px;
-    z-index: 2
-  }
+    .video-icon {
+      max-width: 70px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -35px;
+      margin-left: -35px;
+      z-index: 2
+    }
 
-  .video-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
-    z-index: 1
-  }
+    .video-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
+      z-index: 1
+    }
 
-  .block {
-    display: block;
-    background-position: center;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-  }
+    .block {
+      display: block;
+      background-position: center;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+    }
 
-  .video-list {
-    margin-top: 5px;
-    margin-bottom: 30px;
-    overflow: hidden;
-  }
+    .video-list {
+      margin-top: 5px;
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
 
-  .video-top.video-item {
-    width: 50%;
-    height: 150px;
-    float: left;
-    box-sizing: border-box;
-    border-left: 4px solid #fff;
-    border-right: 4px solid #fff;
-    border-top: 5px solid #fff;
+    .video-top.video-item {
+      width: 50%;
+      height: 150px;
+      float: left;
+      box-sizing: border-box;
+      border-left: 4px solid #fff;
+      border-right: 4px solid #fff;
+      border-top: 5px solid #fff;
+    }
   }
 
   @media screen and (min-width: 414px) {
-    .video-top {
+    .park-map-video .video-top {
       height: 250px;
     }
-    .video-top.video-item {
+    .park-map-video .video-top.video-item {
       height: 190px;
     }
   }
 
 </style>
 <template>
-  <section>
+  <section class="park-map-video">
     <div class="video-top" @click="goToLink(VideoMain.videoUrl)">
       <a href="javascript:;" class="block" :style="{backgroundImage: 'url(' + VideoMain.imgUrl + ')'}"></a>
       <img class="video-icon" src="./../../assets/img/video.png" alt="">
@@ -89,7 +91,7 @@
           videoUrl: ''
         },
         ListVideo: [],
-        showMoreText:false
+        showMoreText: false
       }
     },
     beforeMount() {

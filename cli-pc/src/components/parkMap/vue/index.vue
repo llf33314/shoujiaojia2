@@ -33,7 +33,6 @@ export default {
   margin-bottom: 40px;
 }
 .a-in-top {
-  background: #fafbfc;
   margin-bottom: 30px;
   padding: 30px 25px 70px;
 }
