@@ -139,10 +139,6 @@
       }
     },
     mounted() {
-      this.type = this.$route.params.type
-      this.getDetail(this.$route.params.id, this.$route.params.type)
-    },
-    created() {
       const self = this
       // 获取微信sdk
       this._wx.getWxSDK(this.$route.params.busId, {
@@ -150,6 +146,8 @@
         link: window.location.href,
         imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
       })
+      this.type = this.$route.params.type
+      this.getDetail(this.$route.params.id, this.$route.params.type)
     },
     methods: {
       // 获取金纬度
