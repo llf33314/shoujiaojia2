@@ -13,7 +13,7 @@ export const wx = {
       //测试
       console.log(res)
       if (!res.code) {
-        alert(res.msg) 
+        alert(res.msg,'shareurl') 
         //return
       }
       this.wxReady(res,shareObj)
@@ -70,6 +70,8 @@ export const wx = {
         longitude: ''
       }
     }
+    alert(window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
+    '&tocoord=' + to.coordinate + '&policy=1&referer=myapp')
     window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
       '&tocoord=' + to.coordinate + '&policy=1&referer=myapp'
   }
