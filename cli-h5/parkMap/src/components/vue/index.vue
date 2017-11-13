@@ -447,6 +447,12 @@
       }
     },
     mounted() {
+      // 获取微信sdk
+      this._wx.getWxSDK(this.$route.params.busId, {
+        title: '景区地图',
+        link: window.location.href,
+        imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
+      })
 
       touch.on(document.getElementById('mapCstyle'), 'pinchstart', (e) => {
         this.flag = true
@@ -468,16 +474,6 @@
     },
     beforeMount() {
       document.title = '景区地图'
-    },
-    created() {
-      // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId, {
-        title: '景区地图',
-        link: window.location.href,
-        imgUrl: './static/imgs/erweima.jpg'
-      })
-
-
     },
     watch: {
       pinNum() {

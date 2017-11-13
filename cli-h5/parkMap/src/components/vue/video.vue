@@ -103,11 +103,9 @@
       else
         this.getVideoMain(busId)
       this.getListVideo(busId)
-    },
-    created() {
       // 获取微信sdk
       this._wx.getWxSDK(this.$route.params.busId, {
-        title: '周边吃住列表',
+        title: '视频',
         link: window.location.href,
         imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
       })
