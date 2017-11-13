@@ -169,28 +169,29 @@
       }
     },
     mounted() {
-      var form = {
-        latitude: '23.08828',
-        longitude: '114.43721'
-      }
-      this.getListHotels()
-      this.getListEats()
-      if (window.localStorage.parkMapLatitudeAndLogitude) {
-        form = window.JSON.parse(window.localStorage.parkMapLatitudeAndLogitude)
-        this.LatAndLogFlag = true
-      }
-      this.lat = form.latitude
-      this.lon = form.longitude
-      this.type = this.$route.params.type
-      window.addEventListener('scroll', this.onScrollEates); //挂载滚动事件
-      window.addEventListener('scroll', this.onScrollHotels); //挂载滚动事件
-
       // 获取微信sdk
       this._wx.getWxSDK(this.$route.params.busId, {
         title: '周边吃住列表',
         link: window.location.href,
         imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
       })
+      var form = {
+        latitude: '23.08828',
+        longitude: '114.43721'
+      }
+      if (window.sessionStorage.parkMapLatitudeAndLogitude) {
+        form = window.JSON.parse(window.sessionStorage.parkMapLatitudeAndLogitude)
+        this.LatAndLogFlag = true
+      }
+      this.lat = form.latitude
+      this.lon = form.longitude
+      this.type = this.$route.params.type
+
+      this.getListHotels()
+      this.getListEats()
+
+      window.addEventListener('scroll', this.onScrollEates); //挂载滚动事件
+      window.addEventListener('scroll', this.onScrollHotels); //挂载滚动事件
     },
     destroyed() {
       window.addEventListener('scroll', ''); //挂载滚动事件
