@@ -87,7 +87,7 @@ export default {
   methods: {
     //自动获取地图信息
     getMapData(e){
-      this.addEatReq.address = e.name
+      this.addHotelReq.address = e.name
     },
     submitForm(formName) {
       console.log(this.addHotelReq);
