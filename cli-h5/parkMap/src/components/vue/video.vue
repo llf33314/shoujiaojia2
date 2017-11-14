@@ -104,11 +104,7 @@
         this.getVideoMain(busId)
       this.getListVideo(busId)
       // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId, {
-        title: '视频',
-        link: window.location.href,
-        imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
-      })
+      this._wx.getWxSDK(this.$route.params.busId)
     },
     methods: {
       //获取主视频

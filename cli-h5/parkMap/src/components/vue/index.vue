@@ -308,6 +308,7 @@
 </style>
 <template>
   <section class="park-map-index">
+      <input type="hidden" class="share-img-url" value="http://maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg" />
     <div class="map-p-style" :style="wStyle">
       <div class="map-c-style" :style="wStyle" id="mapPs">
         <div class="map-cc-style" ref="mapScale">
@@ -448,11 +449,7 @@
     },
     mounted() {
       // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId, {
-        title: '景区地图',
-        link: window.location.href,
-        imgUrl: 'http://maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
-      })
+      this._wx.getWxSDK(this.$route.params.busId)
 
       touch.on(document.getElementById('mapCstyle'), 'pinchstart', (e) => {
         this.flag = true

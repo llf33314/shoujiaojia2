@@ -99,6 +99,7 @@
       <li :class="type==0? 'bg':''" @click="selectType(0)">住宿</li>
     </ul>
     <div class="type-box-list">
+      <input type="hidden" class="share-img-url" :value="listEats[0].logoUrl" />
       <ul class="type-list" v-show="type==1" ref="eatsBox">
         <li class="type-list-item" v-for="(item,index) in listEats" @click="goToDetail(item.id,1)">
           <div class="left-img" :style="{backgroundImage: 'url(' + item.logoUrl + ')'}"></div>
@@ -170,11 +171,7 @@
     },
     mounted() {
       // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId, {
-        title: '周边吃住列表',
-        link: window.location.href,
-        imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
-      })
+      this._wx.getWxSDK(this.$route.params.busId)
       var form = {
         latitude: '23.08828',
         longitude: '114.43721'

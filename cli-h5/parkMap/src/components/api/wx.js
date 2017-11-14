@@ -33,7 +33,7 @@ export const wx = {
       window.wx.getLocation({
         type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
         success: function (res) {
-          console.log(window.JSON.stringify(res), '微信获取地理位置')
+          alert(window.JSON.stringify(res), '微信获取地理位置')
           window.sessionStorage.setItem('parkMapLatitudeAndLogitude', window.JSON.stringify({
             latitude: res.latitude, // 纬度，浮点数，范围为90 ~ -90
             longitude: res.longitude, // 经度，浮点数，范围为180 ~ -180。
@@ -42,9 +42,9 @@ export const wx = {
       });
       //朋友圈
       window.wx.onMenuShareTimeline({
-        title: 'shareObj.title' ||'', // 分享标题
-        link: shareObj.link ||'', // 分享链接，该链接域名必须与当前企业的可信域名一致
-        imgUrl: 'http://maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg' ||'', // 分享图标
+        title: window.document.title ||'', // 分享标题
+        link: window.location.href ||'', // 分享链接，该链接域名必须与当前企业的可信域名一致
+        imgUrl: window.document.querySelectorAll('.share-img-url')[0].value ||'', // 分享图标
         success: function () {
           // 用户确认分享后执行的回调函数
         },
@@ -54,10 +54,10 @@ export const wx = {
       });
       //分享给朋友
       window.wx.onMenuShareAppMessage({
-        title: 'shareObj.tiadfsdtle' ||'', // 分享标题
-        desc:  'shareObj.dfad' ||'', // 分享描述
-        link: shareObj.link ||'', // 分享链接，该链接域名必须与当前企业的可信域名一致
-        imgUrl: 'http://maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg' ||'', // 分享图标
+        title: window.document.title, // 分享标题
+        desc:  '', // 分享描述
+        link: window.location.href, // 分享链接，该链接域名必须与当前企业的可信域名一致
+        imgUrl: window.document.querySelectorAll('.share-img-url')[0].value ||'', // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function (res) {
@@ -72,8 +72,7 @@ export const wx = {
 
     });
     window.wx.error(function (res) {
-      alert(window.JSON.stringify(res))
-      alert('config信息验证失败')
+      alert(window.JSON.stringify(res),'config信息验证失败')
     });
   },
   //跳转腾讯地图
