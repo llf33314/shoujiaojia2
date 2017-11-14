@@ -42,9 +42,9 @@ export const wx = {
       });
       //朋友圈
       window.wx.onMenuShareTimeline({
-        title: shareObj.title ||'', // 分享标题
+        title: 'shareObj.title' ||'', // 分享标题
         link: shareObj.link ||'', // 分享链接，该链接域名必须与当前企业的可信域名一致
-        imgUrl: shareObj.imgUrl ||'', // 分享图标
+        imgUrl: 'http://maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg' ||'', // 分享图标
         success: function () {
           // 用户确认分享后执行的回调函数
         },
@@ -54,10 +54,10 @@ export const wx = {
       });
       //分享给朋友
       window.wx.onMenuShareAppMessage({
-        title: shareObj.title ||'', // 分享标题
-        desc:  shareObj.title ||'', // 分享描述
+        title: 'shareObj.tiadfsdtle' ||'', // 分享标题
+        desc:  'shareObj.dfad' ||'', // 分享描述
         link: shareObj.link ||'', // 分享链接，该链接域名必须与当前企业的可信域名一致
-        imgUrl: shareObj.imgUrl ||'', // 分享图标
+        imgUrl: 'http://maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg' ||'', // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function (res) {
@@ -72,6 +72,7 @@ export const wx = {
 
     });
     window.wx.error(function (res) {
+      alert(window.JSON.stringify(res))
       alert('config信息验证失败')
     });
   },
