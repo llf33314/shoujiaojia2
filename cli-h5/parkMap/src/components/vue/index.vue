@@ -39,7 +39,6 @@
 
     .tour-detail-top ul li img {
       max-height: 25px;
-      vertical-align: middle;
     }
 
     .tour-detail-top ul li:nth-of-type(1) {
@@ -288,6 +287,15 @@
       /* border-bottom: 1px solid #cccccc; */
       font-size: 15px;
     }
+    .bg-dive {
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      min-height: 240px;
+    }
+    .swiper-option{
+      max-height:400px;
+    }
   }
 
   body {
@@ -304,11 +312,17 @@
       max-width: 54%;
     }
   }
-
+  @media screen  and (max-height: 480px) {
+    .park-map-index .swiper-option{
+      max-height:340px;
+    }
+  }
+  
 </style>
 <template>
   <section class="park-map-index">
-      <input type="hidden" class="share-img-url" value="http://maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg" />
+    <input type="hidden" class="share-img-url" value="/static/imgs/share/index.jpg"
+    />
     <div class="map-p-style" :style="wStyle">
       <div class="map-c-style" :style="wStyle" id="mapPs">
         <div class="map-cc-style" ref="mapScale">
@@ -356,9 +370,10 @@
         <div class="tour-items">
           <ul>
             <li v-show="tourTabView==1">
-              <swiper :options="swiperOption" style="min-height:200px;max-height:300px;">
+              <swiper :options="swiperOption" class="swiper-option" style="min-height:200px;">
                 <swiper-slide v-for="(item,index) in swiperSlides" :key="index">
-                  <img :src="item" alt="item" style="max-width:100%;">
+                  <img :src="item" alt="item" style="max-width: 100%; min-height: 204px;">
+                  <!-- <div class="bg-dive" :style="{backgroundImage: 'url(' + item + ')'}"></div> -->
                 </swiper-slide>
                 <div v-show="swiperSlides.length >1" class="swiper-pagination" slot="pagination"></div>
               </swiper>
@@ -426,7 +441,6 @@
         swiperOption: {
           autoplay: 5500,
           pagination: '.swiper-pagination',
-          height: 500,
           loop: true,
           lazyLoading: true,
         },
@@ -546,12 +560,16 @@
         this.tourData = item
         this.showTourDetailMask = true
         this.swiperSlides = item.picture
+        console.log(this.swiperSlides)
         this.tourIntroduce = item.introduce
         this.tourName = item.title
         this.audioSrcGroup = item.audio
         this.coordinate = item.coordinate
         this.audioViewState = false
         this.tourTabView = 1
+
+        this.roomAndBoradListState = false
+        this.tourItemsState = false
       },
       // 切换详情信息
       tourTab(type) {

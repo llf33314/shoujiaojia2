@@ -44,8 +44,8 @@ export const tourList = [{
       chUrl: './static/audio/ch/zhongsan.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/zhongsan/1.JPG'
+      
     ]
   }, {
     name: '南生贸易公司旧址',
@@ -67,8 +67,8 @@ export const tourList = [{
       chUrl: './static/audio/ch/nansheng.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/dasha/1.JPG'
+      
     ]
   }, {
     name: '汕头老电信局',
@@ -90,8 +90,8 @@ export const tourList = [{
       chUrl: './static/audio/ch/laodianxin.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/dasha/1.JPG'
+      
     ]
   }, {
     name: '飘香小食店',
@@ -113,8 +113,10 @@ export const tourList = [{
       chUrl: './static/audio/ch/xiaoshidian.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/xiaoshidian/1.JPG',
+      '/static/imgs/xiaoshidian/2.JPG',
+      '/static/imgs/xiaoshidian/3.JPG'
+      
     ]
   }, {
     name: '汕头大厦旧址',
@@ -136,8 +138,7 @@ export const tourList = [{
       chUrl: './static/audio/ch/dasha.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/dasha/1.JPG'
     ]
   }, {
     name: '汕头邮政总局大楼',
@@ -159,8 +160,7 @@ export const tourList = [{
       chUrl: './static/audio/ch/youzhengju.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/youzhengju/1.JPG'
     ]
   }, {
     name: '桂园',
@@ -182,8 +182,9 @@ export const tourList = [{
       chUrl: './static/audio/ch/guiyuan.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/guiyuan/1.JPG',
+      '/static/imgs/guiyuan/2.JPG'
+      
     ]
   }, {
     name: '香园',
@@ -205,8 +206,10 @@ export const tourList = [{
       chUrl: './static/audio/ch/xiangyuan.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/xiangyuan/1.JPG',
+      '/static/imgs/xiangyuan/2.JPG',
+      '/static/imgs/xiangyuan/3.JPG',
+      
     ]
   }, {
     name: '永平酒楼旧址',
@@ -229,8 +232,8 @@ export const tourList = [{
       chUrl: './static/audio/ch/yongpin.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/yongpin/1.JPG'
+      
     ]
   },
   {
@@ -254,8 +257,10 @@ export const tourList = [{
       chUrl: './static/audio/ch/laogongma.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/laogongma/1.JPG',
+      '/static/imgs/laogongma/2.JPG',
+      '/static/imgs/laogongma/3.JPG'
+      
     ]
   },
   {
@@ -278,8 +283,7 @@ export const tourList = [{
       chUrl: './static/audio/ch/zhihang.mp3'
     },
     picture: [
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=594559231,2167829292&fm=27&gp=0.jpg  ',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3965705221,2010595691&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=996503075,3768564257&fm=200&gp=0.jpg'
+      '/static/imgs/zhihang/1.JPG'
     ]
   },
 ]

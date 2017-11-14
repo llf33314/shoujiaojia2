@@ -62,6 +62,7 @@
 </style>
 <template>
   <section class="park-map-video">
+    <input type="hidden" class="share-img-url" value="shareImg" />
     <div class="video-top" @click="goToLink(VideoMain.videoUrl)">
       <a href="javascript:;" class="block" :style="{backgroundImage: 'url(' + VideoMain.imgUrl + ')'}"></a>
       <img class="video-icon" src="./../../assets/img/video.png" alt="">
@@ -85,7 +86,7 @@
   export default {
     data() {
       return {
-        img: '//img1.imgtn.bdimg.com/it/u=2438635438,1401027135&fm=27&gp=0.jpg',
+        img: '',
         VideoMain: {
           imgUrl: '',
           videoUrl: ''
