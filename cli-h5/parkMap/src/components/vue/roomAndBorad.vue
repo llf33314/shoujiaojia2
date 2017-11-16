@@ -168,10 +168,10 @@
         eatslsPageFlag: false,
         LatAndLogFlag: true,
         shareImgs:{
-          eat:'/static/imgs/share/eat.jpg',
-          holte:'/static/imgs/share/holte.jpg'
+          eat:'./static/imgs/share/eat.jpg',
+          holte:'./static/imgs/share/holte.jpg'
         },
-        shareImg:'/static/imgs/share/eat.jpg'
+        shareImg:'./static/imgs/share/eat.jpg'
       }
     },
     watch: {
