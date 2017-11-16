@@ -2,15 +2,17 @@
  * 字体
  * @gzhidao
  */
- * {
+* {
   padding: 0;
   margin: 0;
-  font-family: "Microsoft YaHei", "微软雅黑", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+  font-family: 'Microsoft YaHei', '微软雅黑', 'Helvetica Neue', Helvetica,
+    'PingFang SC', 'Hiragino Sans GB', Arial, sans-serif;
 }
 
 /* normalize.css v3.0.2 | git.io/normalize */
 /* Set <html> and <body> to inherit the height of the viewport */
-html, body {
+html,
+body {
   min-height: 100%;
   overflow-x: auto;
 }
@@ -40,14 +42,29 @@ body {
  * hgroup has been removed from the HTML5 (W3C) specification
  *        https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hgroup
  */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, main, nav, section, summary {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+main,
+nav,
+section,
+summary {
   display: block;
 }
 /**
  * 1. Correct `inline-block` display not defined in IE 8/9.
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */
-audio, canvas, progress, video {
+audio,
+canvas,
+progress,
+video {
   display: inline-block;
   /* 1 */
   vertical-align: baseline;
@@ -65,7 +82,9 @@ audio:not([controls]) {
  * Address `[hidden]` styling not present in IE 8/9/10.
  * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
  */
-[hidden],template,script {
+[hidden],
+template,
+script {
   display: none;
 }
 /* Links
@@ -107,7 +126,8 @@ abbr[title] {
 /**
  * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
  */
-b,strong {
+b,
+strong {
   font-weight: bold;
 }
 /**
@@ -120,7 +140,7 @@ pre {
  * Set consistent quote types.
  */
 q {
-  quotes: "\201C" "\201D" "\2018" "\2019";
+  quotes: '\201C' '\201D' '\2018' '\2019';
 }
 /**
  * Address inconsistent and variable font size in all browsers.
@@ -131,7 +151,8 @@ small {
 /**
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
  */
-sub,sup {
+sub,
+sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
@@ -154,7 +175,7 @@ sub {
   */
 img {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   /* 1 */
   vertical-align: middle;
   /* 3 */
@@ -178,9 +199,11 @@ figure {
 /**
  * Correct font family set oddly in Safari 5 and Chrome.
  */
-code, kbd, pre, samp
-{
-  font-family: Monaco, Menlo, Consolas, "Courier New", "FontAwesome", monospace;
+code,
+kbd,
+pre,
+samp {
+  font-family: Monaco, Menlo, Consolas, 'Courier New', 'FontAwesome', monospace;
   font-size: 1em;
 }
 /* Forms
@@ -209,7 +232,11 @@ legend {
  * 2. Correct font properties not being inherited.
  * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
  */
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
   color: inherit;
   /* 1 */
   font: inherit;
@@ -227,7 +254,8 @@ button {
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
  */
-button, input {
+button,
+input {
   line-height: normal;
 }
 /**
@@ -236,7 +264,8 @@ button, input {
  * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
  * Correct `select` style inheritance in Firefox.
  */
-button, select {
+button,
+select {
   text-transform: none;
 }
 /**
@@ -246,7 +275,10 @@ button, select {
  * 3. Improve usability and consistency of cursor style between image-type
  *    `input` and others.
  */
-button, html input[type="button"], input[type="reset"], input[type="submit"] {
+button,
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
   -webkit-appearance: button;
   /* 2 */
   cursor: pointer;
@@ -257,25 +289,28 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
  * 2. Removes excess padding in IE 8/9.
  * 3. Address box sizing set to `content-box` in IE 8/9/10.
  */
-input[type="radio"], input[type="checkbox"] {
+input[type='radio'],
+input[type='checkbox'] {
   cursor: pointer;
   /*1*/
   padding: 0;
   /*2*/
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   /* 3 */
 }
 /**
  * Re-set default cursor for disabled elements.
  */
-button[disabled], html input[disabled] {
+button[disabled],
+html input[disabled] {
   cursor: default;
 }
 /**
  * Remove inner padding and border in Firefox 4+.
  */
-button::-moz-focus-inner, input::-moz-focus-inner {
+button::-moz-focus-inner,
+input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
@@ -284,7 +319,8 @@ button::-moz-focus-inner, input::-moz-focus-inner {
  * `font-size` values of the `input`, it causes the cursor style of the
  * decrement button to change from `default` to `text`.
  */
-input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   height: auto;
 }
 /**
@@ -292,19 +328,19 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
  * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
  *    (include `-moz` to future-proof).
  */
-input[type="search"] {
+input[type='search'] {
   -webkit-appearance: textfield;
   /* 1 */
   -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box;
   /* 2 */
 }
 /**
  * Remove inner padding and search cancel button in Safari 5 and Chrome
  * on OS X.
  */
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 /**
@@ -334,12 +370,13 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-td, th {
+td,
+th {
   padding: 0;
 }
 
 ul li {
-  list-style-type:none;
+  list-style-type: none;
 }
 
 /* 边距不算入宽高 */
@@ -351,44 +388,34 @@ ul li {
 /* 边距算入宽高 */
 .none-sizing {
   -webkit-box-sizing: content-box !important;
-     -moz-box-sizing: content-box !important;
-          box-sizing: content-box !important;
+  -moz-box-sizing: content-box !important;
+  box-sizing: content-box !important;
 }
 
 /**
  * 主体内容容器
  * @gzhidao
  */
-.gt-content{
+.public-content {
   padding: 0 70px 0 60px;
+  overflow: hidden;
 }
 /**
  * 顶部面包屑
  * @yanhuiting
  */
-.gt-crumbs{
+.public-crumbs {
   height: 50px;
   line-height: 50px;
-  border-top: 1px solid #EDEDED;
-  border-bottom: 1px solid #EDEDED;
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
   padding-left: 60px;
-  margin-bottom: 30px;
-}
-/**
- * 顶部tab切换
- * @yanhuiting
- */
-.gt-top-tabs{
-  position: relative;
- }
-.el-tabs__header {
-  margin-bottom:20px;
 }
 /**
  * 顶部tab切换》》》视频教程按钮
  * @yanhuiting
  */
-.gt-top-tabs .gt-video-btn{
+.gt-top-tabs .gt-video-btn {
   position: absolute;
   right: 0;
   top: 0;
@@ -399,220 +426,116 @@ ul li {
  * 顶部tab切换底部》》》灰色的搜索/按钮区域
  * @yanhuiting
  */
-.gt-gray-region{
-  padding: 13px 30px;
+.public-gray-region {
+  padding: 13px 20px;
   background-color: #f4f4f4;
-}
-/**
- * 操作成功/确认询问提示内容
- * @gzhidao
- */
-.gt-success-enquire{
-  text-align: left;
-  font-size: 14px;
-  color: #333;
-  position: relative;
-  height: 35px;
-  line-height: 35px;
-}
-.gt-success-enquire .icont{
-  font-size: 36px;
-  color: #34d063;
-  float: left;
-  padding-right: 20px;
-}
-.gt-success-enquire .title{
-  line-height: 20px;
-}
-.gt-success-enquire .dps{
-  color: #666;
-  line-height: 20px;
-}
-/**
- * 操作成功/确认询问框宽度
- * @gzhidao
- */
-.el-dialog--askDeleteVisible{
-  width: 560px;
-  padding-bottom: 20px;
-}
-.el-dialog--askDeleteVisible .gt-success-enquire{
-  padding-bottom: 140px;
-}
-/**
- * element弹框标题
- * @gzhidao
- */
-.el-dialog__header {
-  padding: 15px 20px;
-  border-bottom: 1px solid #eeeeee;
-  line-height: 1.3;
-}
-.el-dialog__title {
-  font-size: 14px;
-  color: #333;
-}
-.el-dialog {
-  border-radius: 4px;
-}
-.el-dialog__body {
-  padding: 30px;
-}
-/**
- * 复制链接弹框
- * @gzhidao
- */
-.el-dialog--cope-link{
-  width: 640px;
-}
-.el-dialog--cope-link .el-input {
-  width: 320px;
-  float: left;
-  margin-right: 20px;
-}
-.el-dialog--cope-link .erwema{
-  width: 160px;
-  height: 160px;
-  margin-right: 20px;
-  float: left;
-}
-.el-dialog--cope-link .down{
-  margin-top: 124px;
+  margin-bottom: 30px;
 }
 /**
  * element表单title字体颜色
  * @gzhidao
  */
-.el-form-item__label {
-  color: #333;
-  padding-right: 30px;
-}
 /**
  * element 按钮字体大小
  * @gzhidao
  */
-.el-button {
-  font-size: 13px;
-}
-/**
- * gt 按钮样式  normal根据内容填充  blue为蓝色 red为red
- * @xiandan
- */
 .gt-button-normal {
   height: 26px;
   line-height: 24px;
-  padding: 0 5px;
+  padding: 0 10px;
   font-size: 12px;
 }
-.gt-button-normal.blue {
- color: #20a0ff;
- border-color: #20a0ff;
+/* 蓝色按钮 */
+.blue {
+  color: #20a0ff;
+  background-color: #fff;
+  border: 1px solid #20a0ff;
 }
-.gt-button-normal.red {
- color: #FF4949;
- border-color: #FF4949;
+.blue:hover {
+  background: #20a0ff;
+  color: #fff;
 }
-/*
- * element 视频按钮
- * @gzhidao
-*/
-.gt-video-btn{
+/**
+   * 金额输入框
+   * @xiandan
+   */
+.RMBinput {
+  width: 80px;
+  position: relative;
+  line-height: 1;
+}
+.RMBinput .el-input__inner {
+  width: 80px;
+  height: 32px;
+  padding-left: 41px;
+  text-align: center;
+}
+
+.RMBinput:before {
   position: absolute;
-  right: 0;
-  z-index: 1;
+  top: 1px;
+  left: 1px;
+  content: '￥';
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #999;
+  border-right: 1px solid #bfcbd9;
+  background-color: #f6f6f6;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
-.gt-video-btn .gt-play{
-  padding-right: 5px;
-  font-size: 13px
-}
-
-.community-post-picture .el-upload-list--picture-card .el-upload-list__item{
-  width: 100px;
-  height: 100px;
-}
-.community-post-picture .el-upload--picture-card {
-  width: 100px;
-  height: 100px;
-  line-height: 110px;
-}
-
 /**
- * 常用 浮动 清除浮动 定位 行内块级元素
- * @xiandan
- */
-.fl{ float: left }
-.fr{ float: right }
-.clearfix:after {
-    visibility: hidden;
-    clear: both;
-    display: block;
-    content: ".";
-    height: 0;
+   * 公共提示样式
+   * 格式
+           <div class="public-tip">
+                 <p>选择公告样式2后商家无需创建公告分组，直接添加新公告即可</p>
+                 <i class="el-icon-arrow-down"></i>
+           </div>
+   * @xiandan
+   */
+.public-tip {
+  position: relative;
+  display: inline-block;
+  color: #999;
+  font-size: 14px;
+  padding: 15px 10px;
+  border: 1px solid #bfcbd9;
+  border-radius: 5px;
+  line-height: 1.2;
 }
-.relative { position: relative; }
-.inblock { display: inline-block; }
-.lh1 { line-height: 1; }
 
-.bd1px-radius { border:1px solid #dfe6ec; border-radius: 5px; }
-/**
-* 常用 字体大小 字体水平对齐方式
-* @xiandan
+.public-tip .el-icon-arrow-down {
+  position: absolute;
+  bottom: -11px;
+  left: 20px;
+  color: #bfcbd9;
+  font-size: 12px;
+  background-color: #fff;
+}
+/* 
+* table title
 */
-.fs0 { font-size: 0; }
-.fs12 { font-size: 12px; }
-.fs13 { font-size: 13px; }
-.fs14 { font-size: 14px; }
-
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
-
-/**
-* 常用 字体颜色 背景颜色
-* @xiandan
-*/
-.cfff { color: #fff; }
-.c333 { color: #333; }
-.c999 { color: #999; }
-.red { color: #FF4949; }
-
-.bg-f8f8f8 { background-color: #f8f8f8; }
-
-/**
-* 常用 元素的垂直对齐方式
-* @xiandan
-*/
-.va-t { vertical-align: top; }
-.va-m { vertical-align: middle; }
-.va-b { vertical-align: bottom; }
-
-/**
- * 常用 margin
- * @xiandan
- */
-.mg-t20 { margin-top: 20px; }
-.mg-t30 { margin-top: 30px; }
-
-.mg-r30 { margin-right: 30px; }
-.mg-l10 { margin-left: 10px } 
-
-.mg-b10 { margin-bottom: 10px; }
-.mg-b20 { margin-bottom: 20px; }
-.mg-b30 { margin-bottom: 30px; }
-
-.mg-tb30 { margin-top: 30px; margin-bottom: 30px; }
-
-/**
- * 常用 padding
- * @xiandan
- */
- .pd-l30 { padding-left: 30px; }
- .pd-tb14 { padding-top: 14px; padding-bottom: 14px; }
-
- .pd-20 { padding: 20px; }
-
- /**
- * 版心宽度
- * @xiandan
- */
- .gt-panel-content { width: 90%; margin: 0 auto; }
+.public-table-title {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-top: 15px;
+  color: #000;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.public-fl {
+  float: left;
+}
+.public-fr {
+  float: right;
+}
+.public-page-top {
+  margin-top: 20px;
+}
+.public-top20 {
+  margin-top: 20px;
+}

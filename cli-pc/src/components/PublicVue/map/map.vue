@@ -248,6 +248,7 @@ export default {
       border-bottom: 1px solid #dfe6ec;
       margin: 0;
       padding: 10px 30px 10px 0;
+      overflow: hidden;
     }
     .el-radio__input {
       float: right;
