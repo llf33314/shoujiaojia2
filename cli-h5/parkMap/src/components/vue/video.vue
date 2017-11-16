@@ -62,7 +62,7 @@
 </style>
 <template>
   <section class="park-map-video">
-    <input type="hidden" class="share-img-url" value="/static/imgs/share/video.jpg" />
+    <input type="hidden" class="share-img-url" value="./static/imgs/share/video.jpg" />
     <div class="video-top" @click="goToLink(VideoMain.videoUrl)">
       <a href="javascript:;" class="block" :style="{backgroundImage: 'url(' + VideoMain.imgUrl + ')'}"></a>
       <img class="video-icon" src="./../../assets/img/video.png" alt="">

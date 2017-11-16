@@ -321,7 +321,7 @@
 </style>
 <template>
   <section class="park-map-index">
-    <input type="hidden" class="share-img-url" value="/static/imgs/share/index.jpg"
+    <input type="hidden" class="share-img-url" value="./static/imgs/share/index.jpg"
     />
     <div class="map-p-style" :style="wStyle">
       <div class="map-c-style" :style="wStyle" id="mapPs">
