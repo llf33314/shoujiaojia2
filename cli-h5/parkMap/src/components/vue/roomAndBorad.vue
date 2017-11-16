@@ -167,16 +167,16 @@
         hotelsPageFlag: false,
         eatslsPageFlag: false,
         LatAndLogFlag: true,
-        shareImgs:{
-          eat:'./static/imgs/share/eat.jpg',
-          holte:'./static/imgs/share/holte.jpg'
+        shareImgs: {
+          eat: './static/imgs/share/eat.jpg',
+          holte: './static/imgs/share/holte.jpg'
         },
-        shareImg:'./static/imgs/share/eat.jpg'
+        shareImg: './static/imgs/share/eat.jpg'
       }
     },
     watch: {
-      type(){
-        if(this.type == 1) this.shareImg = this.shareImgs.eat
+      type() {
+        if (this.type == 1) this.shareImg = this.shareImgs.eat
         else this.shareImg = this.shareImgs.holte
       }
     },
@@ -189,7 +189,7 @@
       }
       if (window.sessionStorage.parkMapLatitudeAndLogitude) {
         form = window.JSON.parse(window.sessionStorage.parkMapLatitudeAndLogitude)
-      }else{
+      } else {
         //this.LatAndLogFlag = false
       }
       this.lat = form.latitude
@@ -202,10 +202,14 @@
       window.addEventListener('scroll', this.onScrollEates); //挂载滚动事件
       window.addEventListener('scroll', this.onScrollHotels); //挂载滚动事件
     },
+    created() {
+      this.getListHotels()
+      this.getListEats()
+    },
     destroyed() {
       window.addEventListener('scroll', ''); //挂载滚动事件
     },
-   
+
     beforeMount() {
       document.title = '周边吃住列表'
     },
