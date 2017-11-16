@@ -99,7 +99,6 @@
       <li :class="type==0? 'bg':''" @click="selectType(0)">住宿</li>
     </ul>
     <div class="type-box-list">
-      <input type="hidden" class="share-img-url" :value="shareImg" />
       <ul class="type-list" v-show="type==1" ref="eatsBox">
         <li class="type-list-item" v-for="(item,index) in listEats" @click="goToDetail(item.id,1)">
           <div class="left-img" :style="{backgroundImage: 'url(' + item.logoUrl + ')'}"></div>
