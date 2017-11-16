@@ -321,7 +321,7 @@
 </style>
 <template>
   <section class="park-map-index">
-    <img style="display:none" src="./static/imgs/share/index.jpg" alt="">
+    <img style="display:none" :src="shareImg" alt="">
     <div class="map-p-style" :style="wStyle">
       <div class="map-c-style" :style="wStyle" id="mapPs">
         <div class="map-cc-style" ref="mapScale">
@@ -423,6 +423,7 @@
     },
     data() {
       return {
+        shareImg:'./static/imgs/share/index.jpg',
         scale: 1,
         pinNum: 0,
         pinType: true,
@@ -659,7 +660,7 @@
       // 跳转周边吃住
       goToRoomAndBorad(item) {
         this.$router.push({
-          path: '/parkMap/roomAndBorad/' + this.$route.params.busId + '/' + item.type
+          path: '/roomAndBorad/' + this.$route.params.busId + '/' + item.type
         })
       }
     }
