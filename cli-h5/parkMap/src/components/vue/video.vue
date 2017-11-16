@@ -62,6 +62,7 @@
 </style>
 <template>
   <section class="park-map-video">
+    <input type="hidden" class="share-img-url" value="/static/imgs/share/video.jpg" />
     <div class="video-top" @click="goToLink(VideoMain.videoUrl)">
       <a href="javascript:;" class="block" :style="{backgroundImage: 'url(' + VideoMain.imgUrl + ')'}"></a>
       <img class="video-icon" src="./../../assets/img/video.png" alt="">
@@ -85,7 +86,7 @@
   export default {
     data() {
       return {
-        img: '//img1.imgtn.bdimg.com/it/u=2438635438,1401027135&fm=27&gp=0.jpg',
+        img: '',
         VideoMain: {
           imgUrl: '',
           videoUrl: ''
@@ -104,11 +105,7 @@
         this.getVideoMain(busId)
       this.getListVideo(busId)
       // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId, {
-        title: '视频',
-        link: window.location.href,
-        imgUrl: '//maint.deeptel.com.cn/upload//image/3/goodtom/3/20171030/6D19FD6D60C4B424348F07EFE9B3408C.jpg'
-      })
+      this._wx.getWxSDK(this.$route.params.busId)
     },
     methods: {
       //获取主视频
