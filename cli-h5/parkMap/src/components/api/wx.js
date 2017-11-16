@@ -78,7 +78,7 @@ export const wx = {
 
     });
     window.wx.error(function (res) {
-      //alert(window.JSON.stringify(res),'config信息验证失败')
+      alert(window.JSON.stringify(res),'config信息验证失败')
     });
   },
   //跳转腾讯地图

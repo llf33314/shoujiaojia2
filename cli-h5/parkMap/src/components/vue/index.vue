@@ -443,6 +443,7 @@
           pagination: '.swiper-pagination',
           loop: true,
           lazyLoading: true,
+          autoHeight: true
         },
         swiperSlides: [],
         tourIntroduce: '',

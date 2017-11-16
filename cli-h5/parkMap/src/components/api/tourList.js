@@ -44,7 +44,9 @@ export const tourList = [{
       chUrl: './static/audio/ch/zhongsan.mp3'
     },
     picture: [
-      '/static/imgs/zhongsan/1.JPG'
+      '/static/imgs/zhongsan/1.JPG',
+      '/static/imgs/zhongsan/2.JPG',
+      '/static/imgs/zhongsan/3.JPG'
       
     ]
   }, {
@@ -67,7 +69,9 @@ export const tourList = [{
       chUrl: './static/audio/ch/nansheng.mp3'
     },
     picture: [
-      '/static/imgs/dasha/1.JPG'
+      '/static/imgs/dasha/1.JPG',
+      '/static/imgs/dasha/2.JPG',
+      '/static/imgs/dasha/3.JPG'
       
     ]
   }, {
@@ -90,7 +94,9 @@ export const tourList = [{
       chUrl: './static/audio/ch/laodianxin.mp3'
     },
     picture: [
-      '/static/imgs/dasha/1.JPG'
+      '/static/imgs/dasha/1.JPG',
+      '/static/imgs/dasha/2.JPG',
+      '/static/imgs/dasha/3.JPG'
       
     ]
   }, {
@@ -138,7 +144,9 @@ export const tourList = [{
       chUrl: './static/audio/ch/dasha.mp3'
     },
     picture: [
-      '/static/imgs/dasha/1.JPG'
+      '/static/imgs/dasha/1.JPG',
+      '/static/imgs/dasha/2.JPG',
+      '/static/imgs/dasha/3.JPG'
     ]
   }, {
     name: '汕头邮政总局大楼',
@@ -160,7 +168,9 @@ export const tourList = [{
       chUrl: './static/audio/ch/youzhengju.mp3'
     },
     picture: [
-      '/static/imgs/youzhengju/1.JPG'
+      '/static/imgs/youzhengju/1.JPG',
+      '/static/imgs/youzhengju/2.JPG',
+      '/static/imgs/youzhengju/3.JPG'
     ]
   }, {
     name: '桂园',
@@ -183,7 +193,8 @@ export const tourList = [{
     },
     picture: [
       '/static/imgs/guiyuan/1.JPG',
-      '/static/imgs/guiyuan/2.JPG'
+      '/static/imgs/guiyuan/2.JPG',
+      '/static/imgs/guiyuan/3.JPG'
       
     ]
   }, {
@@ -232,7 +243,9 @@ export const tourList = [{
       chUrl: './static/audio/ch/yongpin.mp3'
     },
     picture: [
-      '/static/imgs/yongpin/1.JPG'
+      '/static/imgs/yongpin/1.JPG',
+      '/static/imgs/yongpin/2.JPG',
+      '/static/imgs/yongpin/3.JPG'
       
     ]
   },
@@ -260,7 +273,6 @@ export const tourList = [{
       '/static/imgs/laogongma/1.JPG',
       '/static/imgs/laogongma/2.JPG',
       '/static/imgs/laogongma/3.JPG'
-      
     ]
   },
   {
@@ -283,7 +295,9 @@ export const tourList = [{
       chUrl: './static/audio/ch/zhihang.mp3'
     },
     picture: [
-      '/static/imgs/zhihang/1.JPG'
+      '/static/imgs/zhihang/1.JPG',
+      '/static/imgs/zhihang/2.JPG',
+      '/static/imgs/zhihang/3.JPG'
     ]
   },
 ]
