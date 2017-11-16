@@ -24,7 +24,7 @@ export const wx = {
     const self = this
     //console.log(resData, 'this.$route.params.busI')
     window.wx.config({
-      debug: true, //开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+      debug: false, //开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
       appId: resData.data.appid, // 必填，企业号的唯一标识，此处填写企业号corpid
       timestamp: resData.data.timestamp, // 必填，生成签名的时间戳
       nonceStr: resData.data.nonce_str, // 必填，生成签名的随机串
@@ -48,9 +48,9 @@ export const wx = {
       });
       //朋友圈
       window.wx.onMenuShareTimeline({
-        title: window.document.title ||'', // 分享标题
-        link: window.location.href ||'', // 分享链接，该链接域名必须与当前企业的可信域名一致
-        imgUrl: window.document.querySelectorAll('.share-img-url')[0].value ||'', // 分享图标
+        title: '', // 分享标题
+        link: window.location.href, // 分享链接，该链接域名必须与当前企业的可信域名一致
+        imgUrl:'', // 分享图标
         success: function () {
           // 用户确认分享后执行的回调函数
         },
@@ -60,10 +60,10 @@ export const wx = {
       });
       //分享给朋友
       window.wx.onMenuShareAppMessage({
-        title: window.document.title, // 分享标题
-        desc:  window.document.title, // 分享描述
+        title: '', // 分享标题
+        desc:  '', // 分享描述
         link: window.location.href, // 分享链接，该链接域名必须与当前企业的可信域名一致
-        imgUrl: window.document.querySelectorAll('.share-img-url')[0].value ||'', // 分享图标
+        imgUrl:'', // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function (res) {

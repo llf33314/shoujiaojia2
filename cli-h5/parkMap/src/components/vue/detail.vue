@@ -89,7 +89,6 @@
     overflow: hidden;">
       <img :src="data.bannerUrl" style="min-width:100%;height:250px;" alt="">
     </div>
-    <input type="hidden" class="share-img-url" :value="data.bannerUrl" />
     <ul class="detail-list">
       <li v-text="data.name"></li>
       <li class="has-img" @click="goToNav(data.lat,data.lon)">
@@ -145,7 +144,7 @@
       this.getDetail(this.$route.params.id, this.$route.params.type)
       // 获取微信sdk
       this._wx.getWxSDK(this.$route.params.busId)
-      
+
     },
     methods: {
       // 获取金纬度
