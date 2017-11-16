@@ -106,7 +106,7 @@
           <div class="right-content">
             <h2 class="title">
               <span class="over" style="flex: 5;" v-text="item.name"></span>
-              <span v-if="LatAndLogFlag" style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
+              <span v-if="LatAndLogFlag&&item.distance" style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
             </h2>
             <p class="dps over" v-text="item.introduce"></p>
             <p class="icon-text over">
@@ -190,7 +190,7 @@
       if (window.sessionStorage.parkMapLatitudeAndLogitude) {
         form = window.JSON.parse(window.sessionStorage.parkMapLatitudeAndLogitude)
       }else{
-        this.LatAndLogFlag = false
+        //this.LatAndLogFlag = false
       }
       this.lat = form.latitude
       this.lon = form.longitude
