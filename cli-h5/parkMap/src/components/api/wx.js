@@ -48,6 +48,7 @@ export const wx = {
       });
       //朋友圈
       window.wx.onMenuShareTimeline({
+        imgUrl:'http://maint.deeptel.com.cn/upload//image/3/goodtom/3/20171101/3B78558F6AEDB11AB48C6743C475D1FE.jpg',
         success: function () {
           // 用户确认分享后执行的回调函数
         },
