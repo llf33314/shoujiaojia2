@@ -69,9 +69,9 @@ export const tourList = [{
       chUrl: './static/audio/ch/nansheng.mp3'
     },
     picture: [
-      './static/imgs/dasha/1.jpg',
-      './static/imgs/dasha/2.jpg',
-      './static/imgs/dasha/3.jpg'
+      './static/imgs/nansheng/1.jpg',
+      './static/imgs/nansheng/2.jpg',
+      './static/imgs/nansheng/3.jpg'
       
     ]
   }, {
@@ -94,9 +94,9 @@ export const tourList = [{
       chUrl: './static/audio/ch/laodianxin.mp3'
     },
     picture: [
-      './static/imgs/dasha/1.jpg',
-      './static/imgs/dasha/2.jpg',
-      './static/imgs/dasha/3.jpg'
+      './static/imgs/laodianxin/1.jpg',
+      './static/imgs/laodianxin/2.jpg',
+      './static/imgs/laodianxin/3.jpg'
       
     ]
   }, {
@@ -144,8 +144,8 @@ export const tourList = [{
       chUrl: './static/audio/ch/dasha.mp3'
     },
     picture: [
-      './static/imgs/dasha/1.jpg',
       './static/imgs/dasha/2.jpg',
+      './static/imgs/dasha/1.jpg',
       './static/imgs/dasha/3.jpg'
     ]
   }, {

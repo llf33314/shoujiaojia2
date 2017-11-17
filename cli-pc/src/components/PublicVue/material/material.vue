@@ -142,6 +142,7 @@
     /* new */
     .show-img-large{
       max-width:100%;
+      max-height:500px;
     }
     .material-box {
       border-radius: 3px;

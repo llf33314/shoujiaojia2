@@ -48,9 +48,6 @@ export const wx = {
       });
       //朋友圈
       window.wx.onMenuShareTimeline({
-        title: '', // 分享标题
-        link: window.location.href, // 分享链接，该链接域名必须与当前企业的可信域名一致
-        imgUrl:'', // 分享图标
         success: function () {
           // 用户确认分享后执行的回调函数
         },
@@ -60,10 +57,8 @@ export const wx = {
       });
       //分享给朋友
       window.wx.onMenuShareAppMessage({
-        title: '', // 分享标题
-        desc:  '', // 分享描述
+        title: window.document.title, // 分享标题
         link: window.location.href, // 分享链接，该链接域名必须与当前企业的可信域名一致
-        imgUrl:'', // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function (res) {
@@ -93,7 +88,7 @@ export const wx = {
       }
     }
     
-    window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
-      '&tocoord=' + to.coordinate + '&policy=1&referer=myapp'
+    window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.coordinate +
+      '&tocoord=' + to.name + '&policy=1&referer=myapp'
   }
 }
