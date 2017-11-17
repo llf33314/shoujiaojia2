@@ -194,9 +194,6 @@
       this.lat = form.latitude
       this.lon = form.longitude
       this.type = this.$route.params.type
-
-      this.getListHotels()
-      this.getListEats()
     },
     created() {
       this.getListHotels()
