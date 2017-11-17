@@ -99,10 +99,11 @@
         });
       },
       handleCurrentChange(val) {
+        this.hotelListReq.current = val;
         this.listHotels();
       },
       handleSizeChange(val) {
-        this.hotelListReq.size = val;
+        this.hotelListReq.current = val;
         this.listHotels();
       }
     },

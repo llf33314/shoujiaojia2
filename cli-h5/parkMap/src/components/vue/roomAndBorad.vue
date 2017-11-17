@@ -197,22 +197,25 @@
 
       this.getListHotels()
       this.getListEats()
-
-      window.addEventListener('scroll', this.onScrollEates); //挂载滚动事件
-      window.addEventListener('scroll', this.onScrollHotels); //挂载滚动事件
     },
     created() {
       this.getListHotels()
       this.getListEats()
+      setTimeout(() => {
+        this.onScroll()
+      }, 500)
     },
     destroyed() {
-      window.addEventListener('scroll', ''); //挂载滚动事件
+      //window.addEventListener('scroll', ''); //挂载滚动事件
     },
-
     beforeMount() {
       document.title = '周边吃住列表'
     },
     methods: {
+      onScroll() {
+        window.addEventListener('scroll', this.onScrollEates); //挂载滚动事件
+        window.addEventListener('scroll', this.onScrollHotels); //挂载滚动事件
+      },
       // 选择餐饮、住宿
       selectType(type) {
         this.type = type
@@ -279,7 +282,7 @@
       //滚动加载餐饮
       onScrollEates(event) {
         if (this.type != 1) return
-        var nScrollTop = document.documentElement.scrollTop || document.body.scrollTop; //滚动条高度
+        var nScrollTop = document.scrollTop || document.body.scrollTop; //滚动条高度
         var winH = window.innerHeight; //页面可视区域高度
         var nScrollHight = this.$refs.eatsBox.offsetHeight; //div高度
         var ratio = (nScrollHight - winH - nScrollTop) / winH;
@@ -291,7 +294,7 @@
       //滚动加载酒店
       onScrollHotels(event) {
         if (this.type != 0) return
-        var nScrollTop = document.documentElement.scrollTop || document.body.scrollTop; //滚动条高度
+        var nScrollTop = document.scrollTop || document.body.scrollTop; //滚动条高度
         var winH = window.innerHeight; //页面可视区域高度
         var nScrollHight = this.$refs.hotelsBox.offsetHeight; //div高度
         var ratio = (nScrollHight - winH - nScrollTop) / winH;

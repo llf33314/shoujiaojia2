@@ -19,7 +19,7 @@
   }
 </script>
 
-<style lang="scss" type="text/css" scoped>
+<style lang="less" type="text/css" scoped>
   .gt-nomsg {
     text-align: center;
     border: 1px solid #dfe6ec;

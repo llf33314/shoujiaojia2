@@ -38,7 +38,7 @@
       return {
         eatListData: [],
         eatListReq: {
-          current: 0,
+          current: 1,
           size: 10
         },
         page: {
@@ -99,15 +99,17 @@
         });
       },
       handleCurrentChange(val) {
+        this.eatListReq.current = val;
         this.listEats();
       },
       handleSizeChange(val) {
-        this.eatListReq.size = val;
+        this.eatListReq.current = val;
         this.listEats();
       }
     },
     created() {
       this.listEats();
+      
     }
   };
 

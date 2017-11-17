@@ -238,8 +238,13 @@
           this.Original.detailedAddress = this.required.MapData.name;
         }
         this.dialogVisible = false;
-
-        this.$emit("update:gtmapInformation", _this.required);
+        console.log(_this.required,'_this.required************')
+        _this.$emit('getMapData', {
+          lat: _this.required.MapData.latLng.lat,
+          lng: _this.required.MapData.latLng.lng,
+          name:_this.required.MapData.name
+        })
+        //this.$emit("update:gtmapInformation", _this.required);
       }
     },
     props: ["gtmapInformation"] //省份名字和地址,
