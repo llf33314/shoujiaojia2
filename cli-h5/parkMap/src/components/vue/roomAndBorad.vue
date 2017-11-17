@@ -303,7 +303,7 @@
       // 跳转详情
       goToDetail(id, type) {
         this.$router.push({
-          path: '/parkMap/detail/' + this.$route.params.busId + '/' + id + '/' + type
+          path: '/detail/' + this.$route.params.busId + '/' + id + '/' + type
         })
       }
 
