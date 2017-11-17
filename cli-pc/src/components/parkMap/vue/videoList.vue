@@ -59,7 +59,7 @@
       return {
         videoListData: [],
         videoListReq: {
-          current: 0,
+          current: 1,
           size: 10
         },
         page: {
@@ -204,10 +204,11 @@
         });
       },
       handleCurrentChange(val) {
+        this.videoListReq.current = val;
         this.listVideos();
       },
       handleSizeChange(val) {
-        this.videoListReq.size = val;
+        this.videoListReq.current = val;
         this.listVideos();
       },
       headerClick(column, event) {

@@ -29,7 +29,9 @@ require('./assets/iconfont/iconfont.css')
 /*
 * 挂载全局axsio方法
 * */
+const gt = require('gt-public-js/dist/gt.min')
 Vue.prototype.axios = axios
+Vue.prototype.phone = gt.phone
 /*
 * 在启动时生成生产提示
 * */

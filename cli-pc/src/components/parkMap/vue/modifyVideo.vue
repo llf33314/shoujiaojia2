@@ -26,7 +26,7 @@
           <el-input v-model="modifyVideoReq.videoName" style="width: 251px!important;"></el-input>
         </el-form-item>
         <el-form-item label="封面图上传" prop="imgUrl">
-          <gt-material prop="logoUrl" :url="modifyVideoReq.imgUrl" v-on:getChangeUrl="getChangeUrl" width="80" height="80"></gt-material>
+          <gt-material prop="imgUrl" :url="modifyVideoReq.imgUrl" v-on:getChangeUrl="getChangeUrl" width="80" height="80"></gt-material>
           <p class="a-in-stop-prompt">建议上传1:1尺寸图片</p>
         </el-form-item>
         <el-form-item label="直播链接：" prop="videoUrl">

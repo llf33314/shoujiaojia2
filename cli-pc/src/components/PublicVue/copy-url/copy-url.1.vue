@@ -98,7 +98,3 @@
 
 </script>
 
-<style lang="scss" type="text/css" scoped>
-
-
-</style>

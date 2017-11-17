@@ -112,7 +112,7 @@
   }
 </script>
 
-<style lang="scss" type="text/css" scoped>
+<style lang="less" type="text/css" scoped>
   .emoji-content {
     border: 1px solid #dfe6ec;
     height: 200px;

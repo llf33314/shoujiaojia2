@@ -58,6 +58,16 @@
   import gtmap from '@/components/PublicVue/map/gtMap.vue';
   export default {
     data() {
+      const isPhone = (rule,value,callback)=>{
+        if(value ===''){
+          callback(new Error('请输入店铺电话'));
+        }else{
+          if(!this.phone(value)){
+            callback(new Error('请输入正确店铺电话'));
+          }
+          callback();
+        }
+      }
       return {
         addHotelReq: {
           name: '', // 名称
@@ -110,8 +120,7 @@
             trigger: 'blur'
           }],
           phone: [{
-            required: true,
-            message: '请输入店铺电话',
+            validator:isPhone,
             trigger: 'blur'
           }],
           bannerUrl: [{
