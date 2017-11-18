@@ -134,7 +134,6 @@
         },
         type: 0,
         data: {
-
         }
       }
     },
@@ -142,9 +141,6 @@
       const self = this
       this.type = this.$route.params.type
       this.getDetail(this.$route.params.id, this.$route.params.type)
-      // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId)
-
     },
     methods: {
       // 获取金纬度
@@ -158,6 +154,7 @@
               console.log(res.data)
               this.data = res.data
               document.title = res.data.name
+              window.dataPack.setWXShare()
             } else {
               alert(res.msg)
             }
@@ -172,6 +169,7 @@
               console.log(res.data)
               this.data = res.data
               document.title = res.data.name
+              window.dataPack.setWXShare()
             } else {
               alert(res.msg)
             }
@@ -181,7 +179,7 @@
       //跳转地图
       goToNav(latitude, longitude) {
         const coordinate = latitude + ',' + longitude
-        this._wx.gtToTXMap({
+        window.dataPack.goToLoaction({
           coordinate: coordinate,
           name: this.data.name
         })

@@ -5,8 +5,6 @@ import {
 export const wx = {
   //获取微信js-sdk
   getWxSDK(busId,shareObj) {
-    console.log(wx)
-    console.log(window.wx)
     requestGetWxJsSDK(busId, {
       "shareUrl": window.location.href,
     }).then((res) => {
@@ -31,51 +29,7 @@ export const wx = {
       signature: resData.data.signature, // 必填，签名，见附录1
       jsApiList: ['getLocation','onMenuShareAppMessage','onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     });
-    window.wx.ready(function () {
-      window.wx.getLocation({
-        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-        success: function (res) {
-          self.LatitudeAndLogitude = {
-            latitude: res.latitude, // 纬度，浮点数，范围为90 ~ -90
-            longitude: res.longitude, // 经度，浮点数，范围为180 ~ -180。
-          }
-          //alert(window.JSON.stringify(res), '微信获取地理位置')
-          window.sessionStorage.setItem('parkMapLatitudeAndLogitude', window.JSON.stringify({
-            latitude: res.latitude, // 纬度，浮点数，范围为90 ~ -90
-            longitude: res.longitude, // 经度，浮点数，范围为180 ~ -180。
-          }))
-        }
-      });
-      //朋友圈
-      window.wx.onMenuShareTimeline({
-        imgUrl:'http://maint.deeptel.com.cn/upload//image/3/goodtom/3/20171101/3B78558F6AEDB11AB48C6743C475D1FE.jpg',
-        success: function () {
-          // 用户确认分享后执行的回调函数
-        },
-        cancel: function () {
-          // 用户取消分享后执行的回调函数
-        }
-      });
-      //分享给朋友
-      window.wx.onMenuShareAppMessage({
-        title: window.document.title, // 分享标题
-        link: window.location.href, // 分享链接，该链接域名必须与当前企业的可信域名一致
-        type: '', // 分享类型,music、video或link，不填默认为link
-        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-        success: function (res) {
-          // 用户确认分享后执行的回调函数
-          
-        },
-        cancel: function (res) {
-          // 用户取消分享后执行的回调函数
-          
-        }
-      });
-
-    });
-    window.wx.error(function (res) {
-      alert(window.JSON.stringify(res),'config信息验证失败')
-    });
+    
   },
   //跳转腾讯地图
   gtToTXMap(to) {
@@ -89,7 +43,7 @@ export const wx = {
       }
     }
     
-    window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.coordinate +
-      '&tocoord=' + to.name + '&policy=1&referer=myapp'
+    window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
+      '&tocoord=' + to.coordinate+ '&policy=1&referer=myapp'
   }
 }

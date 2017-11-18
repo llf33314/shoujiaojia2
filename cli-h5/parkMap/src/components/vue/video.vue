@@ -103,8 +103,7 @@
       else
         this.getVideoMain(busId)
       this.getListVideo(busId)
-      // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId)
+
     },
     methods: {
       //获取主视频
@@ -121,6 +120,7 @@
             imgUrl: res.data.imgUrl,
             videoUrl: res.data.videoUrl
           }
+          window.dataPack.setWXShare()
         })
       },
       // 获取视频列表
@@ -134,6 +134,7 @@
           }
           this.ListVideo = res.data
           this.showMoreText = true
+
         })
       },
       //跳转视频url
