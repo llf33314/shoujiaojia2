@@ -293,8 +293,8 @@
       background-repeat: no-repeat;
       min-height: 240px;
     }
-    .swiper-option{
-      max-height:400px;
+    .swiper-option {
+      max-height: 400px;
     }
   }
 
@@ -312,12 +312,13 @@
       max-width: 54%;
     }
   }
-  @media screen  and (max-height: 480px) {
-    .park-map-index .swiper-option{
-      max-height:340px;
+
+  @media screen and (max-height: 480px) {
+    .park-map-index .swiper-option {
+      max-height: 340px;
     }
   }
-  
+
 </style>
 <template>
   <section class="park-map-index">
@@ -423,7 +424,7 @@
     },
     data() {
       return {
-        shareImg:'./static/imgs/share/index.jpg',
+        shareImg: window.MOBILEBASEDOMAIN + '/mobile/parkMap/static/imgs/share/index.jpg',
         scale: 1,
         pinNum: 0,
         pinType: true,
@@ -463,9 +464,6 @@
       }
     },
     mounted() {
-      // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId)
-
       touch.on(document.getElementById('mapCstyle'), 'pinchstart', (e) => {
         this.flag = true
       });
@@ -480,9 +478,13 @@
       touch.on(document.getElementById('mapCstyle'), 'pinchend', (e) => {
         this.flag = false
       });
-
       this.wSetStyle()
       this.showOpenMap()
+    },
+    created() {
+      setTimeout(() => {
+        window.dataPack.setWXShare()
+      }, 1000)
     },
     beforeMount() {
       document.title = '景区地图'
@@ -647,7 +649,8 @@
       },
       // 跳转到导航--跳转腾讯地图
       goToNavigation() {
-        this._wx.gtToTXMap({
+        console.log(this.tourData.coordinate,'this.tourData.coordinate')
+        window.dataPack.goToLoaction({
           coordinate: this.tourData.coordinate,
           name: this.tourData.name
         })

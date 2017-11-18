@@ -105,7 +105,7 @@
           <div class="right-content">
             <h2 class="title">
               <span class="over" style="flex: 5;" v-text="item.name"></span>
-              <span v-if="LatAndLogFlag&&item.distance" style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
+              <span v-if="LatAndLogFlag" style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
             </h2>
             <p class="dps over" v-text="item.introduce"></p>
             <p class="icon-text over">
@@ -165,12 +165,14 @@
         eatsFlag: true,
         hotelsPageFlag: false,
         eatslsPageFlag: false,
-        LatAndLogFlag: true,
+        LatAndLogFlag: false,
         shareImgs: {
           eat: './static/imgs/share/eat.jpg',
           holte: './static/imgs/share/holte.jpg'
         },
-        shareImg: './static/imgs/share/eat.jpg'
+        shareImg: './static/imgs/share/eat.jpg',
+        getWxSDK: true,
+        setScrollFlag: true,
       }
     },
     watch: {
@@ -180,38 +182,47 @@
       }
     },
     mounted() {
-      // 获取微信sdk
-      this._wx.getWxSDK(this.$route.params.busId)
-      var form = {
-        latitude: '23.08828',
-        longitude: '114.43721'
-      }
-      if (window.sessionStorage.parkMapLatitudeAndLogitude) {
-        form = window.JSON.parse(window.sessionStorage.parkMapLatitudeAndLogitude)
-      } else {
-        //this.LatAndLogFlag = false
-      }
-      this.lat = form.latitude
-      this.lon = form.longitude
       this.type = this.$route.params.type
-    },
-    created() {
-      this.getListHotels()
-      this.getListEats()
-      setTimeout(() => {
-        this.onScroll()
-      }, 500)
-    },
-    destroyed() {
-      //window.addEventListener('scroll', ''); //挂载滚动事件
+      if (window.dataPack.logLan) {
+        this.lat = window.dataPack.logLan.latitude
+        this.lon = window.dataPack.logLan.longitude
+        this.getListHotels()
+        this.getListEats()
+      } else {
+        const setInt = setInterval(() => {
+          if (window.dataPack.logLan) {
+            this.lat = window.dataPack.logLan.latitude
+            this.lon = window.dataPack.logLan.longitude
+            this.getListHotels()
+            this.getListEats()
+            clearInterval(setInt)
+          }
+        }, 300)
+        setTimeout(() => {
+          if (!window.dataPack.logLan) {
+            this.lat = '23.08828'
+            this.lon = '114.43721'
+            this.getListHotels()
+            this.getListEats()
+            window.dataPack.logLan = {
+              latitude: '23.08828',
+              longitude: '114.43721'
+            }
+          }
+          clearInterval(setInt)
+        }, 3000)
+      }
+      this.LatAndLogFlag = true
     },
     beforeMount() {
       document.title = '周边吃住列表'
     },
     methods: {
       onScroll() {
-        window.addEventListener('scroll', this.onScrollEates); //挂载滚动事件
-        window.addEventListener('scroll', this.onScrollHotels); //挂载滚动事件
+        setTimeout(() => {
+          window.addEventListener('scroll', this.onScrollEates); //挂载滚动事件
+          window.addEventListener('scroll', this.onScrollHotels); //挂载滚动事件
+        }, 1000)
       },
       // 选择餐饮、住宿
       selectType(type) {
@@ -219,9 +230,7 @@
       },
       //加载酒店数据
       getListHotels() {
-        if (this.hotelsTotalPages != '' && this.hotelsCurrent > this.hotelsTotalPages) {
-          return
-        }
+        if (this.hotelsTotalPages != '' && this.hotelsCurrent > this.hotelsTotalPages) return
         requestListHotels({
           "current": this.hotelsCurrent,
           "lat": this.lat,
@@ -243,15 +252,18 @@
             }
             this.hotelsFlag = true
             this.showListBox = true
+            if (this.setScrollFlag) {
+              this.setScrollFlag = false
+              this.onScroll()
+            }
+            window.dataPack.setWXShare()
+
           }, 60)
         })
       },
       //加载餐饮数据
       getListEats() {
-        console.log(this.eatsCurrent, 'this.eatsCurrent')
-        if (this.eatsTotalPages != '' && this.eatsCurrent > this.eatsTotalPages) {
-          return
-        }
+        if (this.eatsTotalPages != '' && this.eatsCurrent > this.eatsTotalPages) return
         requestListEates({
           "current": this.eatsCurrent,
           "lat": this.lat,
@@ -273,6 +285,12 @@
             }
             this.eatsFlag = true
             this.showListBox = true
+            if (this.setScrollFlag) {
+              this.setScrollFlag = false
+              this.onScroll()
+            }
+            window.dataPack.setWXShare()
+
           }, 60)
         })
       },
