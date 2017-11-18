@@ -39,6 +39,7 @@
           window.wx.onMenuShareTimeline({
             title: window.document.title, // 分享标题
             link: window.location.href, // 分享链接，该链接域名必须与当前企业的可信域名一致
+            imgUrl: window.MOBILEBASEDOMAIN + '/mobile/parkMap/static/imgs/share/index.jpg',
             success: function () {
               // 用户确认分享后执行的回调函数
             },
@@ -50,6 +51,7 @@
           window.wx.onMenuShareAppMessage({
             title: window.document.title, // 分享标题
             link: window.location.href, // 分享链接，该链接域名必须与当前企业的可信域名一致
+            imgUrl: window.MOBILEBASEDOMAIN + '/mobile/parkMap/static/imgs/share/index.jpg',
             type: '', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success: function (res) {
@@ -61,10 +63,7 @@
           });
         });
         window.wx.error(function (res) {
-          window.dataPack.logLan = {
-            latitude: '23.08828',
-            longitude: '114.43721'
-          }
+
         });
       }
-    };</script><script type=text/javascript src=./static/js/manifest.08339d41649e81ded629.js></script><script type=text/javascript src=./static/js/vendor.41f7c15a8fb7ec97e6b6.js></script><script type=text/javascript src=./static/js/app.9c754a5e69fd4218c660.js></script></body></html>
+    };</script><script type=text/javascript src=./static/js/manifest.73a353052e188eff15ad.js></script><script type=text/javascript src=./static/js/vendor.41f7c15a8fb7ec97e6b6.js></script><script type=text/javascript src=./static/js/app.9c754a5e69fd4218c660.js></script></body></html>

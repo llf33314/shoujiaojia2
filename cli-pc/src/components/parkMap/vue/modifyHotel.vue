@@ -46,7 +46,7 @@
           <el-input type="textarea" v-model="modifyHotelReq.remark" style="width: 300px!important;"></el-input>
         </el-form-item>
         <el-form-item style="margin-top: 80px;">
-          <el-button type="primary" @click="submitForm('modifyHotelReq')">保存</el-button>
+          <el-button type="primary" @click="submitForm('modifyHotelReq')" :loading="loading.state" v-text="loading.text"></el-button>
           <el-button type="primary" @click="resetForm('modifyHotelReq')">返回</el-button>
         </el-form-item>
       </el-form>
@@ -60,17 +60,21 @@
   import gtmap from '@/components/PublicVue/map/gtMap.vue';
   export default {
     data() {
-      const isPhone = (rule,value,callback)=>{
-        if(value ===''){
+      const isPhone = (rule, value, callback) => {
+        if (value === '') {
           callback(new Error('请输入店铺电话'));
-        }else{
-          if(!this.phone(value)){
+        } else {
+          if (!this.phone(value)) {
             callback(new Error('请输入正确店铺电话'));
           }
           callback();
         }
       }
       return {
+        loading: {
+          state: false,
+          text: '保存'
+        },
         modifyHotelReq: {
           name: '', // 名称
           logoUrl: '', // logo
@@ -122,7 +126,7 @@
             trigger: 'blur'
           }],
           phone: [{
-            validator:isPhone,
+            validator: isPhone,
             trigger: 'blur'
           }],
           bannerUrl: [{
@@ -164,6 +168,10 @@
         this.modifyHotelReq[e.prop] = e.url;
       },
       modifyHotel() {
+        this.loading = {
+          state: true,
+          text: '保存中'
+        }
         console.log('save obj : ' + this.modifyHotelReq);
         requestModifyHotel(this.modifyHotelReq).then(data => {
           // console.log(data);
@@ -181,6 +189,10 @@
             });
           } else {
             this.$message.error(data.msg + '[错误码：' + _code + ']');
+          }
+          this.loading = {
+            state: false,
+            text: '保存'
           }
         });
       }

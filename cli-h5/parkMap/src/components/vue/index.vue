@@ -480,8 +480,6 @@
       });
       this.wSetStyle()
       this.showOpenMap()
-    },
-    created() {
       setTimeout(() => {
         window.dataPack.setWXShare()
       }, 1000)
@@ -649,7 +647,7 @@
       },
       // 跳转到导航--跳转腾讯地图
       goToNavigation() {
-        console.log(this.tourData.coordinate,'this.tourData.coordinate')
+        console.log(this.tourData.coordinate, 'this.tourData.coordinate')
         window.dataPack.goToLoaction({
           coordinate: this.tourData.coordinate,
           name: this.tourData.name
