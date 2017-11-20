@@ -32,7 +32,7 @@
           <el-input v-model="addVideoReq.videoUrl" style="width: 251px!important;"></el-input>
         </el-form-item>
         <el-form-item style="margin-top: 80px;">
-          <el-button type="primary" @click="submitForm('addVideoReq')">保存</el-button>
+          <el-button type="primary" @click="submitForm('addVideoReq')" :loading="loading.state" v-text="loading.text"></el-button>
           <el-button type="primary" @click="resetForm('addVideoReq')">返回</el-button>
         </el-form-item>
       </el-form>
@@ -46,6 +46,10 @@
   export default {
     data() {
       return {
+        loading: {
+          state: false,
+          text: '保存'
+        },
         addVideoReq: {
           videoName: '',
           imgUrl: '',
@@ -95,6 +99,10 @@
         this.addVideoReq[e.prop] = e.url;
       },
       addVide() {
+        this.loading = {
+          state: true,
+          text: '保存中'
+        }
         requestAddVideo(this.addVideoReq).then(data => {
           // console.log(data);
           var _code = data.code;
@@ -111,6 +119,10 @@
             });
           } else {
             this.$message.error(data.msg + '[错误码：' + _code + ']');
+          }
+          this.loading = {
+            state: false,
+            text: '保存'
           }
         });
       }

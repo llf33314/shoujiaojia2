@@ -182,12 +182,13 @@
       }
     },
     mounted() {
-      this.type = this.$route.params.type
+      
       if (window.dataPack.logLan) {
         this.lat = window.dataPack.logLan.latitude
         this.lon = window.dataPack.logLan.longitude
         this.getListHotels()
         this.getListEats()
+        this.type = this.$route.params.type
       } else {
         const setInt = setInterval(() => {
           if (window.dataPack.logLan) {
@@ -195,6 +196,7 @@
             this.lon = window.dataPack.logLan.longitude
             this.getListHotels()
             this.getListEats()
+            this.type = this.$route.params.type
             clearInterval(setInt)
           }
         }, 300)
@@ -204,6 +206,7 @@
             this.lon = '114.43721'
             this.getListHotels()
             this.getListEats()
+            this.type = this.$route.params.type
             window.dataPack.logLan = {
               latitude: '23.08828',
               longitude: '114.43721'
