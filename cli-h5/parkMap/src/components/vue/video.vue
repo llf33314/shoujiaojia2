@@ -139,7 +139,7 @@
       },
       //跳转视频url
       goToLink(url) {
-        window.location.href = url
+        window.open(url)
       },
     }
   }
