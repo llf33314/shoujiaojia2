@@ -171,6 +171,7 @@ public class MiniParkMobileServiceImpl implements MiniParkMobileService {
         List<MListVideoRes> mListVideoResList = new ArrayList<>();
         EntityWrapper<CustomizeMiniparkVideo> entityWrapper = new EntityWrapper<>();
         entityWrapper.eq("bus_id", busUser.getId());
+        entityWrapper.orderBy("video_sort");
         List<CustomizeMiniparkVideo> customizeMiniparkVideoList = customizeMiniparkVideoService.selectList(entityWrapper);
         for (CustomizeMiniparkVideo customizeMiniparkVideo : customizeMiniparkVideoList){
             MListVideoRes mListVideoRes = new MListVideoRes();
