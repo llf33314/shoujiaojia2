@@ -372,7 +372,7 @@
             <li v-show="tourTabView==1">
               <swiper :options="swiperOption" class="swiper-option" style="min-height:200px;">
                 <swiper-slide v-for="(item,index) in swiperSlides" :key="index">
-                  <img :src="item" alt="item" style="max-width: 100%; min-height: 204px;">
+                  <img :src="item" alt="加载失败..." style="max-width: 100%; min-height: 204px;">
                   <!-- <div class="bg-dive" :style="{backgroundImage: 'url(' + item + ')'}"></div> -->
                 </swiper-slide>
                 <div v-show="swiperSlides.length >1" class="swiper-pagination" slot="pagination"></div>
@@ -443,7 +443,7 @@
           autoplay: 5500,
           pagination: '.swiper-pagination',
           loop: true,
-          lazyLoading: true,
+          // lazyLoading: true,
           autoHeight: true
         },
         swiperSlides: [],
@@ -468,11 +468,11 @@
         this.flag = true
       });
       touch.on(document.getElementById('mapCstyle'), 'pinchin', (e) => {
-        this.pinNum = e.scale
+        this.pinNum = e.scale * 0.1
         this.pinType = false
       });
       touch.on(document.getElementById('mapCstyle'), 'pinchout', (e) => {
-        this.pinNum = e.scale
+        this.pinNum = e.scale * 0.1
         this.pinType = true
       })
       touch.on(document.getElementById('mapCstyle'), 'pinchend', (e) => {
@@ -511,8 +511,11 @@
       // 初始化中心显示区域
       showOpenMap() {
         this.$refs.mapScale.style.transform = 'scale(0.5)'
-        document.querySelectorAll('#mapPs')[0].scrollLeft = 550
-        document.querySelectorAll('#mapPs')[0].scrollTop = 580 - window.innerHeight * 0.5
+        setTimeout(() => {
+          document.querySelectorAll('#mapPs')[0].scrollLeft = 550
+          document.querySelectorAll('#mapPs')[0].scrollTop = 580 - window.innerHeight * 0.5
+        }, 100)
+
       },
       // open景点列表
       showTourItem() {
@@ -524,36 +527,21 @@
 
         const scrollLeft = document.querySelectorAll('#mapPs')[0].scrollLeft + window.innerWidth * 0.5 + 'px'
         const scrollTop = document.querySelectorAll('#mapPs')[0].scrollTop + window.innerHeight * 0.5 + 'px'
-
-        this.$refs.mapScale.style.transition = 'transform 0.8s'
+        if (this.scale > 1.7) this.scale = 1.7
+        if (this.scale < 0.5) this.scale = 0.5
+        this.$refs.mapScale.style.transition = 'transform 0.5s'
         this.$refs.mapScale.style.transformOrigin = '' + scrollLeft + ' ' + scrollTop + ''
 
-        if (this.scale > 1.7) {
-          this.scale = 1.7
-        }
-        if (this.scale < 0.5) {
-          this.scale = 0.5
-        }
-
         this.$refs.mapScale.style.transform = 'scale(' + this.scale + ')'
-
         this.flag = true
       },
       // 跳到景点
       goToTour(item) {
         this.tourItemsState = false
+
         this.$refs.mapScale.style.transform = 'scale(1)'
-        if (item.name == '全部景点') {
-          document.querySelectorAll('#mapPs')[0].scrollLeft = 0
-          document.querySelectorAll('#mapPs')[0].scrollTop = 0
-          setTimeout(() => {
-            this.showOpenMap();
-          }, 50)
-        } else {
-          console.log(item.scrollTo)
-          document.querySelectorAll('#mapPs')[0].scrollLeft = item.scrollTo.x - window.innerWidth * 0.5
-          document.querySelectorAll('#mapPs')[0].scrollTop = item.scrollTo.y - window.innerHeight * 0.5
-        }
+        document.querySelectorAll('#mapPs')[0].scrollLeft = item.scrollTo.x - window.innerWidth * 0.5
+        document.querySelectorAll('#mapPs')[0].scrollTop = item.scrollTo.y - window.innerHeight * 0.5
 
       },
       //查看详情
@@ -619,13 +607,26 @@
       },
       // 播放
       playAudio(id) {
-        var myAudio = document.getElementById(id);
-        myAudio.play();
+        var audio1 = document.getElementById(id);
+        audio1.play();
+        audio1.pause();
+
+        function audioAutoPlay(id) {
+          var audio = document.getElementById(id);
+          audio.play();
+          document.addEventListener("WeixinJSBridgeReady", function () {
+            audio.play();
+          }, false);
+        }
+        audioAutoPlay(id);
       },
       // 暂停
       pauseAudio(id) {
         var myAudio = document.getElementById(id);
         myAudio.pause();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+          myAudio.pause();
+        }, false);
       },
       // 重新加载
       loadAudio(id) {

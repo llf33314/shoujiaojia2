@@ -9,11 +9,12 @@ export const roomAndBoradList = [{
   }
 ]
 
-export const tourList = [{
+export const tourList = [
+  {
     name: '全部景点',
     scrollTo: {
-      x: '',
-      y: ''
+      x: 1367,
+      y: 1074
     },
     coordinate: '',
     introduce: '景点介绍',
