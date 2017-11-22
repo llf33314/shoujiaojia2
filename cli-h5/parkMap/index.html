@@ -9,17 +9,10 @@
   <meta name="description" content="小公园">
   <meta name="subject" content="小公园">
   <title>景区地图</title>
+  <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
   <script>
     // 测试数据库
     var MOBILEBASEDOMAIN = 'http://192.168.3.98:7077'
-
-  </script>
-</head>
-
-<body>
-  <div id="app"></div>
-  <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js" defer></script>
-  <script>
     var dataPack = {
       logLan: null,
       getWXLocation: function () {
@@ -43,14 +36,9 @@
       },
       goToLoaction: function (to) {
         var domain = '//apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
-        if (!window.dataPack.logLan) {
-          var form = {
-            latitude: '23.08828',
-            longitude: '114.43721'
-          }
-        } else {
-          var form = window.dataPack.logLan
-        }
+        var form = window.dataPack.logLan
+        alert(window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
+          '&tocoord=' + to.coordinate + '&policy=1&referer=myapp')
         window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
           '&tocoord=' + to.coordinate + '&policy=1&referer=myapp'
       },
@@ -90,6 +78,13 @@
     };
 
   </script>
+
+</head>
+
+<body>
+  <div id="app"></div>
+
+
 </body>
 
 </html>

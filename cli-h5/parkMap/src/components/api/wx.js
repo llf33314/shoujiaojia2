@@ -34,14 +34,7 @@ export const wx = {
   //跳转腾讯地图
   gtToTXMap(to) {
     const domain = '//apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
-    if (window.sessionStorage.parkMapLatitudeAndLogitude) {
-      var form = window.JSON.parse(window.sessionStorage.parkMapLatitudeAndLogitude)
-    } else {
-      var form = {
-        latitude: '23.08828',
-        longitude: '114.43721'
-      }
-    }
+    var form = window.dataPack.logLan;
     
     window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
       '&tocoord=' + to.coordinate+ '&policy=1&referer=myapp'

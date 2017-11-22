@@ -1,5 +1,6 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta id=meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"><meta name=robots content=index,follow><meta name=description content=小公园><meta name=subject content=小公园><title>景区地图</title><script>// 测试数据库
-    var MOBILEBASEDOMAIN = 'https://customize.deeptel.com.cn'</script><link href=./static/css/app.d6d25b60c7d0005260e100b86043e60e.css rel=stylesheet></head><body><div id=app></div><script src=//res.wx.qq.com/open/js/jweixin-1.2.0.js defer=defer></script><script>var dataPack = {
+<!DOCTYPE html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta id=meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"><meta name=robots content=index,follow><meta name=description content=小公园><meta name=subject content=小公园><title>景区地图</title><script src=//res.wx.qq.com/open/js/jweixin-1.2.0.js></script><script>// 测试数据库
+    var MOBILEBASEDOMAIN = 'https://customize.deeptel.com.cn'
+    var dataPack = {
       logLan: null,
       getWXLocation: function () {
         window.wx.ready(function () {
@@ -22,14 +23,9 @@
       },
       goToLoaction: function (to) {
         var domain = '//apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
-        if (!window.dataPack.logLan) {
-          var form = {
-            latitude: '23.08828',
-            longitude: '114.43721'
-          }
-        } else {
-          var form = window.dataPack.logLan
-        }
+        var form = window.dataPack.logLan
+        alert(window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
+          '&tocoord=' + to.coordinate + '&policy=1&referer=myapp')
         window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
           '&tocoord=' + to.coordinate + '&policy=1&referer=myapp'
       },
@@ -66,4 +62,4 @@
 
         });
       }
-    };</script><script type=text/javascript src=./static/js/manifest.410f80eae4f3d7cb1666.js></script><script type=text/javascript src=./static/js/vendor.41f7c15a8fb7ec97e6b6.js></script><script type=text/javascript src=./static/js/app.9c391447e8e47ce0637f.js></script></body></html>
+    };</script><link href=./static/css/app.d6d25b60c7d0005260e100b86043e60e.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.555bc1b822ef857a1a0a.js></script><script type=text/javascript src=./static/js/vendor.41f7c15a8fb7ec97e6b6.js></script><script type=text/javascript src=./static/js/app.085895cb9022944286e1.js></script></body></html>
