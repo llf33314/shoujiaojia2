@@ -27,7 +27,7 @@ export const wx = {
       timestamp: resData.data.timestamp, // 必填，生成签名的时间戳
       nonceStr: resData.data.nonce_str, // 必填，生成签名的随机串
       signature: resData.data.signature, // 必填，签名，见附录1
-      jsApiList: ['getLocation','onMenuShareAppMessage','onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+      jsApiList: ['getLocation','onMenuShareAppMessage','onMenuShareTimeline','WeixinJSBridgeReady'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     });
     
   },

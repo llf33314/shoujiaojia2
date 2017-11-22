@@ -170,7 +170,7 @@ export const tourList = [
     },
     picture: [
       './static/imgs/youzhengju/1.jpg',
-      './static/imgs/youzhengju/2.jpg',
+      './static/imgs/youzhengju/6.png',
       './static/imgs/youzhengju/3.jpg'
     ]
   }, {

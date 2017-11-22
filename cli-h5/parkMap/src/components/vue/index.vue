@@ -349,10 +349,10 @@
     <div class="tour-detail-mask" v-if="showTourDetailMask" @click="showTourDetailMask=false">
       <div class="tour-detail-top" v-if="audioViewState">
         <span v-text="tourName" class="over" style="padding-left:15px;"></span>
-        <audio style="width:50px" id="myAudio1">
+        <audio preload loop="loop" style="width:50px" id="myAudio1">
           <source :src="audioSrcGroup.chUrl" type="audio/mp4" />
         </audio>
-        <audio style="width:50px" id="myAudio2">
+        <audio preload loop="loop" style="width:50px" id="myAudio2">
           <source :src="audioSrcGroup.enUrl" type="audio/mp4" />
         </audio>
         <ul>
@@ -607,26 +607,29 @@
       },
       // 播放
       playAudio(id) {
-        var audio1 = document.getElementById(id);
-        audio1.play();
-        audio1.pause();
-
-        function audioAutoPlay(id) {
-          var audio = document.getElementById(id);
-          audio.play();
-          document.addEventListener("WeixinJSBridgeReady", function () {
+        var audio = document.getElementById(id),
+          play = function () {
             audio.play();
-          }, false);
-        }
-        audioAutoPlay(id);
+            document.removeEventListener("touchstart", play, false);
+          };
+        audio.play();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+          play();
+        }, false);
+        document.addEventListener("touchstart", play, false);
       },
       // 暂停
       pauseAudio(id) {
-        var myAudio = document.getElementById(id);
-        myAudio.pause();
+        var audio = document.getElementById(id),
+          play = function () {
+            audio.pause();
+            document.removeEventListener("touchstart", play, false);
+          };
+        audio.pause();
         document.addEventListener("WeixinJSBridgeReady", function () {
-          myAudio.pause();
+          pause();
         }, false);
+        document.addEventListener("touchstart", play, false);
       },
       // 重新加载
       loadAudio(id) {
