@@ -349,11 +349,9 @@
     <div class="tour-detail-mask" v-if="showTourDetailMask" @click="showTourDetailMask=false">
       <div class="tour-detail-top" v-if="audioViewState">
         <span v-text="tourName" class="over" style="padding-left:15px;"></span>
-        <audio preload loop="loop" style="width:50px" id="myAudio1">
-          <source :src="audioSrcGroup.chUrl" type="audio/mp4" />
+        <audio loop="loop" style="width:50px" :src="audioSrcGroup.chUrl" id="myAudio1">
         </audio>
-        <audio preload loop="loop" style="width:50px" id="myAudio2">
-          <source :src="audioSrcGroup.enUrl" type="audio/mp4" />
+        <audio loop="loop" style="width:50px" :src="audioSrcGroup.enUrl" id="myAudio2">
         </audio>
         <ul>
           <li>
@@ -367,6 +365,8 @@
         </ul>
       </div>
       <div class="tour-detail">
+
+
         <div class="tour-items">
           <ul>
             <li v-show="tourTabView==1">
@@ -383,6 +383,7 @@
           </ul>
           <div class="tour-title swiper-pagination" v-text="tourName"></div>
           <ul class="tour-tab">
+
             <li @click.stop="tourTab(1)">
               <img src="./../../assets/img/commentary.png" />
               <p>语音解说</p>
@@ -633,8 +634,16 @@
       },
       // 重新加载
       loadAudio(id) {
-        var myAudio = document.getElementById(id);
-        myAudio.load();
+        var audio = document.getElementById(id),
+          play = function () {
+            audio.load();
+            document.removeEventListener("touchstart", play, false);
+          };
+        audio.load();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+          load();
+        }, false);
+        document.addEventListener("touchstart", play, false);
       },
       // 播放/暂停
       openOrcloseVideo() {
