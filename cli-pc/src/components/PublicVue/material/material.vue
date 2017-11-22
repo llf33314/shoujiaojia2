@@ -295,8 +295,8 @@
       padding: 0 10px 10px;
       overflow: hidden;
       border-radius: 5px;
-      min-width: 700px;
-      max-width: 1000px;
+      min-width: 790px;
+      max-width: 790px;
       display: inline-block;
       margin-top: 10%;
       .title {
