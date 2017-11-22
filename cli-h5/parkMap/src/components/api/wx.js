@@ -35,8 +35,7 @@ export const wx = {
   gtToTXMap(to) {
     const domain = '//apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
     var form = window.dataPack.logLan;
-    alert(window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
-    '&tocoord=' + to.coordinate+ '&policy=1&referer=myapp')
+    
     window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
       '&tocoord=' + to.coordinate+ '&policy=1&referer=myapp'
   }
