@@ -634,16 +634,12 @@
       },
       // 重新加载
       loadAudio(id) {
-        var audio = document.getElementById(id),
-          play = function () {
-            audio.load();
-            document.removeEventListener("touchstart", play, false);
-          };
+        console.log(66666)
+        var audio = document.getElementById(id)
         audio.load();
         document.addEventListener("WeixinJSBridgeReady", function () {
-          load();
+          audio.load();
         }, false);
-        document.addEventListener("touchstart", play, false);
       },
       // 播放/暂停
       openOrcloseVideo() {
