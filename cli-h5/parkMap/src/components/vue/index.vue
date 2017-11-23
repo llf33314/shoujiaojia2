@@ -552,7 +552,7 @@
         this.swiperSlides = item.picture
         console.log(this.swiperSlides)
         this.tourIntroduce = item.introduce
-        this.tourName = item.title
+        this.tourName = item.name
         this.audioSrcGroup = item.audio
         this.coordinate = item.coordinate
         this.audioViewState = false
