@@ -35,12 +35,15 @@
         });
       },
       goToLoaction: function (to) {
+        
         var domain = '//apis.map.qq.com/uri/v1/routeplan?type=walk&from=我&fromcoord='
-        var form = window.dataPack.logLan
-        alert(window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
-          '&tocoord=' + to.coordinate + '&policy=1&referer=myapp')
+        var form = window.dataPack.logLan || {
+            latitude: '23.08828',
+            longitude: '114.43721'
+          }
+        
         window.location.href = domain + form.latitude + ',' + form.longitude + '&to=' + to.name +
-          '&tocoord=' + to.coordinate + '&policy=1&referer=myapp'
+          '&tocoord=' + to.coordinate + '&policy=LEAST_DISTANCE&referer=myapp'
       },
       setWXShare: function () {
         window.wx.ready(function () {
