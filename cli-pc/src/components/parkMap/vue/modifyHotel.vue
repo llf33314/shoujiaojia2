@@ -23,14 +23,14 @@
       <el-form :model="modifyHotelReq" :rules="modifyHotelRules" ref="modifyHotelReq" label-width="130px" class="demo-ruleForm">
 
         <el-form-item label="店铺名称" prop="name">
-          <el-input v-model="modifyHotelReq.name" style="width: 251px!important;"></el-input>
+          <el-input v-model="modifyHotelReq.name" placeholder="长度不超过20个字符" style="width: 251px!important;"></el-input>
         </el-form-item>
         <el-form-item label="LOGO上传" prop="logoUrl">
           <gt-material prop="logoUrl" :url="modifyHotelReq.logoUrl" v-on:getChangeUrl="getChangeUrl" width="80" height="80"></gt-material>
           <p class="a-in-stop-prompt">建议上传1:1尺寸图片</p>
         </el-form-item>
         <el-form-item label="文案介绍" prop="introduce">
-          <el-input v-model="modifyHotelReq.introduce" style="width: 251px!important;"></el-input>
+          <el-input v-model="modifyHotelReq.introduce" placeholder="长度不超过20个字符" style="width: 251px!important;"></el-input>
         </el-form-item>
         <el-form-item label="店铺地址" prop="address">
           <gtmap :gtmapInformation.sync="mapBean" style="width: 251px!important;"></gtmap>
@@ -98,8 +98,8 @@
             },
             {
               min: 1,
-              max: 7,
-              message: '长度不超过7个字符',
+              max: 20,
+              message: '长度不超过20个字符',
               trigger: 'blur'
             }
           ],
@@ -115,8 +115,8 @@
             },
             {
               min: 1,
-              max: 7,
-              message: '长度不超过7个字符',
+              max: 20,
+              message: '长度不超过20个字符',
               trigger: 'blur'
             }
           ],
