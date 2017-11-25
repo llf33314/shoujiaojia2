@@ -89,58 +89,110 @@
     .dps.over {
       margin-bottom: 7px;
     }
+    .loading {
+      width: 80px;
+      height: 40px;
+      margin: 0 auto;
+      margin-top: 100px;
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      margin-left: -40px;
+      z-index: 1;
+    }
+    .loading span {
+      display: inline-block;
+      width: 8px;
+      height: 100%;
+      border-radius: 4px;
+      background: #90ee90;
+      -webkit-animation: load 1.04s ease infinite;
+    }
+    .loading span:nth-child(2) {
+      -webkit-animation-delay: 0.13s;
+    }
+    .loading span:nth-child(3) {
+      -webkit-animation-delay: 0.26s;
+    }
+    .loading span:nth-child(4) {
+      -webkit-animation-delay: 0.39s;
+    }
+    .loading span:nth-child(5) {
+      -webkit-animation-delay: 0.52s;
+    }
+    @keyframes load {
+      0%,
+      100% {
+        height: 40px;
+        background: #90ee90;
+      }
+      50% {
+        height: 60px;
+        margin-top: -20px;
+        background: #add8e6;
+      }
+    }
   }
 
 </style>
 <template>
-  <section class="park-map-room" v-show="showListBox">
-    <ul class="top-title">
-      <li :class="type==1? 'bg':''" @click="selectType(1)">餐饮</li>
-      <li :class="type==0? 'bg':''" @click="selectType(0)">住宿</li>
-    </ul>
-    <div class="type-box-list">
-      <ul class="type-list" v-show="type==1" ref="eatsBox">
-        <li class="type-list-item" v-for="(item,index) in listEats" @click="goToDetail(item.id,1)">
-          <div class="left-img" :style="{backgroundImage: 'url(' + item.logoUrl + ')'}"></div>
-          <div class="right-content">
-            <h2 class="title">
-              <span class="over" style="flex: 5;" v-text="item.name"></span>
-              <span v-if="LatAndLogFlag" style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
-            </h2>
-            <p class="dps over" v-text="item.introduce"></p>
-            <p class="icon-text over">
-              <img class="icon" src="./../../assets/img/address-icon.png" alt="地址">
-              <span v-text="item.address"></span>
-            </p>
-            <p class="icon-text over">
-              <img class="icon" src="./../../assets/img/phone-icon.png" alt="电话">
-              <span v-text="item.phone"></span>
-            </p>
-          </div>
-        </li>
-        <div class="no-more" v-if="eatsCurrent > eatsTotalPages && eatslsPageFlag">加载完毕</div>
+  <section class="park-map-room">
+    <div class="loading" v-show="!showListBox">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div v-show="showListBox">
+      <ul class="top-title">
+        <li :class="type==1? 'bg':''" @click="selectType(1)">餐饮</li>
+        <li :class="type==0? 'bg':''" @click="selectType(0)">住宿</li>
       </ul>
-      <ul class="type-list" v-show="type==0" ref="hotelsBox">
-        <li class="type-list-item" v-for="(item,index) in listHotels" @click="goToDetail(item.id,0)">
-          <div class="left-img" :style="{backgroundImage: 'url(' + item.logoUrl + ')'}"></div>
-          <div class="right-content">
-            <h2 class="title">
-              <span class="over" style="flex: 5;" v-text="item.name"></span>
-              <span v-if="LatAndLogFlag" style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
-            </h2>
-            <p class="dps over" v-text="item.introduce"></p>
-            <p class="icon-text over">
-              <img class="icon" src="./../../assets/img/address-icon.png" alt="地址">
-              <span v-text="item.address"></span>
-            </p>
-            <p class="icon-text over">
-              <img class="icon" src="./../../assets/img/phone-icon.png" alt="电话">
-              <span v-text="item.phone"></span>
-            </p>
-          </div>
-        </li>
-        <div class="no-more" v-if="hotelsCurrent > hotelsTotalPages && hotelsPageFlag">加载完毕</div>
-      </ul>
+      <div class="type-box-list">
+        <ul class="type-list" v-show="type==1" ref="eatsBox">
+          <li class="type-list-item" v-for="(item,index) in listEats" @click="goToDetail(item.id,1)">
+            <div class="left-img" :style="{backgroundImage: 'url(' + item.logoUrl + ')'}"></div>
+            <div class="right-content">
+              <h2 class="title">
+                <span class="over" style="flex: 5;" v-text="item.name"></span>
+                <span v-if="LatAndLogFlag" style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
+              </h2>
+              <p class="dps over" v-text="item.introduce"></p>
+              <p class="icon-text over">
+                <img class="icon" src="./../../assets/img/address-icon.png" alt="地址">
+                <span v-text="item.address"></span>
+              </p>
+              <p class="icon-text over">
+                <img class="icon" src="./../../assets/img/phone-icon.png" alt="电话">
+                <span v-text="item.phone"></span>
+              </p>
+            </div>
+          </li>
+          <div class="no-more" v-if="eatsCurrent > eatsTotalPages && eatslsPageFlag">加载完毕</div>
+        </ul>
+        <ul class="type-list" v-show="type==0" ref="hotelsBox">
+          <li class="type-list-item" v-for="(item,index) in listHotels" @click="goToDetail(item.id,0)">
+            <div class="left-img" :style="{backgroundImage: 'url(' + item.logoUrl + ')'}"></div>
+            <div class="right-content">
+              <h2 class="title">
+                <span class="over" style="flex: 5;" v-text="item.name"></span>
+                <span v-if="LatAndLogFlag" style="flex: 1;font-size: 14px;color:#666;margin-top:5px;" v-text="((item.distance)/1000).toFixed(1) + 'KM'"></span>
+              </h2>
+              <p class="dps over" v-text="item.introduce"></p>
+              <p class="icon-text over">
+                <img class="icon" src="./../../assets/img/address-icon.png" alt="地址">
+                <span v-text="item.address"></span>
+              </p>
+              <p class="icon-text over">
+                <img class="icon" src="./../../assets/img/phone-icon.png" alt="电话">
+                <span v-text="item.phone"></span>
+              </p>
+            </div>
+          </li>
+          <div class="no-more" v-if="hotelsCurrent > hotelsTotalPages && hotelsPageFlag">加载完毕</div>
+        </ul>
+      </div>
     </div>
   </section>
 </template>
@@ -182,7 +234,7 @@
       }
     },
     mounted() {
-      
+
       if (window.dataPack.logLan) {
         this.lat = window.dataPack.logLan.latitude
         this.lon = window.dataPack.logLan.longitude
