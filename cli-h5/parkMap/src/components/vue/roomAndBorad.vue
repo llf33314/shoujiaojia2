@@ -250,6 +250,7 @@
             this.getListEats()
             this.type = this.$route.params.type
             clearInterval(setInt)
+            this.showListBox = true
           }
         }, 300)
         setTimeout(() => {
@@ -265,6 +266,7 @@
             }
           }
           clearInterval(setInt)
+          this.showListBox = true
         }, 3000)
       }
       this.LatAndLogFlag = true
